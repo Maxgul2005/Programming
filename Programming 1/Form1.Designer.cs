@@ -1,4 +1,4 @@
-﻿namespace Programming
+﻿namespace Programming_1
 {
     partial class Form1
     {
