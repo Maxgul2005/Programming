@@ -4,5 +4,4 @@ public enum StudentFormOfStudy
     Correspondence,
     Evening,
     Remote,
-
 }

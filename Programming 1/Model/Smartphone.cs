@@ -4,7 +4,4 @@ public enum Smartphone
     Samsung,
     Poco,
     Honor,
-
-
-
 }
