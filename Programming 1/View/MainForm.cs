@@ -15,6 +15,8 @@ namespace Programming_1
         public MainForm()
         {
             InitializeComponent();
+            ValuesListBox.Items.AddRange(Enum.GetValues(typeof(Collor)).Cast<object>().ToArray());
+            // выбор по умолчанию
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -80,6 +82,21 @@ namespace Programming_1
         private void ValuesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             IntTextBox.Text = ValuesListBox .SelectedIndex.ToString();
+        }
+
+        private void Parse_Click(object sender, EventArgs e)
+        {
+            string ParsingText = ParsingTextBox.Text;
+            Weekday ParsedDay;
+            if (!int.TryParse(ParsingText, out _) && Enum.TryParse<Weekday>(ParsingText, true, out ParsedDay))
+            {
+                int Weekdayorder = (int)ParsedDay;
+                ParsedValueLabel.Text = $"Этот день недели ({ParsedDay} = {Weekdayorder}) ";
+            }
+            else
+            {
+                ParsedValueLabel.Text = "Нет такого дня недели";
+            }
         }
     }
 }
