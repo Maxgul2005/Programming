@@ -21,54 +21,7 @@ namespace Programming_1
         {
 
         }
-        public enum Collor
-        {
-            Black,
-            White,
-            Red,
-            Orange,
-            Pink,
-        }
-        public enum StudentFormOfStudy
-        {
-            FullTime,
-            Correspondence,
-            Evening,
-            Remote,
-        }
-        public enum Genre
-        {
-            Comedy,
-            Dramas,
-            Thriller,
-            Militants,
-            Horror,
-            Blockbusters,
-        }
-        public enum Smartphone
-        {
-            Apple,
-            Samsung,
-            Poco,
-            Honor,
-        }
-        public enum Season
-        {
-            Winter,
-            Spring,
-            Summer,
-            Autumn,
-        }
-        public enum Weekday
-        {
-            Monday,
-            Tuesday,
-            Wednesday,
-            Thursday,
-            Friday,
-            Saturday,
-            Sunday,
-        }
+     
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var collor = Enum.GetValues(typeof(Collor));
