@@ -34,7 +34,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.IntTextBox = new System.Windows.Forms.TextBox();
             this.ValuesListBox = new System.Windows.Forms.ListBox();
             this.EnumsListBox = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
@@ -68,7 +68,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.IntTextBox);
             this.groupBox1.Controls.Add(this.ValuesListBox);
             this.groupBox1.Controls.Add(this.EnumsListBox);
             this.groupBox1.Location = new System.Drawing.Point(23, 17);
@@ -105,12 +105,12 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Choose enumaration";
             // 
-            // textBox1
+            // IntTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(389, 50);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
+            this.IntTextBox.Location = new System.Drawing.Point(389, 50);
+            this.IntTextBox.Name = "IntTextBox";
+            this.IntTextBox.Size = new System.Drawing.Size(100, 20);
+            this.IntTextBox.TabIndex = 2;
             // 
             // ValuesListBox
             // 
@@ -119,6 +119,7 @@
             this.ValuesListBox.Name = "ValuesListBox";
             this.ValuesListBox.Size = new System.Drawing.Size(120, 95);
             this.ValuesListBox.TabIndex = 1;
+            this.ValuesListBox.SelectedIndexChanged += new System.EventHandler(this.ValuesListBox_SelectedIndexChanged);
             // 
             // EnumsListBox
             // 
@@ -158,7 +159,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox IntTextBox;
         private System.Windows.Forms.ListBox ValuesListBox;
         private System.Windows.Forms.ListBox EnumsListBox;
         private System.Windows.Forms.Label label2;

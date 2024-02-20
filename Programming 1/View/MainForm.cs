@@ -77,11 +77,9 @@ namespace Programming_1
             }
         }
 
-     
-
-
-
-
-
+        private void ValuesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IntTextBox.Text = ValuesListBox .SelectedIndex.ToString();
+        }
     }
 }
