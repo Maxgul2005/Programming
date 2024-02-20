@@ -42,10 +42,15 @@
             this.IntTextBox = new System.Windows.Forms.TextBox();
             this.ValuesListBox = new System.Windows.Forms.ListBox();
             this.EnumsListBox = new System.Windows.Forms.ListBox();
+            this.SeasonGroupBox = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.SeasonComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.SeasonGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -60,6 +65,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.SeasonGroupBox);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -88,9 +94,9 @@
             this.ParsedValueLabel.AutoSize = true;
             this.ParsedValueLabel.Location = new System.Drawing.Point(10, 65);
             this.ParsedValueLabel.Name = "ParsedValueLabel";
-            this.ParsedValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.ParsedValueLabel.Size = new System.Drawing.Size(10, 13);
             this.ParsedValueLabel.TabIndex = 3;
-            this.ParsedValueLabel.Text = "label5";
+            this.ParsedValueLabel.Text = ".";
             // 
             // Parse
             // 
@@ -192,6 +198,45 @@
             this.EnumsListBox.TabIndex = 0;
             this.EnumsListBox.SelectedIndexChanged += new System.EventHandler(this.EnumsListBox_SelectedIndexChanged);
             // 
+            // SeasonGroupBox
+            // 
+            this.SeasonGroupBox.Controls.Add(this.SeasonComboBox);
+            this.SeasonGroupBox.Controls.Add(this.label5);
+            this.SeasonGroupBox.Controls.Add(this.button1);
+            this.SeasonGroupBox.Location = new System.Drawing.Point(393, 274);
+            this.SeasonGroupBox.Name = "SeasonGroupBox";
+            this.SeasonGroupBox.Size = new System.Drawing.Size(234, 104);
+            this.SeasonGroupBox.TabIndex = 2;
+            this.SeasonGroupBox.TabStop = false;
+            this.SeasonGroupBox.Text = "SeasonHand";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(122, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "GO!";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 18);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "HooseSeason";
+            // 
+            // SeasonComboBox
+            // 
+            this.SeasonComboBox.FormattingEnabled = true;
+            this.SeasonComboBox.Location = new System.Drawing.Point(0, 33);
+            this.SeasonComboBox.Name = "SeasonComboBox";
+            this.SeasonComboBox.Size = new System.Drawing.Size(121, 21);
+            this.SeasonComboBox.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -207,6 +252,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.SeasonGroupBox.ResumeLayout(false);
+            this.SeasonGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -227,6 +274,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox ParsingTextBox;
         private System.Windows.Forms.Label ParsedValueLabel;
+        private System.Windows.Forms.GroupBox SeasonGroupBox;
+        private System.Windows.Forms.ComboBox SeasonComboBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
     }
 }
 

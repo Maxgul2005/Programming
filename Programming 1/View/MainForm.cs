@@ -17,6 +17,8 @@ namespace Programming_1
             InitializeComponent();
             ValuesListBox.Items.AddRange(Enum.GetValues(typeof(Collor)).Cast<object>().ToArray());
             // выбор по умолчанию
+            object[] seasonValues = Enum.GetValues(typeof(Season)).Cast<object>().ToArray();
+            SeasonComboBox.Items.AddRange(seasonValues);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -97,6 +99,39 @@ namespace Programming_1
             {
                 ParsedValueLabel.Text = "Нет такого дня недели";
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(SeasonComboBox.SelectedItem == null)
+            {
+                SeasonComboBox.BackColor = System.Drawing.Color.LightPink;
+                return;
+            }
+            SeasonComboBox.BackColor = System.Drawing.Color.White;
+            switch (SeasonComboBox.SelectedItem)
+            {
+                case Season.Summer:
+                    MessageBox.Show("Ура, солнце");
+                    break;
+                case Season.Autumn:
+                    SetBackColor(SeasonGroupBox.BackColor = ColorTranslator.FromHtml("#e29c45"));
+                    break;
+                case Season.Winter:
+                    MessageBox.Show("БРР, Холодно");
+                    break;
+                case Season.Spring:
+                    SetBackColor(SeasonGroupBox.BackColor = ColorTranslator.FromHtml("#559c45"));
+                    break;
+
+            }
+        }
+        private void SetBackColor(System.Drawing.Color color)
+        {
+            groupBox1.BackColor = color;
+            groupBox2.BackColor = color;
+            SeasonComboBox.BackColor = color;
+            this.BackColor = color;
         }
     }
 }
