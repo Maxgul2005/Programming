@@ -1,6 +1,6 @@
 class Time
 {
-    public int Hour;
-    public int Minute;
-    public int Second;
+    private int Hour;
+    private int Minute;
+    private int Second;
 }

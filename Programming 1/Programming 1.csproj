@@ -47,8 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\CassRectangle.cs" />
+    <Compile Include="Model\ClassContact.cs" />
+    <Compile Include="Model\ClassDiscipline.cs" />
     <Compile Include="Model\ClassFilm.cs" />
     <Compile Include="Model\ClassFlight.cs" />
+    <Compile Include="Model\ClassSong.cs" />
     <Compile Include="Model\ClassTime.cs" />
     <Compile Include="Model\Collor.cs" />
     <Compile Include="Model\Genre.cs" />
