@@ -8,46 +8,57 @@ namespace Programming_1.Model
 {
     internal class Rectangle
     {
-        private double Length;
-        private double Width;
-        private string Color { get; set; }
-        public double length
+        private double _length;
+
+        private double _widtht;
+
+        private string _color;
+
+        public double Length
         {
-            get { return Length; }
+            get
+            {
+                return _length;
+            }
             set
             {
-                if (Length <= 0)
+                if (value < 0.0)
                 {
-                    throw new ArgumentException("Длина не может быть отрицательной");
+                    throw new ArgumentException("Длина положительна!");
                 }
-                Length = value;
+                _length = value;
             }
+        }
 
-        }
-        public double width 
-        { get { return Width; }
-            set 
-            { 
-                if (value <= 0) 
+        public double Widtht
+        {
+            get
+            {
+                return _widtht;
+            }
+            set
+            {
+                if (value < 0.0)
                 {
-                    throw new ArgumentException("Ширина должна быть положительным числом"); 
+                    throw new ArgumentException("Длина положительна!");
                 }
-                Width = value; 
-            } 
+                _widtht = value;
+            }
         }
+
+        public string Color { get; set; }
 
         public Rectangle()
         {
-            Length = 15;
-            Width = 30;
-            Color = "Green";
+            Length = 0.0;
+            Widtht = 0.0;
+            Color = "None";
         }
-
-
-        public Rectangle(double length, double width, string color) 
-        { Length = length; 
-          Width = width; 
-          Color = color; 
+        public Rectangle(double length, double widtht, string color)
+        {
+            Length = length;
+            Widtht = widtht;
+            Color = color;
         }
 
 

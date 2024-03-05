@@ -11,5 +11,6 @@ namespace Programming_1.Model
         string Name;
         string LastName;
         int Number;
+        
     }
 }

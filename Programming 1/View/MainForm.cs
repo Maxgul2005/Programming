@@ -12,9 +12,28 @@ namespace Programming_1
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private Rectangle[] _rectangles = new Rectangle[5];
+        private Rectangle _currentRectangle;
+        private string[] RectangleListBoxItems = new string[5];
+        private string[] RectangleColor = new string[6] { "Black", "White", "Orange", "Purple", "Green", "Blue" };
+
+        //Генерация рандомных полей в прямоугольник
+        Random _random = new Random();
+        public void RectangleInitiaziation()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                int length = _random.Next(200);
+                int widtht = _random.Next(200);
+                _rectangles[i] = new Rectangle(length, widtht, 12,4);
+                RectangleListBoxItems[i] = ($"Rectangle{i + 1}");
+            }
+            _rectanglesListBox.Items.AddRange(RectangleListBoxItems);
+        }
+            public MainForm()
         {
             InitializeComponent();
+            RectangleInitiaziation();
             ValuesListBox.Items.AddRange(Enum.GetValues(typeof(Collor)).Cast<object>().ToArray());
             // выбор по умолчанию
             object[] seasonValues = Enum.GetValues(typeof(Season)).Cast<object>().ToArray();
@@ -133,5 +152,7 @@ namespace Programming_1
             SeasonComboBox.BackColor = color;
             this.BackColor = color;
         }
+
+        
     }
 }
