@@ -52,10 +52,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this._rectanglesListBox = new System.Windows.Forms.ListBox();
+            this.TextBoxClassesRectanglesColor = new System.Windows.Forms.TextBox();
+            this.TextBoxClassesRectanglesWidth = new System.Windows.Forms.TextBox();
+            this.TextBoxClassesRectanglesLength = new System.Windows.Forms.TextBox();
+            this.TextBoxClassesRectanglesListBox = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SeasonGroupBox.SuspendLayout();
@@ -266,10 +266,10 @@
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.textBox3);
-            this.groupBox3.Controls.Add(this.textBox2);
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Controls.Add(this._rectanglesListBox);
+            this.groupBox3.Controls.Add(this.TextBoxClassesRectanglesColor);
+            this.groupBox3.Controls.Add(this.TextBoxClassesRectanglesWidth);
+            this.groupBox3.Controls.Add(this.TextBoxClassesRectanglesLength);
+            this.groupBox3.Controls.Add(this.TextBoxClassesRectanglesListBox);
             this.groupBox3.Location = new System.Drawing.Point(8, 20);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(764, 374);
@@ -313,34 +313,36 @@
             this.label6.TabIndex = 4;
             this.label6.Text = "Length:";
             // 
-            // textBox3
+            // TextBoxClassesRectanglesColor
             // 
-            this.textBox3.Location = new System.Drawing.Point(363, 175);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 3;
+            this.TextBoxClassesRectanglesColor.Location = new System.Drawing.Point(363, 175);
+            this.TextBoxClassesRectanglesColor.Name = "TextBoxClassesRectanglesColor";
+            this.TextBoxClassesRectanglesColor.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxClassesRectanglesColor.TabIndex = 3;
             // 
-            // textBox2
+            // TextBoxClassesRectanglesWidth
             // 
-            this.textBox2.Location = new System.Drawing.Point(363, 119);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 2;
+            this.TextBoxClassesRectanglesWidth.Location = new System.Drawing.Point(363, 119);
+            this.TextBoxClassesRectanglesWidth.Name = "TextBoxClassesRectanglesWidth";
+            this.TextBoxClassesRectanglesWidth.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxClassesRectanglesWidth.TabIndex = 2;
             // 
-            // textBox1
+            // TextBoxClassesRectanglesLength
             // 
-            this.textBox1.Location = new System.Drawing.Point(363, 56);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.TextBoxClassesRectanglesLength.Location = new System.Drawing.Point(363, 56);
+            this.TextBoxClassesRectanglesLength.Name = "TextBoxClassesRectanglesLength";
+            this.TextBoxClassesRectanglesLength.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxClassesRectanglesLength.TabIndex = 1;
+            this.TextBoxClassesRectanglesLength.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // _rectanglesListBox
+            // TextBoxClassesRectanglesListBox
             // 
-            this._rectanglesListBox.FormattingEnabled = true;
-            this._rectanglesListBox.Location = new System.Drawing.Point(31, 32);
-            this._rectanglesListBox.Name = "_rectanglesListBox";
-            this._rectanglesListBox.Size = new System.Drawing.Size(260, 225);
-            this._rectanglesListBox.TabIndex = 0;
+            this.TextBoxClassesRectanglesListBox.FormattingEnabled = true;
+            this.TextBoxClassesRectanglesListBox.Location = new System.Drawing.Point(31, 32);
+            this.TextBoxClassesRectanglesListBox.Name = "TextBoxClassesRectanglesListBox";
+            this.TextBoxClassesRectanglesListBox.Size = new System.Drawing.Size(260, 225);
+            this.TextBoxClassesRectanglesListBox.TabIndex = 0;
+            this.TextBoxClassesRectanglesListBox.SelectedIndexChanged += new System.EventHandler(this.TextBoxClassesRectanglesListBox_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -388,13 +390,13 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ListBox _rectanglesListBox;
+        private System.Windows.Forms.ListBox TextBoxClassesRectanglesListBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TextBoxClassesRectanglesColor;
+        private System.Windows.Forms.TextBox TextBoxClassesRectanglesWidth;
+        private System.Windows.Forms.TextBox TextBoxClassesRectanglesLength;
         private System.Windows.Forms.Button Find;
     }
 }

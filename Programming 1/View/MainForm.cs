@@ -14,7 +14,6 @@ namespace Programming_1
     {
         private Rectangle[] _rectangles = new Rectangle[5];
         private Rectangle _currentRectangle;
-        private string[] RectangleListBoxItems = new string[5];
         private string[] RectangleColor = new string[6] { "Black", "White", "Orange", "Purple", "Green", "Blue" };
 
         //Генерация рандомных полей в прямоугольник
@@ -25,12 +24,11 @@ namespace Programming_1
             {
                 int length = _random.Next(200);
                 int widtht = _random.Next(200);
-                _rectangles[i] = new Rectangle(length, widtht, 12,4);
-                RectangleListBoxItems[i] = ($"Rectangle{i + 1}");
+                _rectangles[i] = new Rectangle(length, widtht, RectangleColor[i]);
             }
-            _rectanglesListBox.Items.AddRange(RectangleListBoxItems);
+            TextBoxClassesRectanglesListBox.Items.AddRange(_rectangles);
         }
-            public MainForm()
+        public MainForm()
         {
             InitializeComponent();
             RectangleInitiaziation();
@@ -153,6 +151,31 @@ namespace Programming_1
             this.BackColor = color;
         }
 
-        
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+           if(_currentRectangle == null )
+           {
+                TextBoxClassesRectanglesLength.BackColor = System.Drawing.Color.LightPink;
+                return;
+           }
+
+           try
+            {
+                _currentRectangle.Length = double.Parse(TextBoxClassesRectanglesLength.Text);
+                TextBoxClassesRectanglesLength.BackColor = System.Drawing.Color.White;
+            } catch (Exception)
+            {
+                TextBoxClassesRectanglesLength.BackColor = System.Drawing.Color.LightPink;
+            }
+        }
+
+        private void TextBoxClassesRectanglesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Rectangle rectangle = (Rectangle)TextBoxClassesRectanglesListBox.SelectedItem;
+            _currentRectangle = rectangle;
+            TextBoxClassesRectanglesLength.Text = rectangle.Length.ToString();
+            TextBoxClassesRectanglesWidth.Text = rectangle.Widtht.ToString();
+            TextBoxClassesRectanglesColor.Text = rectangle.Color;
+        }
     }
 }
