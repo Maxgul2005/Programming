@@ -28,6 +28,23 @@ namespace Programming_1
             }
             TextBoxClassesRectanglesListBox.Items.AddRange(_rectangles);
         }
+
+        private int FindRectangleWithMaxWidth(Rectangle[] rectangles)
+        {
+            double MaxWidth = _rectangles[0].Widtht;
+            int MaxWidthIndex = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                if (rectangles[i].Widtht > MaxWidth)
+                {
+                    MaxWidth = rectangles[i].Widtht;
+                    MaxWidthIndex = i;
+                }
+            }
+            return MaxWidthIndex;
+
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -151,6 +168,7 @@ namespace Programming_1
             this.BackColor = color;
         }
 
+        // Обработка исключений длины
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
            if(_currentRectangle == null )
@@ -168,6 +186,25 @@ namespace Programming_1
                 TextBoxClassesRectanglesLength.BackColor = System.Drawing.Color.LightPink;
             }
         }
+        // Обработка исключений ширины
+        private void TextBoxClassesRectanglesWidth_TextChanged(object sender, EventArgs e)
+        {
+            if (_currentRectangle == null)
+            {
+                TextBoxClassesRectanglesWidth.BackColor = System.Drawing.Color.LightPink;
+                return;
+            }
+
+            try
+            {
+                _currentRectangle.Widtht= double.Parse(TextBoxClassesRectanglesWidth.Text);
+                TextBoxClassesRectanglesWidth.BackColor = System.Drawing.Color.White;
+            }
+            catch (Exception)
+            {
+                TextBoxClassesRectanglesWidth.BackColor = System.Drawing.Color.LightPink;
+            }
+        }
 
         private void TextBoxClassesRectanglesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -176,6 +213,12 @@ namespace Programming_1
             TextBoxClassesRectanglesLength.Text = rectangle.Length.ToString();
             TextBoxClassesRectanglesWidth.Text = rectangle.Widtht.ToString();
             TextBoxClassesRectanglesColor.Text = rectangle.Color;
+        }
+
+        private void Find_Click(object sender, EventArgs e)
+        {
+            int RectangleMaxWidthIndex = FindRectangleWithMaxWidth(_rectangles);
+            TextBoxClassesRectanglesListBox.SelectedIndex = RectangleMaxWidthIndex;
         }
     }
 }

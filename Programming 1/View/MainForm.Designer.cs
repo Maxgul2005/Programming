@@ -285,6 +285,7 @@
             this.Find.TabIndex = 7;
             this.Find.Text = "Find";
             this.Find.UseVisualStyleBackColor = true;
+            this.Find.Click += new System.EventHandler(this.Find_Click);
             // 
             // label8
             // 
@@ -326,6 +327,7 @@
             this.TextBoxClassesRectanglesWidth.Name = "TextBoxClassesRectanglesWidth";
             this.TextBoxClassesRectanglesWidth.Size = new System.Drawing.Size(100, 20);
             this.TextBoxClassesRectanglesWidth.TabIndex = 2;
+            this.TextBoxClassesRectanglesWidth.TextChanged += new System.EventHandler(this.TextBoxClassesRectanglesWidth_TextChanged);
             // 
             // TextBoxClassesRectanglesLength
             // 
