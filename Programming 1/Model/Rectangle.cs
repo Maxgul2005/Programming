@@ -9,7 +9,7 @@ class Rectangle
     private double _length;
 
     private double _widtht;
-
+    
 
     public double Length
     {
@@ -58,8 +58,6 @@ class Rectangle
         Color = color;
     }
 
-    public override string ToString()
-    {
-        return $"Rectangle - w:{Widtht}, l:{Length}";
-    }
+    
+    
 }
