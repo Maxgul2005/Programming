@@ -46,8 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Diszipline.cs" />
     <Compile Include="Model\Contact.cs" />
-    <Compile Include="Model\Discipline.cs" />
+    <Compile Include="Model\Point2D.cs" />
     <Compile Include="Model\Rectangle.cs" />
     <Compile Include="Model\Collor.cs" />
     <Compile Include="Model\Flight.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Model\Song.cs" />
     <Compile Include="Model\StudentFormOfStudy.cs" />
     <Compile Include="Model\Time.cs" />
+    <Compile Include="Model\Validator.cs" />
     <Compile Include="Model\Weekday.cs" />
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>

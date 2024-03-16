@@ -11,12 +11,14 @@ using System.Windows.Forms;
 namespace Programming_1
 {
     public partial class MainForm : Form
-    {  /// <summary>
+    {  
+        
+        
+        /// <summary>
         /// class Rectangle
         /// </summary>
         private Rectangle[] _rectangles = new Rectangle[5];
         private Rectangle _currentRectangle;
-       
         private string[] List_Box_Recangle = new string[5];
         private string[] RectangleColor = new string[6] { "Black", "White", "Orange", "Purple", "Green", "Blue" };
 
@@ -28,10 +30,14 @@ namespace Programming_1
             {
                 int length = _random.Next(200);
                 int widtht = _random.Next(200);
-                _rectangles[i] = new Rectangle(length, widtht, RectangleColor[i]);
+                double x = _random.Next(200);
+                double y = _random.Next(200);
+                Point2D center = new Point2D(x, y);
+                _rectangles[i] = new Rectangle(length, widtht, RectangleColor[i],center);
                 List_Box_Recangle[i] = ($"Rectangle {i + 1}");
 
             }
+            
             TextBoxClassesRectanglesListBox.Items.AddRange(List_Box_Recangle);
         }
 
@@ -261,6 +267,8 @@ namespace Programming_1
             TextBoxClassesRectanglesLength.Text = _currentRectangle.Length.ToString();
             TextBoxClassesRectanglesWidth.Text = _currentRectangle.Widtht.ToString();
             TextBoxClassesRectanglesColor.Text = _currentRectangle.Color;
+            TextBoxRectabglesCenterX.Text = _currentRectangle.Center.X.ToString();
+            TextBoxRectabglesCenterY.Text = _currentRectangle.Center.Y.ToString();
         }
 
         private void Find_Click(object sender, EventArgs e)

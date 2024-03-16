@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.SeasonGroupBox = new System.Windows.Forms.GroupBox();
@@ -69,6 +70,11 @@
             this.TextBoxClassesRectanglesWidth = new System.Windows.Forms.TextBox();
             this.TextBoxClassesRectanglesLength = new System.Windows.Forms.TextBox();
             this.TextBoxClassesRectanglesListBox = new System.Windows.Forms.ListBox();
+            this.TextBoxRectabglesCenterX = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.TextBoxRectabglesCenterY = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SeasonGroupBox.SuspendLayout();
@@ -276,6 +282,10 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.TextBoxRectabglesCenterY);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.TextBoxRectabglesCenterX);
             this.groupBox3.Controls.Add(this.Movie);
             this.groupBox3.Controls.Add(this.Find);
             this.groupBox3.Controls.Add(this.label8);
@@ -417,7 +427,7 @@
             // 
             // Find
             // 
-            this.Find.Location = new System.Drawing.Point(249, 181);
+            this.Find.Location = new System.Drawing.Point(253, 285);
             this.Find.Name = "Find";
             this.Find.Size = new System.Drawing.Size(75, 23);
             this.Find.TabIndex = 7;
@@ -483,6 +493,47 @@
             this.TextBoxClassesRectanglesListBox.Size = new System.Drawing.Size(228, 212);
             this.TextBoxClassesRectanglesListBox.TabIndex = 0;
             this.TextBoxClassesRectanglesListBox.SelectedIndexChanged += new System.EventHandler(this.TextBoxClassesRectanglesListBox_SelectedIndexChanged);
+            // 
+            // TextBoxRectabglesCenterX
+            // 
+            this.TextBoxRectabglesCenterX.Enabled = false;
+            this.TextBoxRectabglesCenterX.Location = new System.Drawing.Point(241, 195);
+            this.TextBoxRectabglesCenterX.Name = "TextBoxRectabglesCenterX";
+            this.TextBoxRectabglesCenterX.ReadOnly = true;
+            this.TextBoxRectabglesCenterX.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxRectabglesCenterX.TabIndex = 9;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(255, 179);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(73, 13);
+            this.label14.TabIndex = 10;
+            this.label14.Text = "Coordinates X";
+            // 
+            // TextBoxRectabglesCenterY
+            // 
+            this.TextBoxRectabglesCenterY.Enabled = false;
+            this.TextBoxRectabglesCenterY.Location = new System.Drawing.Point(240, 242);
+            this.TextBoxRectabglesCenterY.Name = "TextBoxRectabglesCenterY";
+            this.TextBoxRectabglesCenterY.ReadOnly = true;
+            this.TextBoxRectabglesCenterY.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxRectabglesCenterY.TabIndex = 11;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(255, 226);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(73, 13);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Coordinates Y";
             // 
             // MainForm
             // 
@@ -553,6 +604,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox TextBoxRectabglesCenterX;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox TextBoxRectabglesCenterY;
     }
 }
 

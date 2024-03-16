@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programming_1.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,8 @@ class Rectangle
     private double _length;
 
     private double _widtht;
-    
+
+   
 
     public double Length
     {
@@ -19,10 +21,7 @@ class Rectangle
         }
         set
         {
-            if (value < 0.0)
-            {
-                throw new ArgumentException("Длина положительна!");
-            }
+            Validator.AssertOnPositiveValue(value, "Длина");
             _length = value;
         }
     }
@@ -35,27 +34,28 @@ class Rectangle
         }
         set
         {
-            if (value < 0.0)
-            {
-                throw new ArgumentException("Длина положительна!");
-            }
+            Validator.AssertOnPositiveValue(value, "Ширина");
             _widtht = value;
         }
     }
+   
 
     public string Color { get; set; }
-
+    public Point2D Center { get; set; }
+   
     public Rectangle()
     {
         Length = 0.0;
         Widtht = 0.0;
         Color = "None";
+        Center = new Point2D(0, 0);
     }
-    public Rectangle(double length, double widtht, string color)
+    public Rectangle(double length, double widtht, string color, Point2D center)
     {
         Length = length;
         Widtht = widtht;
         Color = color;
+        Center = center;
     }
 
     

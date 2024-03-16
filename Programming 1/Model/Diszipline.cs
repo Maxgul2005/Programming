@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming_1.Model
-{
-    internal class Discipline
+
+
+    class Diszipline
     {
-        string Name;
-        int Credits;
+       
+        
     }
-}
+

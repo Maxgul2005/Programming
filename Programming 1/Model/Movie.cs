@@ -10,9 +10,9 @@ using System.Threading.Tasks;
     {
         public  string Name{  get; set; }
         private int _minutes;
-        private int _year { get; set; }
+        private int _year;
         public string Genre { get; set; }
-        private int _rating { get; set; }
+        private int _rating;
 
     public int Minutes
     {
@@ -20,10 +20,7 @@ using System.Threading.Tasks;
         { return _minutes;}
         set
         {
-            if (value <0)
-            {
-                throw new ArgumentException("Время должно быть положительной велечиной");
-            }
+            Validator.AssertOnPositiveValue(value, "minutes");
             _minutes = value;
         }
     }
