@@ -269,6 +269,7 @@ namespace Programming_1
             TextBoxClassesRectanglesColor.Text = _currentRectangle.Color;
             TextBoxRectabglesCenterX.Text = _currentRectangle.Center.X.ToString();
             TextBoxRectabglesCenterY.Text = _currentRectangle.Center.Y.ToString();
+            TextBoxId.Text = _currentRectangle.Id.ToString();
         }
 
         private void Find_Click(object sender, EventArgs e)

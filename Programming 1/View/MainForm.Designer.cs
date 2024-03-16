@@ -75,6 +75,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.TextBoxRectabglesCenterY = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.TextBoxId = new System.Windows.Forms.TextBox();
+            this.ID = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SeasonGroupBox.SuspendLayout();
@@ -282,6 +284,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.ID);
+            this.groupBox3.Controls.Add(this.TextBoxId);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.TextBoxRectabglesCenterY);
             this.groupBox3.Controls.Add(this.label14);
@@ -427,7 +431,7 @@
             // 
             // Find
             // 
-            this.Find.Location = new System.Drawing.Point(253, 285);
+            this.Find.Location = new System.Drawing.Point(253, 328);
             this.Find.Name = "Find";
             this.Find.Size = new System.Drawing.Size(75, 23);
             this.Find.TabIndex = 7;
@@ -535,6 +539,24 @@
             this.label15.TabIndex = 12;
             this.label15.Text = "Coordinates Y";
             // 
+            // TextBoxId
+            // 
+            this.TextBoxId.Enabled = false;
+            this.TextBoxId.Location = new System.Drawing.Point(241, 292);
+            this.TextBoxId.Name = "TextBoxId";
+            this.TextBoxId.ReadOnly = true;
+            this.TextBoxId.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxId.TabIndex = 13;
+            // 
+            // ID
+            // 
+            this.ID.AutoSize = true;
+            this.ID.Location = new System.Drawing.Point(280, 276);
+            this.ID.Name = "ID";
+            this.ID.Size = new System.Drawing.Size(18, 13);
+            this.ID.TabIndex = 14;
+            this.ID.Text = "ID";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -609,6 +631,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox TextBoxRectabglesCenterY;
+        private System.Windows.Forms.TextBox TextBoxId;
+        private System.Windows.Forms.Label ID;
     }
 }
 

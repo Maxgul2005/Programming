@@ -11,7 +11,19 @@ class Rectangle
 
     private double _widtht;
 
-   
+    private static int _allRectanglesCount;
+
+    private int _id;
+
+    public int Id
+    {
+        get { return _id; }
+    }
+
+    public static int AllRectanglesCount
+    {
+        get { return _allRectanglesCount; }
+    }
 
     public double Length
     {
@@ -49,6 +61,7 @@ class Rectangle
         Widtht = 0.0;
         Color = "None";
         Center = new Point2D(0, 0);
+        _id = ++_allRectanglesCount;
     }
     public Rectangle(double length, double widtht, string color, Point2D center)
     {
@@ -56,6 +69,7 @@ class Rectangle
         Widtht = widtht;
         Color = color;
         Center = center;
+        _id = ++_allRectanglesCount;
     }
 
     
