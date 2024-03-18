@@ -11,12 +11,14 @@ using System.Windows.Forms;
 namespace Programming_1
 {
     public partial class MainForm : Form
-    {  
-        
-        
+    {
+
+
         /// <summary>
         /// class Rectangle
         /// </summary>
+        /// 
+        
         private Rectangle[] _rectangles = new Rectangle[5];
         private Rectangle _currentRectangle;
         private string[] List_Box_Recangle = new string[5];
@@ -32,7 +34,9 @@ namespace Programming_1
                 int widtht = _random.Next(200);
                 double x = _random.Next(200);
                 double y = _random.Next(200);
-                Point2D center = new Point2D(x, y);
+                double centrX = x + widtht / 2;
+                double centrY = y + length / 2;
+                Point2D center = new Point2D(centrX, centrY);
                 _rectangles[i] = new Rectangle(length, widtht, RectangleColor[i],center);
                 List_Box_Recangle[i] = ($"Rectangle {i + 1}");
 
@@ -71,7 +75,7 @@ namespace Programming_1
                 int Minutes = _random.Next(280);
                 int Year = _random.Next(1950,2025);
                 string Genre = "Криминалл";
-                int Rating = _random.Next(0,11);
+                int Rating = _random.Next(1,11);
                 _movies[i] = new Movie(moviesName[i],Minutes, Year, Genre, Rating);
                 listBoxMovie[i] = ($"Movie {i + 1}");
             }
@@ -346,5 +350,9 @@ namespace Programming_1
             int indexRating = FindMovieMaxRating(_movies);
             ListBoxClassesMovie.SelectedIndex = indexRating;
         }
+
+
+     
+        
     }
 }

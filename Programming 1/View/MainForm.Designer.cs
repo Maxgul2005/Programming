@@ -49,6 +49,12 @@
             this.EnumsListBox = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ID = new System.Windows.Forms.Label();
+            this.TextBoxId = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.TextBoxRectabglesCenterY = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.TextBoxRectabglesCenterX = new System.Windows.Forms.TextBox();
             this.Movie = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -70,13 +76,7 @@
             this.TextBoxClassesRectanglesWidth = new System.Windows.Forms.TextBox();
             this.TextBoxClassesRectanglesLength = new System.Windows.Forms.TextBox();
             this.TextBoxClassesRectanglesListBox = new System.Windows.Forms.ListBox();
-            this.TextBoxRectabglesCenterX = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.label14 = new System.Windows.Forms.Label();
-            this.TextBoxRectabglesCenterY = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.TextBoxId = new System.Windows.Forms.TextBox();
-            this.ID = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SeasonGroupBox.SuspendLayout();
@@ -306,6 +306,60 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Rectangles";
             // 
+            // ID
+            // 
+            this.ID.AutoSize = true;
+            this.ID.Location = new System.Drawing.Point(280, 276);
+            this.ID.Name = "ID";
+            this.ID.Size = new System.Drawing.Size(18, 13);
+            this.ID.TabIndex = 14;
+            this.ID.Text = "ID";
+            // 
+            // TextBoxId
+            // 
+            this.TextBoxId.Enabled = false;
+            this.TextBoxId.Location = new System.Drawing.Point(241, 292);
+            this.TextBoxId.Name = "TextBoxId";
+            this.TextBoxId.ReadOnly = true;
+            this.TextBoxId.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxId.TabIndex = 13;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(255, 226);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(73, 13);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Coordinates Y";
+            // 
+            // TextBoxRectabglesCenterY
+            // 
+            this.TextBoxRectabglesCenterY.Enabled = false;
+            this.TextBoxRectabglesCenterY.Location = new System.Drawing.Point(240, 242);
+            this.TextBoxRectabglesCenterY.Name = "TextBoxRectabglesCenterY";
+            this.TextBoxRectabglesCenterY.ReadOnly = true;
+            this.TextBoxRectabglesCenterY.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxRectabglesCenterY.TabIndex = 11;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(255, 179);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(73, 13);
+            this.label14.TabIndex = 10;
+            this.label14.Text = "Coordinates X";
+            // 
+            // TextBoxRectabglesCenterX
+            // 
+            this.TextBoxRectabglesCenterX.Enabled = false;
+            this.TextBoxRectabglesCenterX.Location = new System.Drawing.Point(241, 195);
+            this.TextBoxRectabglesCenterX.Name = "TextBoxRectabglesCenterX";
+            this.TextBoxRectabglesCenterX.ReadOnly = true;
+            this.TextBoxRectabglesCenterX.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxRectabglesCenterX.TabIndex = 9;
+            // 
             // Movie
             // 
             this.Movie.Controls.Add(this.label13);
@@ -498,64 +552,10 @@
             this.TextBoxClassesRectanglesListBox.TabIndex = 0;
             this.TextBoxClassesRectanglesListBox.SelectedIndexChanged += new System.EventHandler(this.TextBoxClassesRectanglesListBox_SelectedIndexChanged);
             // 
-            // TextBoxRectabglesCenterX
-            // 
-            this.TextBoxRectabglesCenterX.Enabled = false;
-            this.TextBoxRectabglesCenterX.Location = new System.Drawing.Point(241, 195);
-            this.TextBoxRectabglesCenterX.Name = "TextBoxRectabglesCenterX";
-            this.TextBoxRectabglesCenterX.ReadOnly = true;
-            this.TextBoxRectabglesCenterX.Size = new System.Drawing.Size(100, 20);
-            this.TextBoxRectabglesCenterX.TabIndex = 9;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(255, 179);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(73, 13);
-            this.label14.TabIndex = 10;
-            this.label14.Text = "Coordinates X";
-            // 
-            // TextBoxRectabglesCenterY
-            // 
-            this.TextBoxRectabglesCenterY.Enabled = false;
-            this.TextBoxRectabglesCenterY.Location = new System.Drawing.Point(240, 242);
-            this.TextBoxRectabglesCenterY.Name = "TextBoxRectabglesCenterY";
-            this.TextBoxRectabglesCenterY.ReadOnly = true;
-            this.TextBoxRectabglesCenterY.Size = new System.Drawing.Size(100, 20);
-            this.TextBoxRectabglesCenterY.TabIndex = 11;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(255, 226);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(73, 13);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Coordinates Y";
-            // 
-            // TextBoxId
-            // 
-            this.TextBoxId.Enabled = false;
-            this.TextBoxId.Location = new System.Drawing.Point(241, 292);
-            this.TextBoxId.Name = "TextBoxId";
-            this.TextBoxId.ReadOnly = true;
-            this.TextBoxId.Size = new System.Drawing.Size(100, 20);
-            this.TextBoxId.TabIndex = 13;
-            // 
-            // ID
-            // 
-            this.ID.AutoSize = true;
-            this.ID.Location = new System.Drawing.Point(280, 276);
-            this.ID.Name = "ID";
-            this.ID.Size = new System.Drawing.Size(18, 13);
-            this.ID.TabIndex = 14;
-            this.ID.Text = "ID";
             // 
             // MainForm
             // 

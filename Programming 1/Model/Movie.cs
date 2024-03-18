@@ -30,10 +30,7 @@ using System.Threading.Tasks;
         { return _year;}
         set
         {
-            if ((value < 1950) || (value > 2024))
-            {
-                throw new ArgumentException("Год должен быть в диапозоне от 1950 до 2024");
-            }
+            Validator.AssertValueInRange(value,1950,2024,"Year");
             _year = value;
         }
     }
@@ -42,10 +39,7 @@ using System.Threading.Tasks;
         get { return _rating;}
         set
         {
-            if ((value < 0) || (value > 10))
-            {
-                throw new ArgumentException("Рейтинг должен быть в диапозоне от 0+ до 10");
-            }
+            Validator.AssertValueInRange(value, 0, 10, "Rating");
             _rating = value;
         }
     }

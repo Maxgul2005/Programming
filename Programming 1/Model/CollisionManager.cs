@@ -15,10 +15,10 @@ static class CollisionManager
 
         if (deltaX < halfWidth1 + halfWidth2 && deltaY < halfHeight1 + halfHeight2)
         {
-            return true; // Rectangles are colliding
+            return true; 
         }
 
-        return false; // Rectangles are not colliding
+        return false; 
     }
 
     public static bool IsCollision(Ring ring1, Ring ring2)
@@ -28,10 +28,10 @@ static class CollisionManager
 
         if (distance < sumRadii)
         {
-            return true; // Rings are colliding
+            return true; 
         }
 
-        return false; // Rings are not colliding
+        return false; 
     }
 }
 
