@@ -72,6 +72,37 @@ class Rectangle
         _id = ++_allRectanglesCount;
     }
 
-    
-    
+   
+    private int _x;
+    public int X
+    {
+        get { return _x; }
+        set 
+        {
+            Validator.AssertOnPositiveValue(value, "_X");
+            _x = value;
+        }
+    }
+    private int _y;
+    public int Y
+    {
+        get { return _y; }
+        set
+        {
+            Validator.AssertOnPositiveValue(value, "_y");
+            _y = value;
+        }
+    }
+
+    public Rectangle(int x, int y, double width, double length)
+    {
+        X = x;
+        Y = y;
+        Widtht = width;
+        Length = length;
+        _id = ++_allRectanglesCount;
+
+    }
+
+
 }

@@ -98,10 +98,11 @@ namespace Programming_1
             return maxIndexRating;
         }
 
-
-
+       
+       
         public MainForm()
         {
+           
             InitializeComponent();
             RectangleInitiaziation();
             MovieInitiaziation();
@@ -182,6 +183,7 @@ namespace Programming_1
             Weekday ParsedDay;
             if (!int.TryParse(ParsingText, out _) && Enum.TryParse<Weekday>(ParsingText, true, out ParsedDay))
             {
+                
                 int Weekdayorder = (int)ParsedDay;
                 ParsedValueLabel.Text = $"Этот день недели ({ParsedDay} = {Weekdayorder}) ";
             }
@@ -300,7 +302,7 @@ namespace Programming_1
                 TextBoxMovieMinutes.BackColor = System.Drawing.Color.LightPink;
             }
 
-            try
+           try
             {
                 _currentMovie.Minutes = int.Parse(TextBoxMovieMinutes.Text);
                 TextBoxMovieMinutes.BackColor = System.Drawing.Color.White;
@@ -308,7 +310,7 @@ namespace Programming_1
             catch 
             {
                 TextBoxMovieMinutes.BackColor = System.Drawing.Color.LightPink;
-            }
+            } 
         }
 
         private void TextBoxMovieYear_TextChanged(object sender, EventArgs e)
@@ -327,6 +329,7 @@ namespace Programming_1
                 TextBoxMovieYear.BackColor = System.Drawing.Color.LightPink;
             }
         }
+        
 
         private void TextBoxMovieRaiting_TextChanged(object sender, EventArgs e)
         {
@@ -351,8 +354,94 @@ namespace Programming_1
             ListBoxClassesMovie.SelectedIndex = indexRating;
         }
 
+        List<Rectangle> _rectangels = new List<Rectangle>();
+        List<Rectangle> _currentRectangles = new List<Rectangle>();
+        List<Panel> _rectanglePanels = new List<Panel>();
 
-     
+        private void ButtonAddRectangle_Click(object sender, EventArgs e)
+        {
+            int x = _random.Next(10, 300);
+            int y = _random.Next(10, 300);
+            double width = _random.Next(10, 200);
+            double length = _random.Next(30, 80);
+            int id = _random.Next(1, 10);
+            Rectangle rectangle = new Rectangle(x, y, width, length);
+            _rectangels.Add(rectangle);
+            listBoxRectangels.Items.Add($"{rectangle.Id} : (X = {rectangle.X}, Y = {rectangle.Y}, W = {rectangle.Widtht}, L = {rectangle.Length})");
+
+            TextBoxIdRectangels.Text = rectangle.Id.ToString();
+            TextBoxX_Rectangels.Text = rectangle.X.ToString();
+            TextBoxY_Rectangels.Text = rectangle.Y.ToString();
+            TextBoxWidthRectangels.Text = rectangle.Widtht.ToString();
+            TextBoxLengthRectangels.Text = rectangle.Length.ToString();
+
+            Panel panel = new Panel()
+            {
+                Location = new Point(rectangle.X, rectangle.Y),
+                Width = Convert.ToInt16(rectangle.Widtht),
+                Height = Convert.ToInt16(rectangle.Length),
+                BackColor = Color.FromArgb(127, 127, 255, 127)
+            };
+            _rectanglePanels.Add(panel);
+            this.Controls.Add(panel);
+            PanelRectangels.Controls.Add(panel);
+            
+        }
+
+
+
+        // Удаление прямоугольника
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+            int SelectedIndexListBoxRectangels = listBoxRectangels.SelectedIndex+1;
+          
+                
+                try
+            {
+                Panel panelToRemove = _rectanglePanels[SelectedIndexListBoxRectangels];
+                _rectanglePanels.Remove(panelToRemove);
+                PanelRectangels.Controls.Remove(panelToRemove);
+                this.Controls.Remove(panelToRemove);
+                _rectangels.RemoveAt(SelectedIndexListBoxRectangels);
+                listBoxRectangels.Items.RemoveAt(SelectedIndexListBoxRectangels);
+                
+                listBoxRectangels.Refresh();
+         
+                if (_rectangels.Count > 0)
+                {
+                    Rectangle newRectangle = _rectangels.First();
+                    TextBoxIdRectangels.Text = newRectangle.Id.ToString();
+                    TextBoxX_Rectangels.Text = newRectangle.X.ToString();
+                    TextBoxY_Rectangels.Text = newRectangle.Y.ToString();
+                    TextBoxWidthRectangels.Text = newRectangle.Widtht.ToString();
+                    TextBoxLengthRectangels.Text = newRectangle.Length.ToString();
+                    
+
+
+                }
+                else
+                {
+                    TextBoxIdRectangels.Text = "";
+                    TextBoxX_Rectangels.Text = "";
+                    TextBoxY_Rectangels.Text = "";
+                    TextBoxWidthRectangels.Text = "";
+                    TextBoxLengthRectangels.Text = "";
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Нет прямоугольников");
+            }
+            
+
+        }
         
+        private void listBoxRectangels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
