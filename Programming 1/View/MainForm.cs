@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Programming_1
 {
     public partial class MainForm : Form
@@ -102,7 +103,8 @@ namespace Programming_1
        
         public MainForm()
         {
-           
+        
+            UpdateListBox();
             InitializeComponent();
             RectangleInitiaziation();
             MovieInitiaziation();
@@ -355,37 +357,22 @@ namespace Programming_1
         }
 
         List<Rectangle> _rectangels = new List<Rectangle>();
-        List<Rectangle> _currentRectangles = new List<Rectangle>();
-        List<Panel> _rectanglePanels = new List<Panel>();
+        List<Rectangle> _currentRectangles;
+       
+        
+
 
         private void ButtonAddRectangle_Click(object sender, EventArgs e)
         {
-            int x = _random.Next(10, 300);
+            int x = _random.Next(10, 300); 
             int y = _random.Next(10, 300);
-            double width = _random.Next(10, 200);
-            double length = _random.Next(30, 80);
-            int id = _random.Next(1, 10);
+            int width = _random.Next(10, 200);
+            int length = _random.Next(30, 80);
             Rectangle rectangle = new Rectangle(x, y, width, length);
             _rectangels.Add(rectangle);
-            listBoxRectangels.Items.Add($"{rectangle.Id} : (X = {rectangle.X}, Y = {rectangle.Y}, W = {rectangle.Widtht}, L = {rectangle.Length})");
+            // listBoxRectangels.Items.Add($"{rectangle.Id} : (X = {rectangle.X}, Y = {rectangle.Y}, W = {rectangle.Widtht}, L = {rectangle.Length})");
+            UpdateListBox();
 
-            TextBoxIdRectangels.Text = rectangle.Id.ToString();
-            TextBoxX_Rectangels.Text = rectangle.X.ToString();
-            TextBoxY_Rectangels.Text = rectangle.Y.ToString();
-            TextBoxWidthRectangels.Text = rectangle.Widtht.ToString();
-            TextBoxLengthRectangels.Text = rectangle.Length.ToString();
-
-            Panel panel = new Panel()
-            {
-                Location = new Point(rectangle.X, rectangle.Y),
-                Width = Convert.ToInt16(rectangle.Widtht),
-                Height = Convert.ToInt16(rectangle.Length),
-                BackColor = Color.FromArgb(127, 127, 255, 127)
-            };
-            _rectanglePanels.Add(panel);
-            this.Controls.Add(panel);
-            PanelRectangels.Controls.Add(panel);
-            
         }
 
 
@@ -394,54 +381,172 @@ namespace Programming_1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
-            int SelectedIndexListBoxRectangels = listBoxRectangels.SelectedIndex+1;
-          
-                
-                try
+            int SelectedIndexListBoxRectangels = listBoxRectangels.SelectedIndex;
+            if (listBoxRectangels.SelectedIndex != -1)
             {
-                Panel panelToRemove = _rectanglePanels[SelectedIndexListBoxRectangels];
-                _rectanglePanels.Remove(panelToRemove);
-                PanelRectangels.Controls.Remove(panelToRemove);
-                this.Controls.Remove(panelToRemove);
                 _rectangels.RemoveAt(SelectedIndexListBoxRectangels);
-                listBoxRectangels.Items.RemoveAt(SelectedIndexListBoxRectangels);
-                
-                listBoxRectangels.Refresh();
-         
-                if (_rectangels.Count > 0)
+                listBoxRectangels.Items.RemoveAt(listBoxRectangels.SelectedIndex);
+            }
+
+            TextBoxX_Rectangels.BackColor = SystemColors.Window;
+            TextBoxY_Rectangels.BackColor = SystemColors.Window;
+            TextBoxWidthRectangels.BackColor = SystemColors.Window;
+            TextBoxLengthRectangels.BackColor = SystemColors.Window;
+
+        }
+        private void UpdateListBox()
+        {
+
+            if (listBoxRectangels != null)
+            {
+                listBoxRectangels.Items.Clear();
+                foreach (Rectangle rectangle in _rectangels)
                 {
-                    Rectangle newRectangle = _rectangels.First();
-                    TextBoxIdRectangels.Text = newRectangle.Id.ToString();
-                    TextBoxX_Rectangels.Text = newRectangle.X.ToString();
-                    TextBoxY_Rectangels.Text = newRectangle.Y.ToString();
-                    TextBoxWidthRectangels.Text = newRectangle.Widtht.ToString();
-                    TextBoxLengthRectangels.Text = newRectangle.Length.ToString();
-                    
+                    listBoxRectangels.Items.Add($"Id: {rectangle.Id}, X: {rectangle.X}, Y: {rectangle.Y}, Width: {rectangle.Widtht}, Height: {rectangle.Length}");
+                }
+            }
+        }
+        private void listBoxRectangels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxRectangels.SelectedIndex != -1)
+            {
+                _currentRectangle = _rectangels[listBoxRectangels.SelectedIndex];
+                //Отображение данных прямоугольника в текстовых полях
+                TextBoxIdRectangels.Text = _currentRectangle.Id.ToString();
+                TextBoxX_Rectangels.Text = _currentRectangle.X.ToString();
+                TextBoxY_Rectangels.Text = _currentRectangle.Y.ToString();
+                TextBoxWidthRectangels.Text = _currentRectangle.Widtht.ToString();
+                TextBoxLengthRectangels.Text = _currentRectangle.Length.ToString();
+            }
+            else
+            {
+                // Очистка текстовых полей
+                TextBoxIdRectangels.Text = "";
+                TextBoxX_Rectangels.Text = "";
+                TextBoxY_Rectangels.Text = "";
+                TextBoxWidthRectangels.Text = "";
+                TextBoxLengthRectangels.Text = "";
+            }
 
-
+            
+        }
+        
+        private void TextBoxX_Rectangels_TextChanged(object sender, EventArgs e)
+        {   
+            // Проверяем, выбран ли какой-то прямоугольник
+            if (_currentRectangle != null)
+            {
+                // Пытаемся преобразовать текст из текстового поля в число
+                if (int.TryParse(TextBoxX_Rectangels.Text, out int newX))
+                {
+                    // Если число меньше нуля, устанавливаем красный цвет фона
+                    if (newX < 0)
+                    {
+                        TextBoxX_Rectangels.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                        TextBoxX_Rectangels.BackColor = SystemColors.Window;
+                        _currentRectangle.X = newX;
+                        UpdateListBox();
+                    }
                 }
                 else
                 {
-                    TextBoxIdRectangels.Text = "";
-                    TextBoxX_Rectangels.Text = "";
-                    TextBoxY_Rectangels.Text = "";
-                    TextBoxWidthRectangels.Text = "";
-                    TextBoxLengthRectangels.Text = "";
+                    // Если введенное значение не является числом, также устанавливаем красный цвет фона
+                    TextBoxX_Rectangels.BackColor = Color.LightPink;
                 }
 
             }
-            catch
-            {
-                MessageBox.Show("Нет прямоугольников");
-            }
-            
-
         }
-        
-        private void listBoxRectangels_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void TextBoxY_Rectangels_TextChanged(object sender, EventArgs e)
         {
+            if (_currentRectangle != null)
+            {
+                // Пытаемся преобразовать текст из текстового поля в число
+                if (int.TryParse(TextBoxY_Rectangels.Text, out int newY))
+                {
+                    // Если число меньше нуля, устанавливаем красный цвет фона
+                    if (newY < 0)
+                    {
+                        TextBoxY_Rectangels.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                        TextBoxY_Rectangels.BackColor = SystemColors.Window;
+                        _currentRectangle.Y = newY;
+                        UpdateListBox();
+                    }
+                }
+                else
+                {
+                    // Если введенное значение не является числом, также устанавливаем красный цвет фона
+                    TextBoxY_Rectangels.BackColor = Color.LightPink;
+                }
+
+            }
+        }
+
+        private void TextBoxWidthRectangels_TextChanged(object sender, EventArgs e)
+        {
+            if (_currentRectangle != null)
+            {
+                // Пытаемся преобразовать текст из текстового поля в число
+                if (int.TryParse(TextBoxWidthRectangels.Text, out int newWidth))
+                {
+                    // Если число меньше нуля, устанавливаем красный цвет фона
+                    if (newWidth < 0)
+                    {
+                        TextBoxWidthRectangels.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                        TextBoxWidthRectangels.BackColor = SystemColors.Window;
+                        _currentRectangle.Widtht = newWidth;
+                        UpdateListBox();
+                    }
+                }
+                else
+                {
+                    // Если введенное значение не является числом, также устанавливаем красный цвет фона
+                    TextBoxWidthRectangels.BackColor = Color.LightPink;
+                }
+
+            }
+        }
+
+        private void TextBoxLengthRectangels_TextChanged(object sender, EventArgs e)
+        {
+
+            if (_currentRectangle != null)
+            {
+                // Пытаемся преобразовать текст из текстового поля в число
+                if (int.TryParse(TextBoxLengthRectangels.Text, out int newLength))
+                {
+                    // Если число меньше нуля, устанавливаем красный цвет фона
+                    if (newLength < 0)
+                    {
+                        TextBoxLengthRectangels.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                        TextBoxLengthRectangels.BackColor = SystemColors.Window;
+                        _currentRectangle.Length = newLength;
+                        UpdateListBox();
+                    }
+                }
+
+                else
+                {
+                    // Если введенное значение не является числом, также устанавливаем красный цвет фона
+                    TextBoxLengthRectangels.BackColor = Color.LightPink;
+                }
+            }
             
         }
     }
 }
+
+

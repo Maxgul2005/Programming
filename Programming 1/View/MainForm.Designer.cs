@@ -676,6 +676,7 @@
             this.TextBoxLengthRectangels.Name = "TextBoxLengthRectangels";
             this.TextBoxLengthRectangels.Size = new System.Drawing.Size(100, 20);
             this.TextBoxLengthRectangels.TabIndex = 9;
+            this.TextBoxLengthRectangels.TextChanged += new System.EventHandler(this.TextBoxLengthRectangels_TextChanged);
             // 
             // TextBoxWidthRectangels
             // 
@@ -683,6 +684,7 @@
             this.TextBoxWidthRectangels.Name = "TextBoxWidthRectangels";
             this.TextBoxWidthRectangels.Size = new System.Drawing.Size(100, 20);
             this.TextBoxWidthRectangels.TabIndex = 8;
+            this.TextBoxWidthRectangels.TextChanged += new System.EventHandler(this.TextBoxWidthRectangels_TextChanged);
             // 
             // TextBoxY_Rectangels
             // 
@@ -690,6 +692,7 @@
             this.TextBoxY_Rectangels.Name = "TextBoxY_Rectangels";
             this.TextBoxY_Rectangels.Size = new System.Drawing.Size(100, 20);
             this.TextBoxY_Rectangels.TabIndex = 7;
+            this.TextBoxY_Rectangels.TextChanged += new System.EventHandler(this.TextBoxY_Rectangels_TextChanged);
             // 
             // TextBoxX_Rectangels
             // 
@@ -697,6 +700,7 @@
             this.TextBoxX_Rectangels.Name = "TextBoxX_Rectangels";
             this.TextBoxX_Rectangels.Size = new System.Drawing.Size(100, 20);
             this.TextBoxX_Rectangels.TabIndex = 6;
+            this.TextBoxX_Rectangels.TextChanged += new System.EventHandler(this.TextBoxX_Rectangels_TextChanged);
             // 
             // TextBoxIdRectangels
             // 
