@@ -239,7 +239,7 @@ namespace Programming_1
 
            try
             {
-                _currentRectangle.Length = double.Parse(TextBoxClassesRectanglesLength.Text);
+                _currentRectangle.Length = int.Parse(TextBoxClassesRectanglesLength.Text);
                 TextBoxClassesRectanglesLength.BackColor = System.Drawing.Color.White;
             } 
             catch (Exception)
@@ -258,7 +258,7 @@ namespace Programming_1
 
             try
             {
-                _currentRectangle.Widtht= double.Parse(TextBoxClassesRectanglesWidth.Text);
+                _currentRectangle.Widtht= int.Parse(TextBoxClassesRectanglesWidth.Text);
                 TextBoxClassesRectanglesWidth.BackColor = System.Drawing.Color.White;
             }
             catch (Exception)
@@ -358,8 +358,10 @@ namespace Programming_1
 
         List<Rectangle> _rectangels = new List<Rectangle>();
         List<Rectangle> _currentRectangles;
-       
-        
+        // Поле для хранения списка панелей прямоугольников на канве
+        private List<Panel> _rectanglePanels = new List<Panel>();
+
+
 
 
         private void ButtonAddRectangle_Click(object sender, EventArgs e)
@@ -370,7 +372,16 @@ namespace Programming_1
             int length = _random.Next(30, 80);
             Rectangle rectangle = new Rectangle(x, y, width, length);
             _rectangels.Add(rectangle);
-            // listBoxRectangels.Items.Add($"{rectangle.Id} : (X = {rectangle.X}, Y = {rectangle.Y}, W = {rectangle.Widtht}, L = {rectangle.Length})");
+            Panel panel = new Panel();
+            panel.Location = new Point(rectangle.X, rectangle.Y);
+            panel.Size = new Size(rectangle.Widtht, rectangle.Length);
+            panel.BackColor = Color.FromArgb(127, 127, 255, 127);
+
+            // Добавление панели на канву
+            PanelRectangels.Controls.Add(panel);
+
+            // Добавление панели в список панелей
+            _rectanglePanels.Add(panel);
             UpdateListBox();
 
         }
@@ -381,11 +392,23 @@ namespace Programming_1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int SelectedIndexListBoxRectangels = listBoxRectangels.SelectedIndex;
-            if (listBoxRectangels.SelectedIndex != -1)
+            int selectedIndex = listBoxRectangels.SelectedIndex;
+            if (selectedIndex != -1)
             {
-                _rectangels.RemoveAt(SelectedIndexListBoxRectangels);
-                listBoxRectangels.Items.RemoveAt(listBoxRectangels.SelectedIndex);
+                // Удаление прямоугольника из списка
+                _rectangels.RemoveAt(selectedIndex);
+
+                // Удаление панели из канвы
+                if (selectedIndex < _rectanglePanels.Count)
+                {
+                    PanelRectangels.Controls.Remove(_rectanglePanels[selectedIndex]);
+
+                    // Удаление панели из списка панелей
+                    _rectanglePanels.RemoveAt(selectedIndex);
+                }
+
+                // Удаление выбранного элемента в списке
+                listBoxRectangels.Items.RemoveAt(selectedIndex);
             }
 
             TextBoxX_Rectangels.BackColor = SystemColors.Window;

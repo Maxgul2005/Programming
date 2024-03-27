@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 class Rectangle
 {
-    private double _length;
+    private int _length;
 
-    private double _widtht;
+    private int _widtht;
 
     private static int _allRectanglesCount;
 
@@ -25,7 +25,7 @@ class Rectangle
         get { return _allRectanglesCount; }
     }
 
-    public double Length
+    public int Length
     {
         get
         {
@@ -38,7 +38,7 @@ class Rectangle
         }
     }
 
-    public double Widtht
+    public int Widtht
     {
         get
         {
@@ -57,13 +57,13 @@ class Rectangle
    
     public Rectangle()
     {
-        Length = 0.0;
-        Widtht = 0.0;
+        Length = 0;
+        Widtht = 0;
         Color = "None";
         Center = new Point2D(0, 0);
         _id = ++_allRectanglesCount;
     }
-    public Rectangle(double length, double widtht, string color, Point2D center)
+    public Rectangle(int length, int widtht, string color, Point2D center)
     {
         Length = length;
         Widtht = widtht;
@@ -94,7 +94,7 @@ class Rectangle
         }
     }
 
-    public Rectangle(int x, int y, double width, double length)
+    public Rectangle(int x, int y, int width, int length)
     {
         X = x;
         Y = y;
