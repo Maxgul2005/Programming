@@ -105,8 +105,6 @@ namespace Programming_1
         public MainForm()
         {
             // PanelRectangels = new Panel();
-            UpdateRectanglePanels();
-            UpdateRectangles();
             FindCollisions();
             UpdateListBox();
             InitializeComponent();
@@ -459,7 +457,8 @@ namespace Programming_1
                 }
             }
         }
-     
+       
+
         private void listBoxRectangels_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBoxRectangels.SelectedIndex != -1)
@@ -473,7 +472,7 @@ namespace Programming_1
                 TextBoxLengthRectangels.Text = _currentRectangle.Length.ToString();
 
                 // Обновляем список панелей в соответствии с выбранным прямоугольником
-                UpdateRectanglePanels();
+                
             }
             else
             {
@@ -483,169 +482,72 @@ namespace Programming_1
                 TextBoxY_Rectangels.Text = "";
                 TextBoxWidthRectangels.Text = "";
                 TextBoxLengthRectangels.Text = "";
-            }
-        }
-        private void UpdateRectangles()
-        {
-            foreach (Panel Panel in _rectanglePanels)
-            {
-                // Получаем значения из текстовых полей и обновляем параметры прямоугольника
-                if (int.TryParse(TextBoxX_Rectangels.Text, out int x))
-                    Panel.Location = new Point(x, Panel.Location.Y);
-
-                if (int.TryParse(TextBoxY_Rectangels.Text, out int y))
-                    Panel.Location = new Point(Panel.Location.X, y);
-
-                if (int.TryParse(TextBoxWidthRectangels.Text, out int width))
-                    Panel.Width = width;
-
-                if (int.TryParse(TextBoxLengthRectangels.Text, out int height))
-                    Panel.Height = height;
-
-                // Перерисовываем панель прямоугольника
-                Panel.Invalidate();
-                foreach (Panel panel2 in _rectanglePanels)
-                {
-                    if (Panel != panel2 && Panel.Bounds.IntersectsWith(panel2.Bounds))
-                    {
-                        Panel.BackColor = Color.Red;
-                        panel2.BackColor = Color.Red;
-                    }
-                }
-
-            }
-           
-
-
-        }
-        private void UpdateRectanglePanels()
-        {
-            for (int i = 0; i < _rectangels.Count; i++)
-            {
-                // Устанавливаем обновленные параметры прямоугольника для каждой панели
-                _rectanglePanels[i].Location = new Point(_rectangels[i].X, _rectangels[i].Y);
-                _rectanglePanels[i].Size = new Size(_rectangels[i].Widtht, _rectangels[i].Length);
+                
             }
         }
 
 
         private void TextBoxX_Rectangels_TextChanged(object sender, EventArgs e)
         {
-            UpdateRectangles();
-            // Проверяем, выбран ли какой-то прямоугольник
-            if (_currentRectangle != null)
+            if (_currentRectangle != null && int.TryParse(TextBoxX_Rectangels.Text, out int newX))
             {
-                // Пытаемся преобразовать текст из текстового поля в число
-                if (int.TryParse(TextBoxX_Rectangels.Text, out int newX))
-                {
-                    // Если число меньше нуля, устанавливаем красный цвет фона
-                    if (newX < 0)
-                    {
-                        TextBoxX_Rectangels.BackColor = Color.LightPink;
-                    }
-                    else
-                    {
-                        TextBoxX_Rectangels.BackColor = SystemColors.Window;
-                        _currentRectangle.X = newX;
-                        UpdateListBox();
-                    }
-                }
-                else
-                {
-                    // Если введенное значение не является числом, также устанавливаем красный цвет фона
-                    TextBoxX_Rectangels.BackColor = Color.LightPink;
-                }
+                _currentRectangle.X = newX;
 
+                if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                {
+                    _rectanglePanels[listBoxRectangels.SelectedIndex].Location = new Point(newX, _currentRectangle.Y);
+                }
+                UpdateListBox();
+                FindCollisions();
             }
         }
-
 
         private void TextBoxY_Rectangels_TextChanged(object sender, EventArgs e)
         {
-            UpdateRectangles();
-            if (_currentRectangle != null)
+            if (_currentRectangle != null && int.TryParse(TextBoxY_Rectangels.Text, out int newY))
             {
-                // Пытаемся преобразовать текст из текстового поля в число
-                if (int.TryParse(TextBoxY_Rectangels.Text, out int newY))
-                {
-                    // Если число меньше нуля, устанавливаем красный цвет фона
-                    if (newY < 0)
-                    {
-                        TextBoxY_Rectangels.BackColor = Color.LightPink;
-                    }
-                    else
-                    {
-                        TextBoxY_Rectangels.BackColor = SystemColors.Window;
-                        _currentRectangle.Y = newY;
-                        UpdateListBox();
-                    }
-                }
-                else
-                {
-                    // Если введенное значение не является числом, также устанавливаем красный цвет фона
-                    TextBoxY_Rectangels.BackColor = Color.LightPink;
-                }
+                _currentRectangle.Y = newY;
 
-            }
-        } 
-
-        private void TextBoxWidthRectangels_TextChanged(object sender, EventArgs e)
-        {
-            UpdateRectangles();
-            if (_currentRectangle != null)
-            {
-                // Пытаемся преобразовать текст из текстового поля в число
-                if (int.TryParse(TextBoxWidthRectangels.Text, out int newWidth))
+                if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
                 {
-                    // Если число меньше нуля, устанавливаем красный цвет фона
-                    if (newWidth < 0)
-                    {
-                        TextBoxWidthRectangels.BackColor = Color.LightPink;
-                    }
-                    else
-                    {
-                        TextBoxWidthRectangels.BackColor = SystemColors.Window;
-                        _currentRectangle.Widtht = newWidth;
-                        UpdateListBox();
-                    }
+                    _rectanglePanels[listBoxRectangels.SelectedIndex].Location = new Point(_currentRectangle.X, newY);
                 }
-                else
-                {
-                    // Если введенное значение не является числом, также устанавливаем красный цвет фона
-                    TextBoxWidthRectangels.BackColor = Color.LightPink;
-                }
-
+                UpdateListBox();
+                FindCollisions();
             }
         }
 
-        private void TextBoxLengthRectangels_TextChanged(object sender, EventArgs e)
+        private void TextBoxWidthRectangels_TextChanged(object sender, EventArgs e)
         {
-            UpdateRectangles();
-            if (_currentRectangle != null)
+            if (_currentRectangle != null && int.TryParse(TextBoxWidthRectangels.Text, out int newWidth))
             {
-                // Пытаемся преобразовать текст из текстового поля в число
-                if (int.TryParse(TextBoxLengthRectangels.Text, out int newLength))
+                _currentRectangle.Widtht = newWidth;
+
+                if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
                 {
-                    // Если число меньше нуля, устанавливаем красный цвет фона
-                    if (newLength < 0)
-                    {
-                        TextBoxLengthRectangels.BackColor = Color.LightPink;
-                    }
-                    else
-                    {
-                        TextBoxLengthRectangels.BackColor = SystemColors.Window;
-                        _currentRectangle.Length = newLength;
-                        UpdateListBox();
-                    }
+                    _rectanglePanels[listBoxRectangels.SelectedIndex].Size = new Size(newWidth, _currentRectangle.Length);
                 }
 
-                else
-                {
-                    // Если введенное значение не является числом, также устанавливаем красный цвет фона
-                    TextBoxLengthRectangels.BackColor = Color.LightPink;
-                }
+                UpdateListBox();
+                FindCollisions();
             }
-            
+        }
+
+        
+        private void TextBoxLengthRectangels_TextChanged(object sender, EventArgs e)
+        {
+           
+            if (_currentRectangle != null && int.TryParse(TextBoxLengthRectangels.Text, out int newHeight))
+            {
+                _currentRectangle.Length = newHeight;
+                if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                {
+                    _rectanglePanels[listBoxRectangels.SelectedIndex].Size = new Size(_currentRectangle.Widtht, newHeight);
+                }
+                UpdateListBox();
+                FindCollisions();
+
+            }
         }
     }
 }
