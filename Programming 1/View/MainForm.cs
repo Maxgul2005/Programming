@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace Programming_1
@@ -19,7 +20,7 @@ namespace Programming_1
         /// class Rectangle
         /// </summary>
         /// 
-        
+       
         private Rectangle[] _rectangles = new Rectangle[5];
         private Rectangle _currentRectangle;
         private string[] List_Box_Recangle = new string[5];
@@ -103,7 +104,10 @@ namespace Programming_1
        
         public MainForm()
         {
-        
+            // PanelRectangels = new Panel();
+            UpdateRectanglePanels();
+            UpdateRectangles();
+            FindCollisions();
             UpdateListBox();
             InitializeComponent();
             RectangleInitiaziation();
@@ -383,7 +387,8 @@ namespace Programming_1
             // Добавление панели в список панелей
             _rectanglePanels.Add(panel);
             UpdateListBox();
-
+            FindCollisions();
+           
         }
 
 
@@ -405,10 +410,12 @@ namespace Programming_1
 
                     // Удаление панели из списка панелей
                     _rectanglePanels.RemoveAt(selectedIndex);
+                   
                 }
 
                 // Удаление выбранного элемента в списке
                 listBoxRectangels.Items.RemoveAt(selectedIndex);
+                FindCollisions();
             }
 
             TextBoxX_Rectangels.BackColor = SystemColors.Window;
@@ -429,17 +436,44 @@ namespace Programming_1
                 }
             }
         }
+        private void FindCollisions()
+        {
+            foreach (var panel in _rectanglePanels)
+            {
+                panel.BackColor = Color.Green;
+            }
+          
+            // Перебираем каждый прямоугольник в списке
+            for (int i = 0; i < _rectangels.Count; i++)
+            {
+                // Проверяем текущий прямоугольник на пересечение с остальными
+                for (int j = i + 1; j < _rectangels.Count; j++)
+                {
+                    // Проверяем пересечение текущего прямоугольника с прямоугольником j
+                    if (CollisionManager.IsCollision(_rectangels[i], _rectangels[j]))
+                    {
+                        // Если пересечение есть, перекрашиваем панели в красный цвет
+                        _rectanglePanels[i].BackColor = Color.Red;
+                        _rectanglePanels[j].BackColor = Color.Red;
+                    }
+                }
+            }
+        }
+     
         private void listBoxRectangels_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBoxRectangels.SelectedIndex != -1)
             {
                 _currentRectangle = _rectangels[listBoxRectangels.SelectedIndex];
-                //Отображение данных прямоугольника в текстовых полях
+                // Отображение данных прямоугольника в текстовых полях
                 TextBoxIdRectangels.Text = _currentRectangle.Id.ToString();
                 TextBoxX_Rectangels.Text = _currentRectangle.X.ToString();
                 TextBoxY_Rectangels.Text = _currentRectangle.Y.ToString();
                 TextBoxWidthRectangels.Text = _currentRectangle.Widtht.ToString();
                 TextBoxLengthRectangels.Text = _currentRectangle.Length.ToString();
+
+                // Обновляем список панелей в соответствии с выбранным прямоугольником
+                UpdateRectanglePanels();
             }
             else
             {
@@ -450,12 +484,54 @@ namespace Programming_1
                 TextBoxWidthRectangels.Text = "";
                 TextBoxLengthRectangels.Text = "";
             }
-
-            
         }
-        
+        private void UpdateRectangles()
+        {
+            foreach (Panel Panel in _rectanglePanels)
+            {
+                // Получаем значения из текстовых полей и обновляем параметры прямоугольника
+                if (int.TryParse(TextBoxX_Rectangels.Text, out int x))
+                    Panel.Location = new Point(x, Panel.Location.Y);
+
+                if (int.TryParse(TextBoxY_Rectangels.Text, out int y))
+                    Panel.Location = new Point(Panel.Location.X, y);
+
+                if (int.TryParse(TextBoxWidthRectangels.Text, out int width))
+                    Panel.Width = width;
+
+                if (int.TryParse(TextBoxLengthRectangels.Text, out int height))
+                    Panel.Height = height;
+
+                // Перерисовываем панель прямоугольника
+                Panel.Invalidate();
+                foreach (Panel panel2 in _rectanglePanels)
+                {
+                    if (Panel != panel2 && Panel.Bounds.IntersectsWith(panel2.Bounds))
+                    {
+                        Panel.BackColor = Color.Red;
+                        panel2.BackColor = Color.Red;
+                    }
+                }
+
+            }
+           
+
+
+        }
+        private void UpdateRectanglePanels()
+        {
+            for (int i = 0; i < _rectangels.Count; i++)
+            {
+                // Устанавливаем обновленные параметры прямоугольника для каждой панели
+                _rectanglePanels[i].Location = new Point(_rectangels[i].X, _rectangels[i].Y);
+                _rectanglePanels[i].Size = new Size(_rectangels[i].Widtht, _rectangels[i].Length);
+            }
+        }
+
+
         private void TextBoxX_Rectangels_TextChanged(object sender, EventArgs e)
-        {   
+        {
+            UpdateRectangles();
             // Проверяем, выбран ли какой-то прямоугольник
             if (_currentRectangle != null)
             {
@@ -486,6 +562,7 @@ namespace Programming_1
 
         private void TextBoxY_Rectangels_TextChanged(object sender, EventArgs e)
         {
+            UpdateRectangles();
             if (_currentRectangle != null)
             {
                 // Пытаемся преобразовать текст из текстового поля в число
@@ -510,10 +587,11 @@ namespace Programming_1
                 }
 
             }
-        }
+        } 
 
         private void TextBoxWidthRectangels_TextChanged(object sender, EventArgs e)
         {
+            UpdateRectangles();
             if (_currentRectangle != null)
             {
                 // Пытаемся преобразовать текст из текстового поля в число
@@ -542,7 +620,7 @@ namespace Programming_1
 
         private void TextBoxLengthRectangels_TextChanged(object sender, EventArgs e)
         {
-
+            UpdateRectangles();
             if (_currentRectangle != null)
             {
                 // Пытаемся преобразовать текст из текстового поля в число
