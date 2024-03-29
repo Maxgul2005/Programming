@@ -489,65 +489,116 @@ namespace Programming_1
 
         private void TextBoxX_Rectangels_TextChanged(object sender, EventArgs e)
         {
-            if (_currentRectangle != null && int.TryParse(TextBoxX_Rectangels.Text, out int newX))
+            if (int.TryParse(TextBoxX_Rectangels.Text, out int newX))
             {
-                _currentRectangle.X = newX;
-
-                if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                if (newX >= 0)
                 {
-                    _rectanglePanels[listBoxRectangels.SelectedIndex].Location = new Point(newX, _currentRectangle.Y);
+                    _currentRectangle.X = newX;
+
+                    if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                    {
+                        _rectanglePanels[listBoxRectangels.SelectedIndex].Location = new Point(newX, _currentRectangle.Y);
+                    }
+
+                    UpdateListBox();
+                    FindCollisions();
+                    TextBoxX_Rectangels.BackColor = SystemColors.Window; // Вернуть обычный цвет фона текстового поля
                 }
-                UpdateListBox();
-                FindCollisions();
+                else
+                {
+                    TextBoxX_Rectangels.BackColor = Color.LightPink; // Изменить цвет фона текстового поля на красный
+                }
+            }
+            else
+            {
+                TextBoxX_Rectangels.BackColor = Color.LightPink; // Изменить цвет фона текстового поля на красный
             }
         }
 
         private void TextBoxY_Rectangels_TextChanged(object sender, EventArgs e)
         {
-            if (_currentRectangle != null && int.TryParse(TextBoxY_Rectangels.Text, out int newY))
+            if (int.TryParse(TextBoxY_Rectangels.Text, out int newY))
             {
-                _currentRectangle.Y = newY;
-
-                if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                if (newY >= 0)
                 {
-                    _rectanglePanels[listBoxRectangels.SelectedIndex].Location = new Point(_currentRectangle.X, newY);
+                    _currentRectangle.Y = newY;
+
+                    if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                    {
+                        _rectanglePanels[listBoxRectangels.SelectedIndex].Location = new Point(_currentRectangle.X, newY);
+                    }
+
+                    UpdateListBox();
+                    FindCollisions();
+                    TextBoxY_Rectangels.BackColor = SystemColors.Window; // Вернуть обычный цвет фона текстового поля
                 }
-                UpdateListBox();
-                FindCollisions();
+                else
+                {
+                    TextBoxY_Rectangels.BackColor = Color.LightPink; // Изменить цвет фона текстового поля на красный
+                }
+            }
+            else
+            {
+                TextBoxY_Rectangels.BackColor = Color.LightPink; // Изменить цвет фона текстового поля на красный
             }
         }
 
         private void TextBoxWidthRectangels_TextChanged(object sender, EventArgs e)
         {
-            if (_currentRectangle != null && int.TryParse(TextBoxWidthRectangels.Text, out int newWidth))
+            if (int.TryParse(TextBoxWidthRectangels.Text, out int newWidth))
             {
-                _currentRectangle.Widtht = newWidth;
-
-                if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                if (newWidth >= 0)
                 {
-                    _rectanglePanels[listBoxRectangels.SelectedIndex].Size = new Size(newWidth, _currentRectangle.Length);
-                }
+                    _currentRectangle.Widtht = newWidth;
 
-                UpdateListBox();
-                FindCollisions();
+                    if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                    {
+                        _rectanglePanels[listBoxRectangels.SelectedIndex].Size = new Size(newWidth, _currentRectangle.Length);
+                    }
+
+                    UpdateListBox();
+                    FindCollisions();
+                    TextBoxWidthRectangels.BackColor = SystemColors.Window; // Вернуть обычный цвет фона текстового поля
+                }
+                else
+                {
+                    TextBoxWidthRectangels.BackColor = Color.LightPink; // Изменить цвет фона текстового поля на красный
+                }
+            }
+            else
+            {
+                TextBoxWidthRectangels.BackColor = Color.LightPink; // Изменить цвет фона текстового поля на красный
             }
         }
 
         
         private void TextBoxLengthRectangels_TextChanged(object sender, EventArgs e)
         {
-           
-            if (_currentRectangle != null && int.TryParse(TextBoxLengthRectangels.Text, out int newHeight))
+            if (int.TryParse(TextBoxLengthRectangels.Text, out int newHeight))
             {
-                _currentRectangle.Length = newHeight;
-                if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                if (newHeight >= 0)
                 {
-                    _rectanglePanels[listBoxRectangels.SelectedIndex].Size = new Size(_currentRectangle.Widtht, newHeight);
-                }
-                UpdateListBox();
-                FindCollisions();
+                    _currentRectangle.Length = newHeight;
 
+                    if (listBoxRectangels.SelectedIndex != -1 && listBoxRectangels.SelectedIndex < _rectanglePanels.Count)
+                    {
+                        _rectanglePanels[listBoxRectangels.SelectedIndex].Size = new Size(_currentRectangle.Widtht, newHeight);
+                    }
+
+                    UpdateListBox();
+                    FindCollisions();
+                    TextBoxLengthRectangels.BackColor = SystemColors.Window; // Вернуть обычный цвет фона текстового поля
+                }
+                else
+                {
+                    TextBoxLengthRectangels.BackColor = Color.LightPink; // Изменить цвет фона текстового поля на красный
+                }
             }
+            else
+            {
+                TextBoxLengthRectangels.BackColor = Color.LightPink; // Изменить цвет фона текстового поля на красный
+            }
+
         }
     }
 }
