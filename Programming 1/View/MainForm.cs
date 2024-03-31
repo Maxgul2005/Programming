@@ -105,6 +105,7 @@ namespace Programming_1
         public MainForm()
         {
             // PanelRectangels = new Panel();
+            ClearRectangleInfo();
             FindCollisions();
             UpdateListBox();
             InitializeComponent();
@@ -368,11 +369,8 @@ namespace Programming_1
 
         private void ButtonAddRectangle_Click(object sender, EventArgs e)
         {
-            int x = _random.Next(10, 300); 
-            int y = _random.Next(10, 300);
-            int width = _random.Next(10, 200);
-            int length = _random.Next(30, 80);
-            Rectangle rectangle = new Rectangle(x, y, width, length);
+
+            Rectangle rectangle = RectangleFactory.Randomize();
             _rectangels.Add(rectangle);
             Panel panel = new Panel();
             panel.Location = new Point(rectangle.X, rectangle.Y);
@@ -417,9 +415,10 @@ namespace Programming_1
             }
 
             TextBoxX_Rectangels.BackColor = SystemColors.Window;
-            TextBoxY_Rectangels.BackColor = SystemColors.Window;
-            TextBoxWidthRectangels.BackColor = SystemColors.Window;
-            TextBoxLengthRectangels.BackColor = SystemColors.Window;
+             TextBoxY_Rectangels.BackColor = SystemColors.Window;
+             TextBoxWidthRectangels.BackColor = SystemColors.Window;
+             TextBoxLengthRectangels.BackColor = SystemColors.Window;
+           
 
         }
         private void UpdateListBox()
@@ -477,12 +476,19 @@ namespace Programming_1
             else
             {
                 // Очистка текстовых полей
+                ClearRectangleInfo();
+            }
+        }
+
+        private void ClearRectangleInfo()
+        {
+            if (listBoxRectangels != null)
+            {
                 TextBoxIdRectangels.Text = "";
                 TextBoxX_Rectangels.Text = "";
                 TextBoxY_Rectangels.Text = "";
                 TextBoxWidthRectangels.Text = "";
                 TextBoxLengthRectangels.Text = "";
-                
             }
         }
 
