@@ -20,6 +20,9 @@ namespace Programming_1
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки для добавления случайного прямоугольника.
+        /// </summary>
         private void ButtonAddRectangle_Click(object sender, EventArgs e)
         {
             Rectangle rectangle = RectangleFactory.Randomize();
@@ -38,6 +41,9 @@ namespace Programming_1
             FindCollisions();
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки для удаления выбранного прямоугольника.
+        /// </summary>
         private void button3_Click(object sender, EventArgs e)
         {
             int selectedIndex = listBoxRectangels.SelectedIndex;
@@ -67,6 +73,10 @@ namespace Programming_1
             TextBoxWidthRectangels.BackColor = SystemColors.Window;
             TextBoxLengthRectangels.BackColor = SystemColors.Window;
         }
+
+        /// <summary>
+        /// Обновляет список прямоугольников в ListBox.
+        /// </summary>
         private void UpdateListBox()
         {
 
@@ -79,11 +89,15 @@ namespace Programming_1
                 }
             }
         }
+
+        /// <summary>
+        /// Поиск пересечения между прямоугольниками и обновление их отображения.
+        /// </summary>
         private void FindCollisions()
         {
             foreach (var panel in _rectanglePanels)
             {
-                panel.BackColor = Color.Green;
+                panel.BackColor = AppColors.CollisionColor2;
             }
 
 
@@ -96,13 +110,16 @@ namespace Programming_1
                     if (CollisionManager.IsCollision(_rectangels[i], _rectangels[j]))
                     {
 
-                        _rectanglePanels[i].BackColor = Color.Red;
-                        _rectanglePanels[j].BackColor = Color.Red;
+                        _rectanglePanels[i].BackColor = AppColors.CollisionColor;
+                        _rectanglePanels[j].BackColor = AppColors.CollisionColor;
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Обработчик изменения выбранного прямоугольника в списке.
+        /// </summary>
         private void listBoxRectangels_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBoxRectangels.SelectedIndex != -1)
@@ -125,6 +142,9 @@ namespace Programming_1
             }
         }
 
+        /// <summary>
+        /// Очищает информацию о текущем прямоугольнике.
+        /// </summary>
         private void ClearRectangleInfo()
         {
             if (listBoxRectangels != null)
@@ -137,6 +157,9 @@ namespace Programming_1
             }
         }
 
+        /// <summary>
+        /// Обработчик изменения координаты X текущего прямоугольника.
+        /// </summary>
         private void TextBoxX_Rectangels_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(TextBoxX_Rectangels.Text, out int newX))
@@ -156,15 +179,18 @@ namespace Programming_1
                 }
                 else
                 {
-                    TextBoxX_Rectangels.BackColor = Color.LightPink;
+                    TextBoxX_Rectangels.BackColor = AppColors.ValidationColor; 
                 }
             }
             else
             {
-                TextBoxX_Rectangels.BackColor = Color.LightPink;
+                TextBoxX_Rectangels.BackColor = AppColors.ValidationColor; 
             }
         }
 
+        /// <summary>
+        /// Обработчик изменения координаты Y текущего прямоугольника.
+        /// </summary>
         private void TextBoxY_Rectangels_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(TextBoxY_Rectangels.Text, out int newY))
@@ -184,15 +210,18 @@ namespace Programming_1
                 }
                 else
                 {
-                    TextBoxY_Rectangels.BackColor = Color.LightPink;
+                    TextBoxY_Rectangels.BackColor = AppColors.ValidationColor; ;
                 }
             }
             else
             {
-                TextBoxY_Rectangels.BackColor = Color.LightPink;
+                TextBoxY_Rectangels.BackColor = AppColors.ValidationColor; 
             }
         }
 
+        /// <summary>
+        /// Обработчик изменения ширины текущего прямоугольника.
+        /// </summary>
         private void TextBoxWidthRectangels_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(TextBoxWidthRectangels.Text, out int newWidth))
@@ -212,15 +241,18 @@ namespace Programming_1
                 }
                 else
                 {
-                    TextBoxWidthRectangels.BackColor = Color.LightPink;
+                    TextBoxWidthRectangels.BackColor = AppColors.ValidationColor; 
                 }
             }
             else
             {
-                TextBoxWidthRectangels.BackColor = Color.LightPink;
+                TextBoxWidthRectangels.BackColor = AppColors.ValidationColor; 
             }
         }
 
+        /// <summary>
+        /// Обработчик изменения длины текущего прямоугольника.
+        /// </summary>
         private void TextBoxLengthRectangels_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(TextBoxLengthRectangels.Text, out int newHeight))
@@ -240,18 +272,16 @@ namespace Programming_1
                 }
                 else
                 {
-                    TextBoxLengthRectangels.BackColor = Color.LightPink;
+                    TextBoxLengthRectangels.BackColor = AppColors.ValidationColor;
                 }
             }
             else
             {
-                TextBoxLengthRectangels.BackColor = Color.LightPink;
+                TextBoxLengthRectangels.BackColor = AppColors.ValidationColor;
             }
         }
 
-        /// <summary>
-        /// События для кнопки добавить 
-        /// </summary>
+        
         private void ButtonAddRectangle_MouseEnter(object sender, EventArgs e)
         {
             ButtonAddRectangle.BackColor = Color.Blue;
@@ -274,9 +304,7 @@ namespace Programming_1
             ButtonAddRectangle.BackColor = ControlPaint.Dark(ButtonAddRectangle.BackColor, 0.3f);
         }
 
-        /// <summary>
-        /// События для кнопки удалить
-        /// </summary>
+        
         
         private void button3_MouseEnter(object sender, EventArgs e)
         {

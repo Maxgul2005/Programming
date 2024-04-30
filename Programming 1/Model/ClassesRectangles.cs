@@ -24,6 +24,10 @@ namespace Programming_1.Model
         }
         //Генерация рандомных полей в прямоугольник
         Random _random = new Random();
+
+        /// <summary>
+        /// Инициализация прямоугольников.
+        /// </summary>
         public void RectangleInitiaziation()
         {
             for (int i = 0; i < 5; i++)
@@ -42,6 +46,12 @@ namespace Programming_1.Model
 
             TextBoxClassesRectanglesListBox.Items.AddRange(List_Box_Recangle);
         }
+
+        /// <summary>
+        /// Находит прямоугольник с максимальной шириной.
+        /// </summary>
+        /// <param name="rectangles">Массив прямоугольников.</param>
+        /// <returns>Индекс прямоугольника с максимальной шириной.</returns>
         private int FindRectangleWithMaxWidth(Rectangle[] rectangles)
         {
             double MaxWidth = _rectangles[0].Widtht;
@@ -77,7 +87,7 @@ namespace Programming_1.Model
         {
             if (_currentRectangle == null)
             {
-                TextBoxClassesRectanglesLength.BackColor = System.Drawing.Color.LightPink;
+                TextBoxClassesRectanglesLength.BackColor = AppColors.ValidationColor;
                 return;
             }
 
@@ -88,7 +98,7 @@ namespace Programming_1.Model
             }
             catch (Exception)
             {
-                TextBoxClassesRectanglesLength.BackColor = System.Drawing.Color.LightPink;
+                TextBoxClassesRectanglesLength.BackColor = AppColors.ValidationColor;
             }
         }
 
@@ -96,7 +106,7 @@ namespace Programming_1.Model
         {
             if (_currentRectangle == null)
             {
-                TextBoxClassesRectanglesWidth.BackColor = System.Drawing.Color.LightPink;
+                TextBoxClassesRectanglesWidth.BackColor = AppColors.ValidationColor;
                 return;
             }
 
@@ -107,7 +117,7 @@ namespace Programming_1.Model
             }
             catch (Exception)
             {
-                TextBoxClassesRectanglesWidth.BackColor = System.Drawing.Color.LightPink;
+                TextBoxClassesRectanglesWidth.BackColor = AppColors.ValidationColor;
             }
         }
 
@@ -115,6 +125,11 @@ namespace Programming_1.Model
         {
             int RectangleMaxWidthIndex = FindRectangleWithMaxWidth(_rectangles);
             TextBoxClassesRectanglesListBox.SelectedIndex = RectangleMaxWidthIndex;
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

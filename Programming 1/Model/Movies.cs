@@ -22,6 +22,10 @@ namespace Programming_1.Model
         private Movie _currentMovie;
         private string[] moviesName = { "Бойцовский клуб", "Форрест Гамп", "Криминальное чтиво", "Механик", "Знахарь" };
         private string[] listBoxMovie = new string[5];
+
+        /// <summary>
+        /// Инициализация фильмов.
+        /// </summary>
         public void MovieInitiaziation()
         {
             for (int i = 0; i < 5; i++)
@@ -37,6 +41,11 @@ namespace Programming_1.Model
 
         }
 
+        /// <summary>
+        /// Находит фильм с максимальным рейтингом.
+        /// </summary>
+        /// <param name="movies">Массив фильмов.</param>
+        /// <returns>Индекс фильма с максимальным рейтингом.</returns>
         private int FindMovieMaxRating(Movie[] movies)
         {
             int maxIndexRating = 0; // Изначально считаем, что максимальный рейтинг первого фильма
@@ -72,7 +81,7 @@ namespace Programming_1.Model
         {
             if (_currentMovie == null)
             {
-                TextBoxMovieMinutes.BackColor = System.Drawing.Color.LightPink;
+                TextBoxMovieMinutes.BackColor = AppColors.ValidationColor;
             }
 
             try
@@ -82,7 +91,7 @@ namespace Programming_1.Model
             }
             catch
             {
-                TextBoxMovieMinutes.BackColor = System.Drawing.Color.LightPink;
+                TextBoxMovieMinutes.BackColor = AppColors.ValidationColor;
             }
         }
 
@@ -90,7 +99,7 @@ namespace Programming_1.Model
         {
             if (_currentMovie == null)
             {
-                TextBoxMovieYear.BackColor = System.Drawing.Color.LightPink;
+                TextBoxMovieYear.BackColor = AppColors.ValidationColor;
             }
             try
             {
@@ -99,7 +108,7 @@ namespace Programming_1.Model
             }
             catch
             {
-                TextBoxMovieYear.BackColor = System.Drawing.Color.LightPink;
+                TextBoxMovieYear.BackColor = AppColors.ValidationColor;
             }
         }
 
@@ -107,7 +116,7 @@ namespace Programming_1.Model
         {
             if (_currentMovie == null)
             {
-                TextBoxMovieRaiting.BackColor = System.Drawing.Color.LightPink;
+                TextBoxMovieRaiting.BackColor = AppColors.ValidationColor; 
             }
             try
             {
@@ -116,7 +125,7 @@ namespace Programming_1.Model
             }
             catch
             {
-                TextBoxMovieRaiting.BackColor = System.Drawing.Color.LightPink;
+                TextBoxMovieRaiting.BackColor = AppColors.ValidationColor; 
             }
         }
 

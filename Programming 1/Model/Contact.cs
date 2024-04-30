@@ -8,36 +8,47 @@ using System.Xml.Linq;
 
 
 
-    class Contact
+class Contact
+{
+    private string _name;
+    private string _surname;
+
+    /// <summary>
+    /// Имя контакта.
+    /// </summary>
+    public string Name
     {
-        private string _name;
-        private string _surname;
-        public string Name
+        get { return _name; }
+        set
         {
-            get { return _name; }
-            set
-            {
-                AssertStringContainsOnlyLetters(value);
-                _name = value;
-            }
-        }
-
-        public string Surname
-        {
-            get { return _surname; }
-            set
-            {
-                AssertStringContainsOnlyLetters(value);
-                _surname = value;
-            }
-        }
-
-        private void AssertStringContainsOnlyLetters(string value)
-        {
-            if (!Regex.IsMatch(value, @"^[a-zA-Z]+$"))
-            {
-                throw new ArgumentException("Строка должна содержать только символы английского алфавита.");
-            }
+            AssertStringContainsOnlyLetters(value);
+            _name = value;
         }
     }
+
+    /// <summary>
+    /// Фамилия контакта.
+    /// </summary>
+    public string Surname
+    {
+        get { return _surname; }
+        set
+        {
+            AssertStringContainsOnlyLetters(value);
+            _surname = value;
+        }
+    }
+
+    /// <summary>
+    /// Проверяет, содержит ли строка только буквы английского алфавита.
+    /// </summary>
+    /// <param name="value">Проверяемая строка.</param>
+    private void AssertStringContainsOnlyLetters(string value)
+    {
+        if (!Regex.IsMatch(value, @"^[a-zA-Z]+$"))
+        {
+            throw new ArgumentException("Строка должна содержать только символы английского алфавита.");
+        }
+    }
+}
 

@@ -24,6 +24,9 @@ namespace Programming_1
 
         }
 
+        /// <summary>
+        /// Обработчик события изменения выбора в списке перечислений.
+        /// </summary>
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var collor = Enum.GetValues(typeof(Collor));
@@ -79,8 +82,10 @@ namespace Programming_1
             }
         }
 
-      
 
+        /// <summary>
+        /// Обработчик события изменения выбора в списке значений перечисления.
+        /// </summary>
         private void ValuesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             IntTextBox.Text = ValuesListBox .SelectedIndex.ToString();

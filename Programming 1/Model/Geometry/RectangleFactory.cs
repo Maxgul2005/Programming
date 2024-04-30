@@ -3,6 +3,11 @@ using System;
     public static class RectangleFactory
     {
         static readonly Random _random = new Random();
+
+        /// <summary>
+        /// Создает случайный прямоугольник.
+        /// </summary>
+        /// <returns>Случайный прямоугольник.</returns>
         public static Rectangle Randomize()
         {
 

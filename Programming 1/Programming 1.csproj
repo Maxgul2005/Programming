@@ -52,6 +52,7 @@
     <Compile Include="Enumerations.Designer.cs">
       <DependentUpon>Enumerations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\AppColors.cs" />
     <Compile Include="Model\ClassesRectangles.cs">
       <SubType>UserControl</SubType>
     </Compile>

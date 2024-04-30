@@ -19,7 +19,16 @@ namespace Programming_1.Model.Enums
             SeasonComboBox.Items.AddRange(seasonValues);
 
         }
+        // Определение события SeasonChanged
+        public event EventHandler SeasonChanged;
 
+        /// <summary>
+        /// Метод для вызова события SeasonChanged.
+        /// </summary>
+        protected virtual void OnSeasonChanged(EventArgs e)
+        {
+            SeasonChanged?.Invoke(this, e);
+        }
         private void button1_Click(object sender, EventArgs e)
         {
               if (SeasonComboBox.SelectedItem == null)
@@ -34,17 +43,34 @@ namespace Programming_1.Model.Enums
                       MessageBox.Show("Ура, солнце");
                       break;
                   case Season.Autumn:
-                    this.BackColor = Color.FromArgb(226, 156, 69); // Оранжевый цвет фона окна
+                    this.BackColor = Color.FromArgb(226, 156, 69); 
                     break;
                   case Season.Winter:
                       MessageBox.Show("БРР, Холодно");
                       break;
                   case Season.Spring:
-                    this.BackColor = Color.FromArgb(85, 156, 69); // Зеленый цвет фона окна
+                    this.BackColor = Color.FromArgb(85, 156, 69); 
                     break;
 
               }
-          }
-          
+            // После обработки изменения времени года вызываем метод OnSeasonChanged для генерации события
+            OnSeasonChanged(EventArgs.Empty);
         }
+
+        /// <summary>
+        /// Возвращает выбранный сезон.
+        /// </summary>
+        public Season SelectedSeason
+        {
+            get
+            {
+                return (Season)SeasonComboBox.SelectedItem;
+            }
+        }
+
+        private void SeasonsHandle_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
     }

@@ -5,6 +5,10 @@ class Ring
     private Point2D _center;
     private double _innerRadius;
     private double _outerRadius;
+
+    /// <summary>
+    /// Возращает и задает центр кольца.
+    /// </summary>
     public Point2D Center
     {
         get { return _center; }
@@ -14,6 +18,9 @@ class Ring
         }
     }
 
+    /// <summary>
+    /// Внутренний радиус кольца.
+    /// </summary>
     public double InnerRadius
     {
         get { return _innerRadius; }
@@ -25,6 +32,9 @@ class Ring
         }
     }
 
+    /// <summary>
+    /// Внешний радиус кольца.
+    /// </summary>
     public double OuterRadius
     {
         get { return _outerRadius; }
@@ -35,6 +45,10 @@ class Ring
             _outerRadius = value;
         }
     }
+
+    /// <summary>
+    /// Возращает Площадь кольца.
+    /// </summary>
     public double Area
     {
         get
@@ -42,6 +56,13 @@ class Ring
             return Math.PI * (Math.Pow(_outerRadius, 2) - Math.Pow(_innerRadius, 2));
         }
     }
+
+    /// <summary>
+    /// Создает экземпляр кольца.
+    /// </summary>
+    /// <param name="center">Центр кольца.</param>
+    /// <param name="innerRadius">Внутренний радиус кольца.</param>
+    /// <param name="outerRadius">Внешний радиус кольца.</param>
     public Ring(Point2D center, double innerRadius, double outerRadius)
     {
         Center = center;

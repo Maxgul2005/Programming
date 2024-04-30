@@ -58,6 +58,7 @@
             this.Controls.Add(this.SeasonComboBox);
             this.Name = "SeasonsHandle";
             this.Size = new System.Drawing.Size(203, 72);
+            this.Load += new System.EventHandler(this.SeasonsHandle_Load);
             this.ResumeLayout(false);
 
         }

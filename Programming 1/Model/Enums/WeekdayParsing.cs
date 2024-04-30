@@ -18,7 +18,9 @@ namespace Programming_1.Model.Enums
         }
 
        
-
+        /// <summary>
+        /// Парсинг данных из TextBox.
+        /// </summary>
         private void Parse_Click(object sender, EventArgs e)
         {
             string ParsingText = ParsingTextBox.Text;
