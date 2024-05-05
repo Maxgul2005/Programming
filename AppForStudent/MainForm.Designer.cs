@@ -40,6 +40,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.AddButonStudent = new System.Windows.Forms.Button();
             this.listBoxStudent = new System.Windows.Forms.ListBox();
+            this.RemoveButonStudent = new System.Windows.Forms.Button();
+            this.updateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TextBoxFullName
@@ -113,9 +115,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 22);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(126, 13);
+            this.label4.Size = new System.Drawing.Size(113, 13);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Выберите направление";
+            this.label4.Text = "Выберите факультет";
             // 
             // label5
             // 
@@ -128,12 +130,13 @@
             // 
             // AddButonStudent
             // 
-            this.AddButonStudent.Location = new System.Drawing.Point(105, 316);
+            this.AddButonStudent.Location = new System.Drawing.Point(15, 313);
             this.AddButonStudent.Name = "AddButonStudent";
             this.AddButonStudent.Size = new System.Drawing.Size(75, 23);
             this.AddButonStudent.TabIndex = 10;
             this.AddButonStudent.Text = "Добавить";
             this.AddButonStudent.UseVisualStyleBackColor = true;
+            this.AddButonStudent.Click += new System.EventHandler(this.AddButonStudent_Click);
             // 
             // listBoxStudent
             // 
@@ -142,12 +145,35 @@
             this.listBoxStudent.Name = "listBoxStudent";
             this.listBoxStudent.Size = new System.Drawing.Size(283, 407);
             this.listBoxStudent.TabIndex = 11;
+            this.listBoxStudent.SelectedIndexChanged += new System.EventHandler(this.listBoxStudent_SelectedIndexChanged);
+            // 
+            // RemoveButonStudent
+            // 
+            this.RemoveButonStudent.Location = new System.Drawing.Point(193, 313);
+            this.RemoveButonStudent.Name = "RemoveButonStudent";
+            this.RemoveButonStudent.Size = new System.Drawing.Size(75, 23);
+            this.RemoveButonStudent.TabIndex = 12;
+            this.RemoveButonStudent.Text = "Удалить";
+            this.RemoveButonStudent.UseVisualStyleBackColor = true;
+            this.RemoveButonStudent.Click += new System.EventHandler(this.RemoveButonStudent_Click);
+            // 
+            // updateButton
+            // 
+            this.updateButton.Location = new System.Drawing.Point(105, 313);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(75, 37);
+            this.updateButton.TabIndex = 13;
+            this.updateButton.Text = "Обновить данные";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 422);
+            this.Controls.Add(this.updateButton);
+            this.Controls.Add(this.RemoveButonStudent);
             this.Controls.Add(this.listBoxStudent);
             this.Controls.Add(this.AddButonStudent);
             this.Controls.Add(this.label5);
@@ -182,6 +208,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button AddButonStudent;
         private System.Windows.Forms.ListBox listBoxStudent;
+        private System.Windows.Forms.Button RemoveButonStudent;
+        private System.Windows.Forms.Button updateButton;
     }
 }
 
