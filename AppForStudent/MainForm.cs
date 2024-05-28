@@ -15,6 +15,7 @@ namespace AppForStudent
     public partial class MainForm : Form
     {
         List<Student> Students = new List<Student>();
+        Student _currentStudent;
         private string filePath = "students.xml"; // Путь к файлу для сохранения данных
 
         public MainForm()
@@ -124,35 +125,23 @@ namespace AppForStudent
             Students.Add(Student);
             UpdateStudentList();
             ClearInfoListBox();
-
         }
         private void UpdateStudentList()
-
         {
-            List<Student> sortedStudents = new List<Student>(Students);
-            BubbleSort(sortedStudents);
             listBoxStudent.Items.Clear();
-            foreach (Student student in sortedStudents)
-            {
-                listBoxStudent.Items.Add($"{student._fullName} - {student._numberGroup} / {student.Facultet}");
-            }
+            listBoxStudent.Items.AddRange(Students.ToArray());
+            if (_currentStudent == null) return;
+            object[] booksObj = new object[Students.Count];
+            listBoxStudent.Items.CopyTo(booksObj, 0);
+            List<Student> books = booksObj.Cast<Student>().ToList();
+            books.Sort((x, y) => x.ToString().CompareTo(y.ToString()));
+            listBoxStudent.Items.Clear();
+            listBoxStudent.Items.AddRange(books.Cast<object>().ToArray());
+            Students.Clear();
+            Students.AddRange(books);
+            listBoxStudent.SelectedItem = _currentStudent;
         }
-        private void BubbleSort(List <Student> Students)
-        {
-            int n = Students.Count;
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n-i-1; j++)
-                {
-                    if ((string.Compare(Students[j]._fullName, Students[j + 1]._fullName) > 0))
-                    {
-                        Student temp = Students[j];
-                        Students[j] = Students[j + 1];
-                        Students[j + 1] = temp;
-                    }
-                }
-            }
-        }
+
         private void ClearInfoListBox()
         {
             TextBoxFullName.Clear();
@@ -182,12 +171,12 @@ namespace AppForStudent
         {
             if (listBoxStudent.SelectedIndex != -1)
             {
-                Student selectedStudent = Students[listBoxStudent.SelectedIndex];
-                TextBoxFullName.Text = selectedStudent._fullName;
-                TextBoxGroupNumber.Text = selectedStudent._numberGroup;
-                TextBoxRecordNumber.Text = selectedStudent.StudentId.ToString();
-                comboBoxEducation.SelectedItem = selectedStudent.Facultet;
-                comboBoxFormStudyStudent.SelectedItem = selectedStudent.StudentFormOfStudy;
+                _currentStudent = Students[listBoxStudent.SelectedIndex];
+                TextBoxFullName.Text = _currentStudent._fullName;
+                TextBoxGroupNumber.Text = _currentStudent._numberGroup;
+                TextBoxRecordNumber.Text = _currentStudent.StudentId.ToString();
+                comboBoxEducation.SelectedItem = _currentStudent.Facultet;
+                comboBoxFormStudyStudent.SelectedItem = _currentStudent.StudentFormOfStudy;
 
             }
         }
@@ -196,15 +185,12 @@ namespace AppForStudent
         {
             if (listBoxStudent.SelectedIndex != -1)
             {
-                
-                Student selectedStudent = Students[listBoxStudent.SelectedIndex];
-
-                
-                selectedStudent._fullName = TextBoxFullName.Text;
-                selectedStudent._numberGroup = TextBoxGroupNumber.Text;
-                TextBoxRecordNumber.Text = selectedStudent.StudentId.ToString();
-                selectedStudent.Facultet = (Facultet)comboBoxEducation.SelectedItem;
-                selectedStudent.StudentFormOfStudy = (StudentFormOfStudy)comboBoxFormStudyStudent.SelectedItem;
+                _currentStudent = Students[listBoxStudent.SelectedIndex];
+                _currentStudent._fullName = TextBoxFullName.Text;
+                _currentStudent._numberGroup = TextBoxGroupNumber.Text;
+                TextBoxRecordNumber.Text = _currentStudent.StudentId.ToString();
+                _currentStudent.Facultet = (Facultet)comboBoxEducation.SelectedItem;
+                _currentStudent.StudentFormOfStudy = (StudentFormOfStudy)comboBoxFormStudyStudent.SelectedItem;
                 UpdateStudentList();
                 ClearInfoListBox();
             }
@@ -215,7 +201,7 @@ namespace AppForStudent
             if (listBoxStudent.SelectedIndex != -1)
             {
                 
-                Student selectedStudent = Students[listBoxStudent.SelectedIndex];
+                _currentStudent = Students[listBoxStudent.SelectedIndex];
                 Students.RemoveAt(listBoxStudent.SelectedIndex);
                 listBoxStudent.Items.RemoveAt(listBoxStudent.SelectedIndex);
                 ClearInfoListBox();

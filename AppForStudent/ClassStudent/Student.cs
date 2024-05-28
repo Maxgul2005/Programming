@@ -28,8 +28,13 @@ public  class Student
             throw new ArgumentException("Неверный формат номера зачетки. Номер должен состоять из 6 цифр.");
         }
         _studentId = studentId;
-       
+
     }
-    
+
+    public override string ToString()
+    {
+        return $"{_fullName} - {_numberGroup} / {Facultet}";
+    }
+
 }
 
