@@ -28,9 +28,9 @@ class Item
         get { return _name; }
         set
         {
-            if (value.Length >= 200)
+            if (string.IsNullOrWhiteSpace(value) || value.Length > 200)
             {
-                throw new ArgumentException("Поле с названием товара должно быть менее, чем 200 символов");
+                throw new ArgumentException("Название товара должно быть не пустым и содержать не более 200 символов.");
             }
             _name = value;
         }
@@ -44,9 +44,9 @@ class Item
         get { return _info; }
         set
         {
-            if (value.Length >= 1000)
+            if (value.Length > 1000)
             {
-                throw new ArgumentException("Поле с описанием товара должно бьть менее, чем 200 символов");
+                throw new ArgumentException("Описание товара должно содержать не более 1000 символов.");
             }
             _info = value;
         }
@@ -60,9 +60,9 @@ class Item
         get { return _cost; }
         set
         {
-            if (value > 100000)
+            if (value < 0 || value > 100000)
             {
-                throw new ArgumentException("Поле товара должно быть меньше, чем 100К");
+                throw new ArgumentException("Стоимость товара должна быть в диапазоне от 0 до 100 000.");
             }
             _cost = value;
         }
