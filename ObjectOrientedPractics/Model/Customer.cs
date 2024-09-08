@@ -3,8 +3,7 @@ using System.Net;
 
 class Customer
 {
-    // Поле-счетчик для генерации уникальных ID
-    private static int _idCounter = 0;
+    
 
     // Поля класса
     private readonly int _id; //целочисленное readonly-поле, хранящее уникальный номер товара.
@@ -27,10 +26,7 @@ class Customer
         get { return _fullname; }
         set
         {
-            if (string.IsNullOrWhiteSpace(value) || value.Length > 200)
-            {
-                throw new ArgumentException("Полное имя должно быть не пустым и содержать менее 200 символов.");
-            }
+            ValueValidator.AssertStringOnLength(value,200,nameof(Fullname));
             _fullname = value;
         }
     }
@@ -43,10 +39,7 @@ class Customer
         get { return _address; }
         set
         {
-            if (string.IsNullOrWhiteSpace(value) || value.Length > 500)
-            {
-                throw new ArgumentException("Адрес должен быть не пустым и содержать менее 500 символов.");
-            }
+            ValueValidator.AssertStringOnLength(value, 500, nameof(Address));
             _address = value;
         }
     }
@@ -58,18 +51,11 @@ class Customer
     /// <param name="address">Адресс покупателя</param>
     public Customer(string  fullname, string address)
     {
-        _id = GetNextId();
+        _id = IdGenerator.GetNextId();
         Fullname = fullname; 
         Address = address;
     }
 
-    /// <summary>
-    /// Метод для генерации уникальных Id
-    /// </summary>
-    /// <returns></returns>
-    private static int GetNextId()
-    {
-        return ++_idCounter;
-    }
+  
 
 }

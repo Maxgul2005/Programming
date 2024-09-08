@@ -3,9 +3,6 @@ using System.Runtime.Remoting.Messaging;
 
 class Item
 {
-    // Поле-счетчик для генерации уникальных ID
-    private static int _idCounter = 0;
-
     // Поля класса
     private readonly int _id; //целочисленное readonly-поле, хранящее уникальный номер товара.
     private string _name; //строковое поле с названием товара, до 200 символов.
@@ -28,10 +25,7 @@ class Item
         get { return _name; }
         set
         {
-            if (string.IsNullOrWhiteSpace(value) || value.Length > 200)
-            {
-                throw new ArgumentException("Название товара должно быть не пустым и содержать не более 200 символов.");
-            }
+            ValueValidator.AssertStringOnLength(value, 200, nameof(Name));
             _name = value;
         }
     }
@@ -44,10 +38,7 @@ class Item
         get { return _info; }
         set
         {
-            if (value.Length > 1000)
-            {
-                throw new ArgumentException("Описание товара должно содержать не более 1000 символов.");
-            }
+            ValueValidator.AssertStringOnLength(value, 1000, nameof(Info));
             _info = value;
         }
     }
@@ -76,19 +67,10 @@ class Item
     /// <param name="cost">cost</param>
     public Item(string name, string info, double cost)
     {
-        _id = GetNextId();
+        _id = IdGenerator.GetNextId();
         Name = name;
         Info = info;
         Cost = cost;
-    }
-
-    /// <summary>
-    /// Метод для генерации уникального ID
-    /// </summary>
-    /// <returns>Уникальный идентификатор товара</returns>
-    private static int GetNextId()
-    {
-        return ++_idCounter;
     }
 
 }
