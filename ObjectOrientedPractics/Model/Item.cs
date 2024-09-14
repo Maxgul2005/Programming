@@ -73,4 +73,8 @@ class Item
         Cost = cost;
     }
 
+    public override string ToString()
+    {
+        return $"Id:{_id},{_name},{_info},Цена: {_cost} ";
+    }
 }

@@ -7,7 +7,7 @@ class ValueValidator
     /// </summary>
     public static void AssertStringOnLength(string value, int maxLength, string propertyName)
     {
-        if (string.IsNullOrWhiteSpace(value) || value.Length > maxLength)
+        if ( value.Length > maxLength)
         {
             throw new ArgumentException("Название товара должно быть не пустым и содержать не более 200 символов.");
         }
