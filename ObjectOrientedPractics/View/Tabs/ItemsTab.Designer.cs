@@ -132,6 +132,7 @@
             this.textBoxDestr.Name = "textBoxDestr";
             this.textBoxDestr.Size = new System.Drawing.Size(360, 71);
             this.textBoxDestr.TabIndex = 6;
+            this.textBoxDestr.TextChanged += new System.EventHandler(this.textBoxDestr_TextChanged);
             // 
             // textBoxItemName
             // 
@@ -140,6 +141,7 @@
             this.textBoxItemName.Name = "textBoxItemName";
             this.textBoxItemName.Size = new System.Drawing.Size(360, 111);
             this.textBoxItemName.TabIndex = 5;
+            this.textBoxItemName.TextChanged += new System.EventHandler(this.textBoxItemName_TextChanged);
             // 
             // LabelItemsCost
             // 

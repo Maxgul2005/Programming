@@ -25,7 +25,9 @@ namespace ObjectOrientedPractics.View.Tabs
 
         // Это поле для хранения списка товаров
         private List<Item> _items = new List<Item>();
-        private int selectedIndex = -1; // Переменная для хранения текущего выбранного индекса
+        private int selectedIndex = -1 ; // Переменная для хранения текущего выбранного индекса
+ 
+
         private void AddItemsButton_Click(object sender, EventArgs e)
         {
 
@@ -59,6 +61,10 @@ namespace ObjectOrientedPractics.View.Tabs
             _items.Add(newItem);
             ItemsListBox.Items.Add(newItem);
             ClearInputFields();
+            textBoxCostItem.BackColor = SystemColors.Window;
+            textBoxItemName.BackColor = SystemColors.Window;
+            textBoxDestr.BackColor = SystemColors.Window;
+
 
 
         }
@@ -126,6 +132,67 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     // Некорректный ввод числа, показываем красный фон
                     textBoxCostItem.BackColor = Color.Pink;
+                }
+            }
+        }
+
+        private void textBoxItemName_TextChanged(object sender, EventArgs e)
+        {
+            if (selectedIndex >= 0 && ItemsListBox.SelectedItem is Item selectedItem)
+            {
+                string newName = textBoxItemName.Text;
+
+                // Проверка на пустую строку (валидация)
+                if (!string.IsNullOrEmpty(newName))
+                {
+                    selectedItem.Name = newName; // Обновляем имя
+
+                    // Обновляем элемент в ListBox
+                    int currentIndex = selectedIndex; // Сохраняем индекс
+                    ItemsListBox.Items.RemoveAt(currentIndex); // Удаляем старый элемент
+                    ItemsListBox.Items.Insert(currentIndex, selectedItem); // Добавляем обновлённый элемент
+
+                    // Снова выбираем этот элемент
+                    ItemsListBox.SelectedIndex = currentIndex;
+
+                    // Возвращаем нормальный цвет фона текстбокса
+                    textBoxItemName.BackColor = SystemColors.Window;
+                }
+                else
+                {
+                    // Обработка некорректного ввода (если имя пустое)
+                    textBoxItemName.BackColor = Color.Pink;
+                }
+            }
+
+        }
+
+        private void textBoxDestr_TextChanged(object sender, EventArgs e)
+        {
+            if (selectedIndex >= 0 && ItemsListBox.SelectedItem is Item selectedItem)
+            {
+                string newInfo = textBoxDestr.Text;
+
+                // Проверка на пустую строку (валидация)
+                if (!string.IsNullOrEmpty(newInfo))
+                {
+                    selectedItem.Info = newInfo; // Обновляем имя
+
+                    // Обновляем элемент в ListBox
+                    int currentIndex = selectedIndex; // Сохраняем индекс
+                    ItemsListBox.Items.RemoveAt(currentIndex); // Удаляем старый элемент
+                    ItemsListBox.Items.Insert(currentIndex, selectedItem); // Добавляем обновлённый элемент
+
+                    // Снова выбираем этот элемент
+                    ItemsListBox.SelectedIndex = currentIndex;
+
+                    // Возвращаем нормальный цвет фона текстбокса
+                    textBoxDestr.BackColor = SystemColors.Window;
+                }
+                else
+                {
+                    // Обработка некорректного ввода (если имя пустое)
+                    textBoxDestr.BackColor = Color.Pink;
                 }
             }
         }
