@@ -9,7 +9,7 @@ class ValueValidator
     {
         if ( value.Length > maxLength)
         {
-            throw new ArgumentException("Название товара должно быть не пустым и содержать не более 200 символов.");
+            throw new ArgumentException($"{propertyName} должен быть меньше {maxLength} символов.");
         }
     }
 }

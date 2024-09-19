@@ -61,9 +61,7 @@ namespace ObjectOrientedPractics.View.Tabs
             _items.Add(newItem);
             ItemsListBox.Items.Add(newItem);
             ClearInputFields();
-            textBoxCostItem.BackColor = SystemColors.Window;
-            textBoxItemName.BackColor = SystemColors.Window;
-            textBoxDestr.BackColor = SystemColors.Window;
+            
 
 
 
@@ -79,6 +77,9 @@ namespace ObjectOrientedPractics.View.Tabs
             textBoxItemName.Clear();
             textBoxDestr.Clear();
             textBoxCostItem.Clear();
+            textBoxCostItem.BackColor = SystemColors.Window;
+            textBoxItemName.BackColor = SystemColors.Window;
+            textBoxDestr.BackColor = SystemColors.Window;
         }
 
         private void RemoveItemsButton_Click(object sender, EventArgs e)

@@ -56,6 +56,9 @@ class Customer
         Address = address;
     }
 
-  
+    public override string ToString()
+    {
+        return $"Id: {_id}, Fullname - {_fullname}, Address - {_address} ";
+    }
 
 }

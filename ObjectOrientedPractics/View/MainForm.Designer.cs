@@ -105,8 +105,8 @@
 
         private System.Windows.Forms.TabPage tabPageItems;
         private System.Windows.Forms.TabControl tabControlI;
-        private View.Tabs.ItemsTab itemsTab1;
         private System.Windows.Forms.TabPage tabPage1;
+        private View.Tabs.ItemsTab itemsTab1;
         private View.Tabs.CustomersTab customersTab1;
     }
 }

@@ -49,6 +49,8 @@
             // 
             // GroupBoxItems
             // 
+            this.GroupBoxItems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.GroupBoxItems.Controls.Add(this.RemoveItemsButton);
             this.GroupBoxItems.Controls.Add(this.AddItemsButton);
             this.GroupBoxItems.Controls.Add(this.ItemsListBox);
@@ -62,6 +64,7 @@
             // 
             // RemoveItemsButton
             // 
+            this.RemoveItemsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.RemoveItemsButton.Location = new System.Drawing.Point(97, 423);
             this.RemoveItemsButton.Name = "RemoveItemsButton";
             this.RemoveItemsButton.Size = new System.Drawing.Size(95, 28);
@@ -72,6 +75,7 @@
             // 
             // AddItemsButton
             // 
+            this.AddItemsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AddItemsButton.Location = new System.Drawing.Point(16, 423);
             this.AddItemsButton.Name = "AddItemsButton";
             this.AddItemsButton.Size = new System.Drawing.Size(75, 28);
@@ -82,6 +86,9 @@
             // 
             // ItemsListBox
             // 
+            this.ItemsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ItemsListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ItemsListBox.FormattingEnabled = true;
             this.ItemsListBox.Location = new System.Drawing.Point(6, 25);
@@ -92,6 +99,8 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.labelItemDiscription);
             this.panel1.Controls.Add(this.labelItemName);
             this.panel1.Controls.Add(this.textBoxDestr);
@@ -127,15 +136,21 @@
             // 
             // textBoxDestr
             // 
+            this.textBoxDestr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDestr.Location = new System.Drawing.Point(21, 268);
             this.textBoxDestr.Multiline = true;
             this.textBoxDestr.Name = "textBoxDestr";
-            this.textBoxDestr.Size = new System.Drawing.Size(360, 71);
+            this.textBoxDestr.Size = new System.Drawing.Size(360, 175);
             this.textBoxDestr.TabIndex = 6;
             this.textBoxDestr.TextChanged += new System.EventHandler(this.textBoxDestr_TextChanged);
             // 
             // textBoxItemName
             // 
+            this.textBoxItemName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxItemName.Location = new System.Drawing.Point(21, 117);
             this.textBoxItemName.Multiline = true;
             this.textBoxItemName.Name = "textBoxItemName";
@@ -155,6 +170,8 @@
             // 
             // labelId
             // 
+            this.labelId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelId.AutoSize = true;
             this.labelId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelId.Location = new System.Drawing.Point(18, 43);
@@ -165,6 +182,8 @@
             // 
             // textBoxCostItem
             // 
+            this.textBoxCostItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCostItem.Location = new System.Drawing.Point(61, 63);
             this.textBoxCostItem.Name = "textBoxCostItem";
             this.textBoxCostItem.Size = new System.Drawing.Size(116, 20);
@@ -173,6 +192,8 @@
             // 
             // textBoxId
             // 
+            this.textBoxId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxId.Location = new System.Drawing.Point(61, 37);
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.Size = new System.Drawing.Size(116, 20);
