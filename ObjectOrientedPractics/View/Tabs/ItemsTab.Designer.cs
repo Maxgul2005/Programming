@@ -225,6 +225,7 @@
             this.Controls.Add(this.GroupBoxItems);
             this.Name = "ItemsTab";
             this.Size = new System.Drawing.Size(686, 471);
+            this.Load += new System.EventHandler(this.ItemsTab_Load);
             this.GroupBoxItems.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

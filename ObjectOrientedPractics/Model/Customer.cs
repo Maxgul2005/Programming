@@ -44,6 +44,7 @@ class Customer
         }
     }
 
+
     /// <summary>
     /// Конструктор Customer
     /// </summary>

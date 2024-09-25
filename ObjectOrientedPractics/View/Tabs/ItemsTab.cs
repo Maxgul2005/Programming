@@ -1,46 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using System.Xml.Schema;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
-        
-
         public ItemsTab()
         {
             InitializeComponent();
             ClearInputFields();
         }
 
-        // Это поле для хранения списка товаров
         private List<Item> _items = new List<Item>();
-        private int selectedIndex = -1 ; // Переменная для хранения текущего выбранного индекса
- 
+        private int selectedIndex = -1; // Переменная для хранения текущего выбранного индекса
 
+        /// <summary>
+        /// Добавляет новый товар в список.
+        /// </summary>
         private void AddItemsButton_Click(object sender, EventArgs e)
         {
-
             textBoxCostItem.BackColor = SystemColors.Window;
 
-            // Проверка, что все поля заполнены
             if (string.IsNullOrEmpty(textBoxCostItem.Text) || string.IsNullOrEmpty(textBoxItemName.Text) || string.IsNullOrEmpty(textBoxDestr.Text))
             {
                 MessageBox.Show("Заполните все поля!!!");
                 return;
             }
 
-            // Попытка преобразования текста в число
             if (!double.TryParse(textBoxCostItem.Text, out double cost))
             {
                 textBoxCostItem.BackColor = Color.Pink;
@@ -48,7 +36,6 @@ namespace ObjectOrientedPractics.View.Tabs
                 return;
             }
 
-            // Проверка стоимости
             if (cost > 1000000)
             {
                 textBoxCostItem.BackColor = Color.Pink;
@@ -56,20 +43,39 @@ namespace ObjectOrientedPractics.View.Tabs
                 return;
             }
 
-            // Если всё корректно, создаем новый объект Item и добавляем его в список
             Item newItem = new Item(textBoxItemName.Text, textBoxDestr.Text, cost);
             _items.Add(newItem);
             ItemsListBox.Items.Add(newItem);
             ClearInputFields();
-            
-
-
-
         }
 
+        /// <summary>
+        /// Удаляет выбранный товар из списка.
+        /// </summary>
+        private void RemoveItemsButton_Click(object sender, EventArgs e)
+        {
+            if (ItemsListBox.SelectedIndex != -1)
+            {
+                _items.RemoveAt(ItemsListBox.SelectedIndex);
+                ItemsListBox.Items.RemoveAt(ItemsListBox.SelectedIndex);
+                ClearInputFields();
+            }
+        }
 
         /// <summary>
-        /// Метод для очистки текстовых полей после добавления товара
+        /// Обновляет выбранный элемент в списке.
+        /// </summary>
+        /// <param name="selectedItem">Объект товара для обновления.</param>
+        private void UpdateSelectedItem(Item selectedItem)
+        {
+            int currentIndex = selectedIndex; // Сохраняем индекс
+            ItemsListBox.Items.RemoveAt(currentIndex); // Удаляем старый элемент
+            ItemsListBox.Items.Insert(currentIndex, selectedItem); // Добавляем обновлённый элемент
+            ItemsListBox.SelectedIndex = currentIndex; // Снова выбираем этот элемент
+        }
+
+        /// <summary>
+        /// Очищает все поля ввода.
         /// </summary>
         private void ClearInputFields()
         {
@@ -82,17 +88,9 @@ namespace ObjectOrientedPractics.View.Tabs
             textBoxDestr.BackColor = SystemColors.Window;
         }
 
-        private void RemoveItemsButton_Click(object sender, EventArgs e)
-        {
-            if (ItemsListBox.SelectedIndex != -1)
-            {
-                _items.RemoveAt(ItemsListBox.SelectedIndex);
-                ItemsListBox.Items.RemoveAt(ItemsListBox.SelectedIndex);
-                ClearInputFields();
-
-            }
-        }
-
+        /// <summary>
+        /// Обрабатывает выбор элемента в списке.
+        /// </summary>
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedIndex = ItemsListBox.SelectedIndex;
@@ -104,98 +102,84 @@ namespace ObjectOrientedPractics.View.Tabs
                 textBoxItemName.Text = SelectedItem.Name;
                 textBoxDestr.Text = SelectedItem.Info;
             }
-            
-
         }
 
+        /// <summary>
+        /// Валидация поля стоимости в реальном времени.
+        /// </summary>
         private void textBoxCostItem_TextChanged_1(object sender, EventArgs e)
         {
-            if (selectedIndex >= 0 && ItemsListBox.SelectedItem is Item selectedItem)
+            if (double.TryParse(textBoxCostItem.Text, out double cost))
             {
-                // Попытка преобразовать значение текстбокса в число
-                if (double.TryParse(textBoxCostItem.Text, out double cost))
+                if (cost >= 0 && cost <= 100000)
                 {
-                    // Обновляем стоимость у выбранного элемента
-                    selectedItem.Cost = cost;
-
-                    // Удаляем старый элемент и добавляем обновлённый на ту же позицию
-                    int currentIndex = selectedIndex; // Сохраняем индекс
-                    ItemsListBox.Items.RemoveAt(currentIndex); // Удаляем старый элемент
-                    ItemsListBox.Items.Insert(currentIndex, selectedItem); // Добавляем обновлённый элемент
-
-                    // Выбираем элемент снова для корректного отображения
-                    ItemsListBox.SelectedIndex = currentIndex;
-
-                    // Возвращаем нормальный цвет фона текстбокса
                     textBoxCostItem.BackColor = SystemColors.Window;
+                    if (selectedIndex >= 0 && ItemsListBox.SelectedItem is Item selectedItem)
+                    {
+                        selectedItem.Cost = cost;
+                        UpdateSelectedItem(selectedItem);
+                    }
                 }
                 else
                 {
-                    // Некорректный ввод числа, показываем красный фон
                     textBoxCostItem.BackColor = Color.Pink;
                 }
             }
+            else
+            {
+                textBoxCostItem.BackColor = Color.Pink;
+            }
         }
 
+        /// <summary>
+        /// Валидация поля имени товара в реальном времени.
+        /// </summary>
         private void textBoxItemName_TextChanged(object sender, EventArgs e)
         {
             if (selectedIndex >= 0 && ItemsListBox.SelectedItem is Item selectedItem)
             {
                 string newName = textBoxItemName.Text;
 
-                // Проверка на пустую строку (валидация)
-                if (!string.IsNullOrEmpty(newName))
+                if (!string.IsNullOrEmpty(newName) && newName.Length <= 200)
                 {
-                    selectedItem.Name = newName; // Обновляем имя
-
-                    // Обновляем элемент в ListBox
-                    int currentIndex = selectedIndex; // Сохраняем индекс
-                    ItemsListBox.Items.RemoveAt(currentIndex); // Удаляем старый элемент
-                    ItemsListBox.Items.Insert(currentIndex, selectedItem); // Добавляем обновлённый элемент
-
-                    // Снова выбираем этот элемент
-                    ItemsListBox.SelectedIndex = currentIndex;
-
-                    // Возвращаем нормальный цвет фона текстбокса
                     textBoxItemName.BackColor = SystemColors.Window;
+                    selectedItem.Name = newName;
+                    UpdateSelectedItem(selectedItem);
                 }
                 else
                 {
-                    // Обработка некорректного ввода (если имя пустое)
                     textBoxItemName.BackColor = Color.Pink;
                 }
             }
-
         }
 
+        /// <summary>
+        /// Валидация поля описания товара в реальном времени.
+        /// </summary>
         private void textBoxDestr_TextChanged(object sender, EventArgs e)
         {
             if (selectedIndex >= 0 && ItemsListBox.SelectedItem is Item selectedItem)
             {
                 string newInfo = textBoxDestr.Text;
 
-                // Проверка на пустую строку (валидация)
-                if (!string.IsNullOrEmpty(newInfo))
+                if (!string.IsNullOrEmpty(newInfo) && newInfo.Length <= 1000)
                 {
-                    selectedItem.Info = newInfo; // Обновляем имя
-
-                    // Обновляем элемент в ListBox
-                    int currentIndex = selectedIndex; // Сохраняем индекс
-                    ItemsListBox.Items.RemoveAt(currentIndex); // Удаляем старый элемент
-                    ItemsListBox.Items.Insert(currentIndex, selectedItem); // Добавляем обновлённый элемент
-
-                    // Снова выбираем этот элемент
-                    ItemsListBox.SelectedIndex = currentIndex;
-
-                    // Возвращаем нормальный цвет фона текстбокса
                     textBoxDestr.BackColor = SystemColors.Window;
+                    selectedItem.Info = newInfo;
+                    UpdateSelectedItem(selectedItem);
                 }
                 else
                 {
-                    // Обработка некорректного ввода (если имя пустое)
                     textBoxDestr.BackColor = Color.Pink;
                 }
             }
+        }
+
+        /// <summary>
+        /// Событие загрузки формы.
+        /// </summary>
+        private void ItemsTab_Load(object sender, EventArgs e)
+        {
         }
     }
 }
