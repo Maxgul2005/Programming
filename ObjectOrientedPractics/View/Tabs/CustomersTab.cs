@@ -19,20 +19,27 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         private List <Customer> _customers = new List <Customer>();// Поле для хранения покупателей
-        private int selectedIndex = -1;
+        private Customer _currentCustomer;
+        
         private void buttonAddCustomer_Click(object sender, EventArgs e)
         {
 
            if (String.IsNullOrEmpty(textBoxFullName.Text) || String.IsNullOrEmpty(textBoxAdress.Text))
-            {
+           {
                 MessageBox.Show("Заполните все поля");
                 return;
                
-            } 
-            Customer _customer = new Customer(textBoxFullName.Text, textBoxAdress.Text);
-            _customers.Add(_customer);
-            listBoxCustomer.Items.Add(_customer);
-            ClearInfo();
+           } 
+           if (IsNumeric(textBoxFullName.Text))
+           {
+                MessageBox.Show("FullName имеет только строковой тип");
+                return;
+           }
+           Customer _customer = new Customer(textBoxFullName.Text, textBoxAdress.Text);
+           _customers.Add(_customer);
+           listBoxCustomer.Items.Add(_customer);
+           _currentCustomer = null;
+           ClearInfo();
         }
 
 
@@ -47,92 +54,59 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void textBoxFullName_TextChanged(object sender, EventArgs e)
         {
-            textBoxFullName.BackColor = Color.White;
-            if (IsNumeric(textBoxFullName.Text))
-            {
-                textBoxFullName.BackColor = Color.Red;
-            }
-            else
-            { 
-                if (selectedIndex >= 0 && listBoxCustomer.SelectedItem != null)
+                if (_currentCustomer!= null)
                 {
-                    try
+                    string newFullName = textBoxFullName.Text;
+                    if (IsNumeric(newFullName))
                     {
-                        Customer selectedCustomer = (Customer)listBoxCustomer.SelectedItem;
-                        if (IsNumeric(textBoxFullName.Text))
-                        {
-                            textBoxFullName.BackColor = Color.Red;
-                            MessageBox.Show("Имя не должно содержать числовые значения", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-
-                        selectedCustomer.Fullname = textBoxFullName.Text;
-                        int currentIndex = selectedIndex;
-                        listBoxCustomer.Items.RemoveAt(currentIndex); // Удаляем старый элемент
-                        listBoxCustomer.Items.Insert(currentIndex, selectedCustomer); // Добавляем обновлённый элемент
-
-                        // Выбираем элемент снова для корректного отображения
-                        listBoxCustomer.SelectedIndex = currentIndex;
-
-                        // Возвращаем нормальный цвет фона текстбокса
-                        textBoxFullName.BackColor = SystemColors.Window;
-                    
+                        textBoxFullName.BackColor = Color.Pink;
+                        return;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        textBoxFullName.BackColor = Color.Red;
-                        MessageBox.Show(ex.Message);
+                        textBoxFullName.BackColor = Color.White;
+                        _currentCustomer.Fullname = newFullName;
+                        int selectedIndex = listBoxCustomer.SelectedIndex;
+                        listBoxCustomer.Items[selectedIndex] = _currentCustomer;
                     }
-                }
-            }
+                }                   
         }
 
         private void textBoxAdress_TextChanged(object sender, EventArgs e)
         {
-            if (selectedIndex>=0 && listBoxCustomer.SelectedItem != null)
+            if (_currentCustomer != null)
             {
-                try
-                {
-                    Customer selectedCustomer = (Customer)listBoxCustomer.SelectedItem;
-                    selectedCustomer.Address = textBoxAdress.Text;
-                    int currentIndex = selectedIndex;
-                    listBoxCustomer.Items.RemoveAt(currentIndex); // Удаляем старый элемент
-                    listBoxCustomer.Items.Insert(currentIndex, selectedCustomer); // Добавляем обновлённый элемент
-
-                    // Выбираем элемент снова для корректного отображения
-                    listBoxCustomer.SelectedIndex = currentIndex;
-
-                    // Возвращаем нормальный цвет фона текстбокса
-                    textBoxAdress.BackColor = SystemColors.Window;
-                }
-                catch (Exception ex)
-                {
-                    textBoxAdress.BackColor = Color.Red; 
-                }
+                string newAdress = textBoxAdress.Text;
+                _currentCustomer.Address = newAdress;
+                int selectedIndex = listBoxCustomer.SelectedIndex;
+                listBoxCustomer.Items[selectedIndex] = _currentCustomer;
             }
         }
 
         private void buttonRemoveCustomer_Click(object sender, EventArgs e)
         {
-            
-            if (listBoxCustomer.SelectedIndex != -1)
+            int SelectedIndex = listBoxCustomer.SelectedIndex;
+            if (SelectedIndex != -1)
             {
-                _customers.RemoveAt(listBoxCustomer.SelectedIndex);
-                listBoxCustomer.Items.RemoveAt(listBoxCustomer.SelectedIndex);
-                ClearInfo();
+                _customers.RemoveAt(SelectedIndex);
+                listBoxCustomer.Items.RemoveAt(SelectedIndex);
+                _currentCustomer = null;
+                ClearInfo() ;
             }
         }
 
         private void listBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedIndex = listBoxCustomer.SelectedIndex;
-            if (listBoxCustomer.SelectedItem != null)
+            int SelectedIndex = listBoxCustomer.SelectedIndex;
+            if (SelectedIndex != -1)
             {
-                Customer CurrentCustem = (Customer)listBoxCustomer.SelectedItem;
-                textBoxId2.Text = CurrentCustem.Id.ToString();
-                textBoxFullName.Text = CurrentCustem.Fullname;
-                textBoxAdress.Text = CurrentCustem.Address;
+                _currentCustomer = _customers[SelectedIndex];
+                textBoxId2.Text = _currentCustomer.Id.ToString();
+                textBoxFullName.Text = _currentCustomer.Fullname;
+                textBoxAdress.Text = _currentCustomer.Address;
+
             }
+            
         }
 
         
@@ -147,5 +121,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             return false; // Если нет цифр, возвращаем false
         }
+
+        
     }
 }
