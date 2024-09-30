@@ -10,6 +10,11 @@ using System.Runtime.Remoting.Messaging;
     private double _cost; //вещественное поле со стоимостью товара, от 0 до 100 000
 
     /// <summary>
+    /// Категория товара.
+    /// </summary>
+    public Category Category { get; set; }
+
+    /// <summary>
     /// Свойство для Id
     /// </summary>
     public int Id
@@ -60,17 +65,19 @@ using System.Runtime.Remoting.Messaging;
     }
 
     /// <summary>
-    /// Конструктор с параметрами Item
+    /// Конструктор класса Item.
     /// </summary>
-    /// <param name="name">name</param>
-    /// <param name="info">info</param>
-    /// <param name="cost">cost</param>
-    public Item(string name, string info, double cost)
+    /// <param name="name">Наименование товара.</param>
+    /// <param name="info">Подробная информация о товаре.</param>
+    /// <param name="cost">Стоимость товара.</param>
+    /// <param name="category">Категория товара.</param>
+    public Item(string name, string info, double cost, Category category)
     {
         _id = IdGenerator.GetNextId();
         Name = name;
         Info = info;
         Cost = cost;
+        Category = category;
     }
 
     public override string ToString()

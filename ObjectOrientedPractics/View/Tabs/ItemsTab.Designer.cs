@@ -43,6 +43,8 @@
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.labelItemSelected = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ComboBoxCategory = new System.Windows.Forms.ComboBox();
             this.GroupBoxItems.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -101,6 +103,8 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.ComboBoxCategory);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.labelItemDiscription);
             this.panel1.Controls.Add(this.labelItemName);
             this.panel1.Controls.Add(this.textBoxDestr);
@@ -162,7 +166,7 @@
             // 
             this.LabelItemsCost.AutoSize = true;
             this.LabelItemsCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabelItemsCost.Location = new System.Drawing.Point(18, 67);
+            this.LabelItemsCost.Location = new System.Drawing.Point(18, 49);
             this.LabelItemsCost.Name = "LabelItemsCost";
             this.LabelItemsCost.Size = new System.Drawing.Size(37, 16);
             this.LabelItemsCost.TabIndex = 4;
@@ -174,7 +178,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelId.AutoSize = true;
             this.labelId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelId.Location = new System.Drawing.Point(18, 43);
+            this.labelId.Location = new System.Drawing.Point(18, 24);
             this.labelId.Name = "labelId";
             this.labelId.Size = new System.Drawing.Size(23, 16);
             this.labelId.TabIndex = 3;
@@ -184,9 +188,9 @@
             // 
             this.textBoxCostItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCostItem.Location = new System.Drawing.Point(61, 63);
+            this.textBoxCostItem.Location = new System.Drawing.Point(81, 49);
             this.textBoxCostItem.Name = "textBoxCostItem";
-            this.textBoxCostItem.Size = new System.Drawing.Size(116, 20);
+            this.textBoxCostItem.Size = new System.Drawing.Size(121, 20);
             this.textBoxCostItem.TabIndex = 2;
             this.textBoxCostItem.TextChanged += new System.EventHandler(this.textBoxCostItem_TextChanged_1);
             // 
@@ -194,9 +198,9 @@
             // 
             this.textBoxId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxId.Location = new System.Drawing.Point(61, 37);
+            this.textBoxId.Location = new System.Drawing.Point(81, 23);
             this.textBoxId.Name = "textBoxId";
-            this.textBoxId.Size = new System.Drawing.Size(116, 20);
+            this.textBoxId.Size = new System.Drawing.Size(121, 20);
             this.textBoxId.TabIndex = 1;
             // 
             // labelItemSelected
@@ -215,6 +219,24 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(8, 8);
             this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 78);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Category:";
+            // 
+            // ComboBoxCategory
+            // 
+            this.ComboBoxCategory.FormattingEnabled = true;
+            this.ComboBoxCategory.Location = new System.Drawing.Point(81, 75);
+            this.ComboBoxCategory.Name = "ComboBoxCategory";
+            this.ComboBoxCategory.Size = new System.Drawing.Size(121, 21);
+            this.ComboBoxCategory.TabIndex = 10;
+            this.ComboBoxCategory.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCategory_SelectedIndexChanged);
             // 
             // ItemsTab
             // 
@@ -250,5 +272,7 @@
         private System.Windows.Forms.TextBox textBoxItemName;
         private System.Windows.Forms.Label labelItemDiscription;
         private System.Windows.Forms.Label labelItemName;
+        private System.Windows.Forms.ComboBox ComboBoxCategory;
+        private System.Windows.Forms.Label label1;
     }
 }

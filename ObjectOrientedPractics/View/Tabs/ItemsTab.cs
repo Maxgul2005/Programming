@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ObjectOrientedPractics.View.Tabs
@@ -11,6 +12,8 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             InitializeComponent();
             ClearInputFields();
+            object[] Category = Enum.GetValues(typeof(Category)).Cast<object>().ToArray();
+            ComboBoxCategory.Items.AddRange(Category);
         }
 
         private List<Item> _items = new List<Item>();
@@ -42,8 +45,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 MessageBox.Show("Стоимость не может быть больше 1,000,000!");
                 return;
             }
-
-            Item newItem = new Item(textBoxItemName.Text, textBoxDestr.Text, cost);
+            Category selectedCategory = Category.Electronics;
+            Item newItem = new Item(textBoxItemName.Text, textBoxDestr.Text, cost, selectedCategory);
             _items.Add(newItem);
             ItemsListBox.Items.Add(newItem);
             ClearInputFields();
@@ -97,6 +100,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (ItemsListBox.SelectedItem != null)
             {
                 Item SelectedItem = (Item)ItemsListBox.SelectedItem;
+                ComboBoxCategory.SelectedItem = SelectedItem.Category;
                 textBoxId.Text = SelectedItem.Id.ToString();
                 textBoxCostItem.Text = SelectedItem.Cost.ToString();
                 textBoxItemName.Text = SelectedItem.Name;
@@ -180,6 +184,20 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void ItemsTab_Load(object sender, EventArgs e)
         {
+        }
+
+        private void ComboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = ItemsListBox.SelectedIndex;
+            if (selectedIndex != -1)
+            {
+                // Получаем выбранный элемент ComboBox и присваиваем категорию товару
+                Category selectedCategory = (Category)ComboBoxCategory.SelectedItem;
+                _items[selectedIndex].Category = selectedCategory;
+
+                // Обновляем товар в списке (если нужно обновить отображение в listBox)
+                ItemsListBox.Items[selectedIndex] = _items[selectedIndex];
+            }
         }
     }
 }
