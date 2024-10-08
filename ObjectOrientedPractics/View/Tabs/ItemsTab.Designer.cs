@@ -33,6 +33,8 @@
             this.AddItemsButton = new System.Windows.Forms.Button();
             this.ItemsListBox = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ComboBoxCategory = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.labelItemDiscription = new System.Windows.Forms.Label();
             this.labelItemName = new System.Windows.Forms.Label();
             this.textBoxDestr = new System.Windows.Forms.TextBox();
@@ -43,8 +45,6 @@
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.labelItemSelected = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.ComboBoxCategory = new System.Windows.Forms.ComboBox();
             this.GroupBoxItems.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -118,6 +118,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(384, 456);
             this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // ComboBoxCategory
+            // 
+            this.ComboBoxCategory.FormattingEnabled = true;
+            this.ComboBoxCategory.Location = new System.Drawing.Point(81, 75);
+            this.ComboBoxCategory.Name = "ComboBoxCategory";
+            this.ComboBoxCategory.Size = new System.Drawing.Size(121, 21);
+            this.ComboBoxCategory.TabIndex = 10;
+            this.ComboBoxCategory.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCategory_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 78);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Category:";
             // 
             // labelItemDiscription
             // 
@@ -219,24 +238,6 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(8, 8);
             this.flowLayoutPanel1.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 78);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Category:";
-            // 
-            // ComboBoxCategory
-            // 
-            this.ComboBoxCategory.FormattingEnabled = true;
-            this.ComboBoxCategory.Location = new System.Drawing.Point(81, 75);
-            this.ComboBoxCategory.Name = "ComboBoxCategory";
-            this.ComboBoxCategory.Size = new System.Drawing.Size(121, 21);
-            this.ComboBoxCategory.TabIndex = 10;
-            this.ComboBoxCategory.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCategory_SelectedIndexChanged);
             // 
             // ItemsTab
             // 

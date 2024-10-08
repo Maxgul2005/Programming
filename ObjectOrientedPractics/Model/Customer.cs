@@ -3,12 +3,21 @@ using System.Net;
 
 class Customer
 {
-    
+    /// <summary>
+    /// Идентификатор клиента.
+    /// </summary>
+    readonly int _id;
 
-    // Поля класса
-    private readonly int _id; //целочисленное readonly-поле, хранящее уникальный номер товара.
-    private string _fullname; //строковое поле с полным именем покупателя 
-    private string _address; //строковое поле с адресом доставки для покупателя
+    /// <summary>
+    /// Полное имя клиента.
+    /// </summary>
+    /// 
+    string _fullname;
+
+    /// <summary>
+    /// Адрес клиента.
+    /// </summary>
+    Address _address;
 
     /// <summary>
     /// Свойство на чтение для Id
@@ -34,12 +43,11 @@ class Customer
     /// <summary>
     /// Свойство для работы с полем _address с валидацией
     /// </summary>
-    public string Address
+    public Address Address
     {
         get { return _address; }
         set
         {
-            ValueValidator.AssertStringOnLength(value, 500, nameof(Address));
             _address = value;
         }
     }
@@ -48,9 +56,9 @@ class Customer
     /// <summary>
     /// Конструктор Customer
     /// </summary>
-    /// <param name="fullname">Полное имя</param>
+    /// <param name="fullname"> Полное имя</param>
     /// <param name="address">Адресс покупателя</param>
-    public Customer(string  fullname, string address)
+    public Customer(string  fullname, Address address)
     {
         _id = IdGenerator.GetNextId();
         Fullname = fullname; 

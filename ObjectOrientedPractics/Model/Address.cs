@@ -1,6 +1,6 @@
 ﻿
-namespace Model
-{
+
+
     /// <summary>
     /// Представляет адрес с почтовым индексом, страной, городом, улицей, номером дома и квартирой.
     /// </summary>
@@ -177,6 +177,7 @@ namespace Model
             Building = building;
             Apartment = apartment;
         }
-    }
+    
 }
+
 

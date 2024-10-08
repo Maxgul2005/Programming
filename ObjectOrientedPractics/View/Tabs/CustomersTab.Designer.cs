@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            Address address1 = new Address();
             this.SelectedCustomer = new System.Windows.Forms.Label();
             this.textBoxId2 = new System.Windows.Forms.TextBox();
-            this.textBoxAdress = new System.Windows.Forms.TextBox();
             this.labelId = new System.Windows.Forms.Label();
             this.labelFullName = new System.Windows.Forms.Label();
-            this.labelAdress = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBoxFullName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -43,6 +42,8 @@
             this.listBoxCustomer = new System.Windows.Forms.ListBox();
             this.Customers = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addressControl1 = new ObjectOrientedPractics.View.Controls.AddressControl();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -64,16 +65,6 @@
             this.textBoxId2.Size = new System.Drawing.Size(249, 20);
             this.textBoxId2.TabIndex = 1;
             // 
-            // textBoxAdress
-            // 
-            this.textBoxAdress.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.textBoxAdress.Location = new System.Drawing.Point(68, 118);
-            this.textBoxAdress.Multiline = true;
-            this.textBoxAdress.Name = "textBoxAdress";
-            this.textBoxAdress.Size = new System.Drawing.Size(249, 246);
-            this.textBoxAdress.TabIndex = 3;
-            this.textBoxAdress.TextChanged += new System.EventHandler(this.textBoxAdress_TextChanged);
-            // 
             // labelId
             // 
             this.labelId.AutoSize = true;
@@ -92,28 +83,19 @@
             this.labelFullName.TabIndex = 5;
             this.labelFullName.Text = "Full Name:";
             // 
-            // labelAdress
-            // 
-            this.labelAdress.AutoSize = true;
-            this.labelAdress.Location = new System.Drawing.Point(4, 125);
-            this.labelAdress.Name = "labelAdress";
-            this.labelAdress.Size = new System.Drawing.Size(48, 13);
-            this.labelAdress.TabIndex = 6;
-            this.labelAdress.Text = "Address:";
-            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.addressControl1);
             this.panel2.Controls.Add(this.textBoxFullName);
-            this.panel2.Controls.Add(this.labelAdress);
             this.panel2.Controls.Add(this.labelFullName);
             this.panel2.Controls.Add(this.labelId);
-            this.panel2.Controls.Add(this.textBoxAdress);
             this.panel2.Controls.Add(this.textBoxId2);
             this.panel2.Controls.Add(this.SelectedCustomer);
             this.panel2.Location = new System.Drawing.Point(296, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(330, 458);
+            this.panel2.Size = new System.Drawing.Size(562, 458);
             this.panel2.TabIndex = 1;
+           
             // 
             // textBoxFullName
             // 
@@ -178,6 +160,25 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // addressControl1
+            // 
+            address1.Apartment = "";
+            address1.Building = "";
+            address1.City = "";
+            address1.Country = "";
+            address1.Index = 100000;
+            address1.Street = "";
+            this.addressControl1.Address = address1;
+            this.addressControl1.Location = new System.Drawing.Point(7, 133);
+            this.addressControl1.Name = "addressControl1";
+            this.addressControl1.Size = new System.Drawing.Size(555, 265);
+            this.addressControl1.TabIndex = 8;
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+            // 
             // CustomersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,7 +186,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "CustomersTab";
-            this.Size = new System.Drawing.Size(629, 459);
+            this.Size = new System.Drawing.Size(858, 459);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -198,10 +199,8 @@
 
         private System.Windows.Forms.Label SelectedCustomer;
         private System.Windows.Forms.TextBox textBoxId2;
-        private System.Windows.Forms.TextBox textBoxAdress;
         private System.Windows.Forms.Label labelId;
         private System.Windows.Forms.Label labelFullName;
-        private System.Windows.Forms.Label labelAdress;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonRemoveCustomer;
@@ -210,5 +209,7 @@
         private System.Windows.Forms.Label Customers;
         private System.Windows.Forms.TextBox textBoxFullName;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private Controls.AddressControl addressControl1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
+﻿using ObjectOrientedPractics.View.Controls;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -15,101 +12,86 @@ namespace ObjectOrientedPractics.View.Tabs
         public CustomersTab()
         {
             InitializeComponent();
+            addressControl = new AddressControl();
             ClearInfo();
         }
 
-        private List <Customer> _customers = new List <Customer>();// Поле для хранения покупателей
+        private List<Customer> _customers = new List<Customer>(); // Поле для хранения покупателей
         private Customer _currentCustomer;
-        
+        private AddressControl addressControl;
+
         private void buttonAddCustomer_Click(object sender, EventArgs e)
         {
-
-           if (String.IsNullOrEmpty(textBoxFullName.Text) || String.IsNullOrEmpty(textBoxAdress.Text))
-           {
+            if (String.IsNullOrEmpty(textBoxFullName.Text) || addressControl.Address == null)
+            {
                 MessageBox.Show("Заполните все поля");
                 return;
-               
-           } 
-           if (IsNumeric(textBoxFullName.Text))
-           {
+            }
+            if (IsNumeric(textBoxFullName.Text))
+            {
                 MessageBox.Show("FullName имеет только строковой тип");
                 return;
-           }
-           Customer _customer = new Customer(textBoxFullName.Text, textBoxAdress.Text);
-           _customers.Add(_customer);
-           listBoxCustomer.Items.Add(_customer);
-           _currentCustomer = null;
-           ClearInfo();
-        }
+            }
 
+            Customer _customer = new Customer(textBoxFullName.Text, addressControl.Address); // Используем AddressControl
+            _customers.Add(_customer);
+            listBoxCustomer.Items.Add(_customer);
+            _currentCustomer = null;
+            ClearInfo();
+        }
 
         private void ClearInfo()
         {
             textBoxId2.Clear();
             textBoxFullName.Clear();
-            textBoxAdress.Clear();
+            addressControl.Address = new Address(); // Сбрасываем AddressControl
             textBoxFullName.BackColor = Color.White;
-            textBoxAdress.BackColor = Color.White;
         }
 
         private void textBoxFullName_TextChanged(object sender, EventArgs e)
         {
-                if (_currentCustomer!= null)
-                {
-                    string newFullName = textBoxFullName.Text;
-                    if (IsNumeric(newFullName))
-                    {
-                        textBoxFullName.BackColor = Color.Pink;
-                        return;
-                    }
-                    else
-                    {
-                        textBoxFullName.BackColor = Color.White;
-                        _currentCustomer.Fullname = newFullName;
-                        int selectedIndex = listBoxCustomer.SelectedIndex;
-                        listBoxCustomer.Items[selectedIndex] = _currentCustomer;
-                    }
-                }                   
-        }
-
-        private void textBoxAdress_TextChanged(object sender, EventArgs e)
-        {
             if (_currentCustomer != null)
             {
-                string newAdress = textBoxAdress.Text;
-                _currentCustomer.Address = newAdress;
-                int selectedIndex = listBoxCustomer.SelectedIndex;
-                listBoxCustomer.Items[selectedIndex] = _currentCustomer;
+                string newFullName = textBoxFullName.Text;
+                if (IsNumeric(newFullName))
+                {
+                    textBoxFullName.BackColor = Color.Pink;
+                    return;
+                }
+                else
+                {
+                    textBoxFullName.BackColor = Color.White;
+                    _currentCustomer.Fullname = newFullName;
+                    int selectedIndex = listBoxCustomer.SelectedIndex;
+                    listBoxCustomer.Items[selectedIndex] = _currentCustomer;
+                }
             }
         }
 
         private void buttonRemoveCustomer_Click(object sender, EventArgs e)
         {
-            int SelectedIndex = listBoxCustomer.SelectedIndex;
-            if (SelectedIndex != -1)
+            int selectedIndex = listBoxCustomer.SelectedIndex;
+            if (selectedIndex != -1)
             {
-                _customers.RemoveAt(SelectedIndex);
-                listBoxCustomer.Items.RemoveAt(SelectedIndex);
+                _customers.RemoveAt(selectedIndex);
+                listBoxCustomer.Items.RemoveAt(selectedIndex);
                 _currentCustomer = null;
-                ClearInfo() ;
+                ClearInfo();
             }
         }
 
         private void listBoxCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int SelectedIndex = listBoxCustomer.SelectedIndex;
-            if (SelectedIndex != -1)
+            int selectedIndex = listBoxCustomer.SelectedIndex;
+            if (selectedIndex != -1)
             {
-                _currentCustomer = _customers[SelectedIndex];
+                _currentCustomer = _customers[selectedIndex];
                 textBoxId2.Text = _currentCustomer.Id.ToString();
                 textBoxFullName.Text = _currentCustomer.Fullname;
-                textBoxAdress.Text = _currentCustomer.Address;
-
+                addressControl.Address = _currentCustomer.Address; // Передаем адрес в AddressControl
             }
-            
         }
 
-        
         private bool IsNumeric(string input)
         {
             foreach (char c in input)
@@ -121,7 +103,5 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             return false; // Если нет цифр, возвращаем false
         }
-
-        
     }
 }

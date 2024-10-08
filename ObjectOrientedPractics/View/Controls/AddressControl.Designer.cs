@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.PostIndexTextBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CountryTextBox = new System.Windows.Forms.TextBox();
             this.CityTextBox = new System.Windows.Forms.TextBox();
@@ -43,6 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.PostIndexTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -57,13 +57,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Delivery Address";
             // 
-            // PostIndexTextBox
-            // 
-            this.PostIndexTextBox.Location = new System.Drawing.Point(69, 35);
-            this.PostIndexTextBox.Name = "PostIndexTextBox";
-            this.PostIndexTextBox.Size = new System.Drawing.Size(100, 20);
-            this.PostIndexTextBox.TabIndex = 1;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -75,6 +68,7 @@
             this.CountryTextBox.Name = "CountryTextBox";
             this.CountryTextBox.Size = new System.Drawing.Size(229, 20);
             this.CountryTextBox.TabIndex = 3;
+            this.CountryTextBox.TextChanged += new System.EventHandler(this.CountryTextBox_TextChanged);
             // 
             // CityTextBox
             // 
@@ -82,6 +76,7 @@
             this.CityTextBox.Name = "CityTextBox";
             this.CityTextBox.Size = new System.Drawing.Size(115, 20);
             this.CityTextBox.TabIndex = 4;
+            this.CityTextBox.TextChanged += new System.EventHandler(this.CityTextBox_TextChanged);
             // 
             // StreetTextBox
             // 
@@ -89,6 +84,7 @@
             this.StreetTextBox.Name = "StreetTextBox";
             this.StreetTextBox.Size = new System.Drawing.Size(419, 20);
             this.StreetTextBox.TabIndex = 5;
+            this.StreetTextBox.TextChanged += new System.EventHandler(this.StreetTextBox_TextChanged);
             // 
             // BuildingTextBox
             // 
@@ -96,6 +92,7 @@
             this.BuildingTextBox.Name = "BuildingTextBox";
             this.BuildingTextBox.Size = new System.Drawing.Size(100, 20);
             this.BuildingTextBox.TabIndex = 6;
+            this.BuildingTextBox.TextChanged += new System.EventHandler(this.BuildingTextBox_TextChanged);
             // 
             // ApartmentTextBox
             // 
@@ -103,6 +100,7 @@
             this.ApartmentTextBox.Name = "ApartmentTextBox";
             this.ApartmentTextBox.Size = new System.Drawing.Size(100, 20);
             this.ApartmentTextBox.TabIndex = 7;
+            this.ApartmentTextBox.TextChanged += new System.EventHandler(this.ApartmentTextBox_TextChanged);
             // 
             // label2
             // 
@@ -159,10 +157,19 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Building";
             // 
+            // PostIndexTextBox
+            // 
+            this.PostIndexTextBox.Location = new System.Drawing.Point(69, 38);
+            this.PostIndexTextBox.Name = "PostIndexTextBox";
+            this.PostIndexTextBox.Size = new System.Drawing.Size(112, 20);
+            this.PostIndexTextBox.TabIndex = 14;
+            this.PostIndexTextBox.TextChanged += new System.EventHandler(this.PostIndexTextBox_TextChanged);
+            // 
             // AddressControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.PostIndexTextBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -174,11 +181,9 @@
             this.Controls.Add(this.StreetTextBox);
             this.Controls.Add(this.CityTextBox);
             this.Controls.Add(this.CountryTextBox);
-            this.Controls.Add(this.PostIndexTextBox);
             this.Controls.Add(this.label1);
             this.Name = "AddressControl";
             this.Size = new System.Drawing.Size(498, 186);
-            this.Load += new System.EventHandler(this.AddressControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,7 +192,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox PostIndexTextBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox CountryTextBox;
         private System.Windows.Forms.TextBox CityTextBox;
@@ -200,5 +204,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.TextBox PostIndexTextBox;
     }
 }

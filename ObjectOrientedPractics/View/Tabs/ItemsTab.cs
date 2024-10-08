@@ -199,5 +199,10 @@ namespace ObjectOrientedPractics.View.Tabs
                 ItemsListBox.Items[selectedIndex] = _items[selectedIndex];
             }
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
