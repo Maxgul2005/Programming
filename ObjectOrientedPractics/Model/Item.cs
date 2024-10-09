@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Runtime.Remoting.Messaging;
 
- class Item
+
+public class Item
 {
     // Поля класса
     private readonly int _id; //целочисленное readonly-поле, хранящее уникальный номер товара.

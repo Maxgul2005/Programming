@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-class Customer
+public class Customer
 {
     /// <summary>
     /// Идентификатор клиента.

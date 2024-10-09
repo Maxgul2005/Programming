@@ -151,7 +151,7 @@
         public Address()
         {
             Index = 100000;
-            Country = "";
+            Country = "jkljkjioi";
             City = "";
             Street = "";
             Building = "";

@@ -8,6 +8,22 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
+        private List<Item> _items = new List<Item>();
+        private int selectedIndex = -1; // Переменная для хранения текущего выбранного индекса
+
+        /// <summary>
+        /// Свойство для получения или установки списка товаров вкладки.
+        /// </summary>
+        public List<Item> Items
+        {
+            get { return _items; }
+            set
+            {
+                _items = value;
+                UpdateListBox(); 
+            }
+        }
+        
         public ItemsTab()
         {
             InitializeComponent();
@@ -16,8 +32,19 @@ namespace ObjectOrientedPractics.View.Tabs
             ComboBoxCategory.Items.AddRange(Category);
         }
 
-        private List<Item> _items = new List<Item>();
-        private int selectedIndex = -1; // Переменная для хранения текущего выбранного индекса
+        /// <summary>
+        /// Обновляет ListBox, отображающий товары.
+        /// </summary>
+        private void UpdateListBox()
+        {
+            ItemsListBox.Items.Clear();
+            foreach (var item in _items)
+            {
+                ItemsListBox.Items.Add(item);
+            }
+        }
+
+
 
         /// <summary>
         /// Добавляет новый товар в список.

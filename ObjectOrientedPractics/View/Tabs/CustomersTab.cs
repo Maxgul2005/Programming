@@ -19,7 +19,31 @@ namespace ObjectOrientedPractics.View.Tabs
         private List<Customer> _customers = new List<Customer>(); // Поле для хранения покупателей
         private Customer _currentCustomer;
         private AddressControl addressControl;
+       
 
+        /// <summary>
+        /// Получает или задает список клиентов.
+        /// При установке значения добавляет клиентов в ListBox.
+        /// </summary>
+        /// <value>Список объектов <see cref="Customer"/>, представляющий клиентов.</value>
+        public List<Customer> Customer
+        {
+            get { return _customers; }
+            set
+            {
+                _customers = value;
+                UpdateListBox(); // Метод для обновления элементов в ListBox
+            }
+        }
+
+        private void UpdateListBox()
+        {
+            listBoxCustomer.Items.Clear(); // Очистить текущий список
+            foreach (var customer in _customers)
+            {
+                listBoxCustomer.Items.Add(customer); // Добавить новых покупателей
+            }
+        } 
         private void buttonAddCustomer_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBoxFullName.Text) || addressControl.Address == null)
@@ -38,13 +62,14 @@ namespace ObjectOrientedPractics.View.Tabs
             listBoxCustomer.Items.Add(_customer);
             _currentCustomer = null;
             ClearInfo();
+            
         }
 
         private void ClearInfo()
         {
             textBoxId2.Clear();
             textBoxFullName.Clear();
-            addressControl.Address = new Address(); // Сбрасываем AddressControl
+            addressControl.PostIndexTextBox.Clear(); // Сбрасываем AddressControl
             textBoxFullName.BackColor = Color.White;
         }
 
@@ -88,7 +113,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentCustomer = _customers[selectedIndex];
                 textBoxId2.Text = _currentCustomer.Id.ToString();
                 textBoxFullName.Text = _currentCustomer.Fullname;
-                addressControl.Address = _currentCustomer.Address; // Передаем адрес в AddressControl
+                addressControl.Address.Country = _currentCustomer.Address.Country; // Передаем адрес в AddressControl
             }
         }
 

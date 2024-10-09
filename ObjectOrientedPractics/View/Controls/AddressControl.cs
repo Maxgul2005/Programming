@@ -47,7 +47,7 @@ namespace ObjectOrientedPractics.View.Controls
         public AddressControl()
         {
             InitializeComponent();
-            Address = new Address();
+            Address =  new Address();
             
         }
 
@@ -109,7 +109,7 @@ namespace ObjectOrientedPractics.View.Controls
         /// Обрабатывает событие изменения текста в поле страны.
         /// Обновляет свойство <see cref="Address.Country"/> на основе введенного текста.
         /// </summary>
-        private void CountryTextBox_TextChanged(object sender, EventArgs e)
+        public void CountryTextBox_TextChanged(object sender, EventArgs e)
         {
             try
             {

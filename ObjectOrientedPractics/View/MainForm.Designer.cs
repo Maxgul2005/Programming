@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabPageItems = new System.Windows.Forms.TabPage();
             this.itemsTab1 = new ObjectOrientedPractics.View.Tabs.ItemsTab();
             this.tabControlI = new System.Windows.Forms.TabControl();
@@ -94,6 +95,7 @@
             this.Controls.Add(this.tabControlI);
             this.Name = "MainForm";
             this.Text = "Object Oriented Practics";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabPageItems.ResumeLayout(false);
             this.tabControlI.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
