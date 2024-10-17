@@ -22,7 +22,10 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         Address _address;
 
-
+        /// <summary>
+        /// Флаг для корректного обновления полей адреса.
+        /// </summary>
+        public bool IsUpdatingFieldFlag = true;
 
         /// <summary>
         /// Получает или устанавливает объект <see cref="Address"/>.
@@ -54,19 +57,7 @@ namespace ObjectOrientedPractics.View.Controls
 
         
 
-        /// <summary>
-        /// Обновляет данные в пользовательском элементе управления на основе текущих значений свойства <see cref="Address"/>.
-        /// </summary>
-        public void UpdateData()
-        {
-
-            PostIndexTextBox.Text = _address.Index.ToString();
-            CountryTextBox.Text = _address.Country;
-            CityTextBox.Text = _address.City;
-            StreetTextBox.Text = _address.Street;
-            BuildingTextBox.Text = _address.Building;
-            ApartmentTextBox.Text = _address.Apartment;
-        }
+       
 
         /// <summary>
         /// Создает подсказку с сообщением об ошибке для текстового поля.
@@ -84,7 +75,7 @@ namespace ObjectOrientedPractics.View.Controls
         /// Обрабатывает событие изменения текста в поле индекса почты.
         /// Проверяет валидность введенного значения и обновляет свойство <see cref="Address.Index"/> если значение корректно.
         /// </summary>
-        public void PostIndexTextBox_TextChanged(object sender, EventArgs e)
+       private void PostIndexTextBox_TextChanged(object sender, EventArgs e)
         {
             if (!int.TryParse(PostIndexTextBox.Text, out int index) || index < 100000 || index > 999999) // Пример проверки на диапазон
             {
@@ -96,7 +87,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 PostIndexTextBox.BackColor = Color.White;
-                Address.Index = index;
+                _address.Index = index;
             }
             catch (ArgumentException error)
             {
@@ -104,23 +95,26 @@ namespace ObjectOrientedPractics.View.Controls
                 PostIndexTextBox.BackColor = Color.Pink;
             }
         }
-
+        
         /// <summary>
         /// Обрабатывает событие изменения текста в поле страны.
         /// Обновляет свойство <see cref="Address.Country"/> на основе введенного текста.
         /// </summary>
-        public void CountryTextBox_TextChanged(object sender, EventArgs e)
+        private void CountryTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (IsUpdatingFieldFlag == true)
             {
-                CountryTextBox.BackColor = Color.White;
-                Address.Country = CountryTextBox.Text;
+                try
+                {
+                    Address.Country = CountryTextBox.Text;
+                    CountryTextBox.BackColor = Color.White;
+                }
+                catch (ArgumentException)
+                {
+                    CountryTextBox.BackColor = Color.Pink; 
+                }
             }
-            catch (ArgumentException error)
-            {
-                CreateTooltip(CountryTextBox, error.Message);
-                CountryTextBox.BackColor = Color.Pink;
-            }
+
         }
 
         /// <summary>
@@ -129,15 +123,18 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         private void CityTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (IsUpdatingFieldFlag == true)
             {
-                CityTextBox.BackColor = Color.White;
-                Address.City = CityTextBox.Text;
-            }
-            catch (ArgumentException error)
-            {
-                CreateTooltip(CityTextBox, error.Message);
-                CityTextBox.BackColor = Color.Pink;
+                try
+                {
+                    CityTextBox.BackColor = Color.White;
+                    Address.City = CityTextBox.Text;
+                }
+                catch (ArgumentException error)
+                {
+                    CreateTooltip(CityTextBox, error.Message);
+                    CityTextBox.BackColor = Color.Pink;
+                }
             }
         }
 
@@ -147,15 +144,18 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         private void StreetTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                StreetTextBox.BackColor = Color.White;
-                Address.Street = StreetTextBox.Text;
-            }
-            catch (ArgumentException error)
-            {
-                CreateTooltip(StreetTextBox, error.Message);
-                StreetTextBox.BackColor = Color.Pink;
+            if (IsUpdatingFieldFlag == true)
+            { 
+                try
+                {
+                    StreetTextBox.BackColor = Color.White;
+                    Address.Street = StreetTextBox.Text;
+                }
+                catch (ArgumentException error)
+                {
+                    CreateTooltip(StreetTextBox, error.Message);
+                    StreetTextBox.BackColor = Color.Pink;
+                }
             }
         }
 
@@ -165,15 +165,18 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         private void BuildingTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (IsUpdatingFieldFlag == true)
             {
-                BuildingTextBox.BackColor = Color.White;
-                Address.Building = BuildingTextBox.Text;
-            }
-            catch (ArgumentException error)
-            {
-                CreateTooltip(BuildingTextBox, error.Message);
-                BuildingTextBox.BackColor = Color.Pink;
+                try
+                {
+                    BuildingTextBox.BackColor = Color.White;
+                    Address.Building = BuildingTextBox.Text;
+                }
+                catch (ArgumentException error)
+                {
+                    CreateTooltip(BuildingTextBox, error.Message);
+                    BuildingTextBox.BackColor = Color.Pink;
+                }
             }
         }
 
@@ -183,17 +186,71 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         private void ApartmentTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (IsUpdatingFieldFlag == true)
             {
-                ApartmentTextBox.BackColor = Color.White;
-                Address.Apartment = ApartmentTextBox.Text;
+                try
+                {
+                    ApartmentTextBox.BackColor = Color.White;
+                    Address.Apartment = ApartmentTextBox.Text;
+                }
+                catch (ArgumentException error)
+                {
+                    CreateTooltip(ApartmentTextBox, error.Message);
+                    ApartmentTextBox.BackColor = Color.Pink;
+                }
             }
-            catch (ArgumentException error)
-            {
-                CreateTooltip(ApartmentTextBox, error.Message);
-                ApartmentTextBox.BackColor = Color.Pink;
-            }
+        } 
+
+        /// <summary>
+        /// Очистка текстовых полей после нажатия кнопки Add
+        /// </summary>
+        public void ClearTextBox()
+        {
+            PostIndexTextBox.Clear();
+            CountryTextBox.Clear();
+            CityTextBox.Clear();
+            StreetTextBox.Clear();
+            BuildingTextBox.Clear();
+            ApartmentTextBox.Clear();
+            PostIndexTextBox.BackColor = Color.White;
         }
 
+        /// <summary>
+        /// Обновляет данные в пользовательском элементе управления на основе текущих значений свойства <see cref="Address"/>.
+        /// </summary>
+        public void UpdateData()
+        {
+
+            PostIndexTextBox.Text = _address.Index.ToString();
+            CountryTextBox.Text = _address.Country;
+            CityTextBox.Text = _address.City;
+            StreetTextBox.Text =_address.Street;
+            BuildingTextBox.Text = _address.Building;
+            ApartmentTextBox.Text = _address.Apartment;
+
+        }
+       
+
+        /// <summary>
+        /// Проверяет, является ли адрес пустым или отсутствующим.
+        /// </summary>
+        /// <returns>true, если хотя бы одно поле адреса пустое; иначе false.</returns>
+        public bool AddressIsNullOrEmpty()
+        {
+            if (string.IsNullOrEmpty(PostIndexTextBox.Text) ||
+                string.IsNullOrEmpty(CountryTextBox.Text) ||
+                string.IsNullOrEmpty(CityTextBox.Text) ||
+                string.IsNullOrEmpty(StreetTextBox.Text) ||
+                string.IsNullOrEmpty(BuildingTextBox.Text) ||
+                string.IsNullOrEmpty(ApartmentTextBox.Text))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+      
     }
 }

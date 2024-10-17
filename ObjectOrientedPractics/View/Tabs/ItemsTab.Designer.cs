@@ -97,6 +97,7 @@
             this.ItemsListBox.Name = "ItemsListBox";
             this.ItemsListBox.Size = new System.Drawing.Size(278, 381);
             this.ItemsListBox.TabIndex = 0;
+            this.ItemsListBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ItemsListBox_MouseClick);
             this.ItemsListBox.SelectedIndexChanged += new System.EventHandler(this.ItemsListBox_SelectedIndexChanged);
             // 
             // panel1
@@ -118,7 +119,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(384, 456);
             this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // ComboBoxCategory
             // 
@@ -248,7 +248,6 @@
             this.Controls.Add(this.GroupBoxItems);
             this.Name = "ItemsTab";
             this.Size = new System.Drawing.Size(686, 471);
-            this.Load += new System.EventHandler(this.ItemsTab_Load);
             this.GroupBoxItems.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

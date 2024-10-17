@@ -52,22 +52,34 @@ public class Customer
         }
     }
 
+    //Конструктор
+    /// <summary>
+    /// Создает пустой/начальный экземпляр класса.Всем полям присваивается значение по умолчанию.
+    /// </summary>
+    public Customer()
+    {
+        Fullname = "None";
+        Address = new Address();
+        _id = IdGenerator.GetNextId();
 
+    }
     /// <summary>
     /// Конструктор Customer
     /// </summary>
     /// <param name="fullname"> Полное имя</param>
     /// <param name="address">Адресс покупателя</param>
-    public Customer(string  fullname, Address address)
+    public Customer(string  fullname)
     {
         _id = IdGenerator.GetNextId();
         Fullname = fullname; 
-        Address = address;
+        Address = new Address();
     }
 
     public override string ToString()
     {
-        return $"Id: {_id}, Fullname - {_fullname}, Address - {_address} ";
+       // return $"Id: {_id}, Fullname - {_fullname}, Address - {_address} ";
+       return $" {_id}) "; 
+
     }
 
 }

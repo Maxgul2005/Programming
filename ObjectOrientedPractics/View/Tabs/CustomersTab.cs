@@ -46,7 +46,7 @@ namespace ObjectOrientedPractics.View.Tabs
         } 
         private void buttonAddCustomer_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxFullName.Text) || addressControl.Address == null)
+            if (String.IsNullOrEmpty(textBoxFullName.Text) || addressControl1.AddressIsNullOrEmpty())
             {
                 MessageBox.Show("Заполните все поля");
                 return;
@@ -57,11 +57,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 return;
             }
 
-            Customer _customer = new Customer(textBoxFullName.Text, addressControl.Address); // Используем AddressControl
-            _customers.Add(_customer);
-            listBoxCustomer.Items.Add(_customer);
+           // Customer _customer = new Customer(textBoxFullName.Text, addressControl1.Address); // Используем AddressControl
+           // _customers.Add(_customer);
+            //listBoxCustomer.Items.Add(_customer);
             _currentCustomer = null;
-            ClearInfo();
+           // ClearInfo();
             
         }
 
@@ -69,7 +69,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             textBoxId2.Clear();
             textBoxFullName.Clear();
-            addressControl.PostIndexTextBox.Clear(); // Сбрасываем AddressControl
+            addressControl1.ClearTextBox();
             textBoxFullName.BackColor = Color.White;
         }
 
@@ -110,13 +110,18 @@ namespace ObjectOrientedPractics.View.Tabs
             int selectedIndex = listBoxCustomer.SelectedIndex;
             if (selectedIndex != -1)
             {
+                addressControl1.IsUpdatingFieldFlag = false;
                 _currentCustomer = _customers[selectedIndex];
                 textBoxId2.Text = _currentCustomer.Id.ToString();
                 textBoxFullName.Text = _currentCustomer.Fullname;
-                addressControl.Address.Country = _currentCustomer.Address.Country; // Передаем адрес в AddressControl
+                
+                addressControl1.UpdateData();
+             
+                
             }
         }
 
+        
         private bool IsNumeric(string input)
         {
             foreach (char c in input)
@@ -127,6 +132,20 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
             }
             return false; // Если нет цифр, возвращаем false
+        }
+
+        /// <summary>
+        /// Обработчик события клика мыши по списку клиентов.
+        /// Очищает выделение, если кликнули не по элементу списка.
+        /// </summary>
+        private void listBoxCustomer_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listBoxCustomer.IndexFromPoint(e.Location) == -1)
+            {
+                addressControl1.IsUpdatingFieldFlag = false;
+                listBoxCustomer.ClearSelected();
+                ClearInfo();
+            }
         }
     }
 }

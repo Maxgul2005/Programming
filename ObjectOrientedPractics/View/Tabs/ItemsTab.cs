@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
+        //Поля класса.
         private List<Item> _items = new List<Item>();
-        private int selectedIndex = -1; // Переменная для хранения текущего выбранного индекса
+        private Item _currentItem;
+        private List<string> ItemsListBoxItems = new List<string>();
 
         /// <summary>
         /// Свойство для получения или установки списка товаров вкладки.
@@ -20,28 +23,16 @@ namespace ObjectOrientedPractics.View.Tabs
             set
             {
                 _items = value;
-                UpdateListBox(); 
+                
             }
         }
         
         public ItemsTab()
         {
             InitializeComponent();
-            ClearInputFields();
+            // Инициализируем значениями перечесления ComboBox
             object[] Category = Enum.GetValues(typeof(Category)).Cast<object>().ToArray();
             ComboBoxCategory.Items.AddRange(Category);
-        }
-
-        /// <summary>
-        /// Обновляет ListBox, отображающий товары.
-        /// </summary>
-        private void UpdateListBox()
-        {
-            ItemsListBox.Items.Clear();
-            foreach (var item in _items)
-            {
-                ItemsListBox.Items.Add(item);
-            }
         }
 
 
@@ -53,7 +44,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             textBoxCostItem.BackColor = SystemColors.Window;
 
-            if (string.IsNullOrEmpty(textBoxCostItem.Text) || string.IsNullOrEmpty(textBoxItemName.Text) || string.IsNullOrEmpty(textBoxDestr.Text))
+            if (string.IsNullOrEmpty(textBoxCostItem.Text) || string.IsNullOrEmpty(textBoxItemName.Text) || string.IsNullOrEmpty(textBoxDestr.Text) || string.IsNullOrEmpty(ComboBoxCategory.Text))
             {
                 MessageBox.Show("Заполните все поля!!!");
                 return;
@@ -72,11 +63,18 @@ namespace ObjectOrientedPractics.View.Tabs
                 MessageBox.Show("Стоимость не может быть больше 1,000,000!");
                 return;
             }
-            Category selectedCategory = Category.Electronics;
-            Item newItem = new Item(textBoxItemName.Text, textBoxDestr.Text, cost, selectedCategory);
-            _items.Add(newItem);
-            ItemsListBox.Items.Add(newItem);
+            Category NewCategory = (Category)Enum.Parse(typeof(Category), ComboBoxCategory.Text);
+            Item NewItem = new Item();
+            NewItem.Name = textBoxItemName.Text;
+            NewItem.Info = textBoxDestr.Text;
+            NewItem.Cost = cost;
+            NewItem.Category = NewCategory;
+            //Добавляем обьект NewItem в список _items Через свойство Items
+            Items.Add(NewItem);
+            ItemsListBoxItems.Add($"{NewItem.Id.ToString()})");
+            ItemsListBox.Items.Add(ItemsListBoxItems[ItemsListBoxItems.Count - 1]);
             ClearInputFields();
+
         }
 
         /// <summary>
@@ -84,25 +82,16 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void RemoveItemsButton_Click(object sender, EventArgs e)
         {
-            if (ItemsListBox.SelectedIndex != -1)
-            {
-                _items.RemoveAt(ItemsListBox.SelectedIndex);
-                ItemsListBox.Items.RemoveAt(ItemsListBox.SelectedIndex);
-                ClearInputFields();
-            }
+            int selectedIndex = ItemsListBox.SelectedIndex;
+            if (selectedIndex == -1) return;
+            Items.RemoveAt(selectedIndex);
+            ItemsListBoxItems.RemoveAt(selectedIndex);
+            ItemsListBox.Items.RemoveAt(selectedIndex);
+            ClearInputFields();
         }
 
-        /// <summary>
-        /// Обновляет выбранный элемент в списке.
-        /// </summary>
-        /// <param name="selectedItem">Объект товара для обновления.</param>
-        private void UpdateSelectedItem(Item selectedItem)
-        {
-            int currentIndex = selectedIndex; // Сохраняем индекс
-            ItemsListBox.Items.RemoveAt(currentIndex); // Удаляем старый элемент
-            ItemsListBox.Items.Insert(currentIndex, selectedItem); // Добавляем обновлённый элемент
-            ItemsListBox.SelectedIndex = currentIndex; // Снова выбираем этот элемент
-        }
+        
+        
 
         /// <summary>
         /// Очищает все поля ввода.
@@ -113,6 +102,7 @@ namespace ObjectOrientedPractics.View.Tabs
             textBoxItemName.Clear();
             textBoxDestr.Clear();
             textBoxCostItem.Clear();
+            ComboBoxCategory.SelectedIndex = -1;
             textBoxCostItem.BackColor = SystemColors.Window;
             textBoxItemName.BackColor = SystemColors.Window;
             textBoxDestr.BackColor = SystemColors.Window;
@@ -123,15 +113,23 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedIndex = ItemsListBox.SelectedIndex;
-            if (ItemsListBox.SelectedItem != null)
+            if (ItemsListBox.SelectedIndex == -1)
             {
-                Item SelectedItem = (Item)ItemsListBox.SelectedItem;
-                ComboBoxCategory.SelectedItem = SelectedItem.Category;
-                textBoxId.Text = SelectedItem.Id.ToString();
-                textBoxCostItem.Text = SelectedItem.Cost.ToString();
-                textBoxItemName.Text = SelectedItem.Name;
-                textBoxDestr.Text = SelectedItem.Info;
+                AddItemsButton.Enabled = true;
+                ClearInputFields();
+               
+            }
+            if (ItemsListBox.SelectedIndex != -1)
+            {
+                AddItemsButton.Enabled = false;
+                int selectedIndex = ItemsListBox.SelectedIndex;
+                _currentItem = Items[selectedIndex];
+                textBoxId.Text = _currentItem.Id.ToString();
+                textBoxCostItem.Text = _currentItem.Cost.ToString();
+                textBoxItemName.Text = _currentItem.Name;
+                textBoxDestr.Text = _currentItem.Info;
+                ComboBoxCategory.Text = _currentItem.Category.ToString();
+
             }
         }
 
@@ -140,25 +138,9 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void textBoxCostItem_TextChanged_1(object sender, EventArgs e)
         {
-            if (double.TryParse(textBoxCostItem.Text, out double cost))
+            if ((ItemsListBox.SelectedIndex != -1))
             {
-                if (cost >= 0 && cost <= 100000)
-                {
-                    textBoxCostItem.BackColor = SystemColors.Window;
-                    if (selectedIndex >= 0 && ItemsListBox.SelectedItem is Item selectedItem)
-                    {
-                        selectedItem.Cost = cost;
-                        UpdateSelectedItem(selectedItem);
-                    }
-                }
-                else
-                {
-                    textBoxCostItem.BackColor = Color.Pink;
-                }
-            }
-            else
-            {
-                textBoxCostItem.BackColor = Color.Pink;
+                _currentItem.Cost = double.Parse(textBoxCostItem.Text);
             }
         }
 
@@ -167,20 +149,9 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void textBoxItemName_TextChanged(object sender, EventArgs e)
         {
-            if (selectedIndex >= 0 && ItemsListBox.SelectedItem is Item selectedItem)
+            if ((ItemsListBox.SelectedIndex != -1))
             {
-                string newName = textBoxItemName.Text;
-
-                if (!string.IsNullOrEmpty(newName) && newName.Length <= 200)
-                {
-                    textBoxItemName.BackColor = SystemColors.Window;
-                    selectedItem.Name = newName;
-                    UpdateSelectedItem(selectedItem);
-                }
-                else
-                {
-                    textBoxItemName.BackColor = Color.Pink;
-                }
+                _currentItem.Name = textBoxItemName.Text;
             }
         }
 
@@ -189,47 +160,30 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private void textBoxDestr_TextChanged(object sender, EventArgs e)
         {
-            if (selectedIndex >= 0 && ItemsListBox.SelectedItem is Item selectedItem)
+            if ((ItemsListBox.SelectedIndex != -1))
             {
-                string newInfo = textBoxDestr.Text;
-
-                if (!string.IsNullOrEmpty(newInfo) && newInfo.Length <= 1000)
-                {
-                    textBoxDestr.BackColor = SystemColors.Window;
-                    selectedItem.Info = newInfo;
-                    UpdateSelectedItem(selectedItem);
-                }
-                else
-                {
-                    textBoxDestr.BackColor = Color.Pink;
-                }
+                _currentItem.Info = textBoxDestr.Text;
             }
         }
 
-        /// <summary>
-        /// Событие загрузки формы.
-        /// </summary>
-        private void ItemsTab_Load(object sender, EventArgs e)
-        {
-        }
 
         private void ComboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedIndex = ItemsListBox.SelectedIndex;
-            if (selectedIndex != -1)
+            if (ItemsListBox.SelectedIndex != -1)
             {
-                // Получаем выбранный элемент ComboBox и присваиваем категорию товару
-                Category selectedCategory = (Category)ComboBoxCategory.SelectedItem;
-                _items[selectedIndex].Category = selectedCategory;
-
-                // Обновляем товар в списке (если нужно обновить отображение в listBox)
-                ItemsListBox.Items[selectedIndex] = _items[selectedIndex];
+                Category category = (Category)ComboBoxCategory.SelectedItem;
+                _currentItem.Category = category;
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void ItemsListBox_MouseClick(object sender, MouseEventArgs e)
         {
-
+            if (ItemsListBox.IndexFromPoint(e.Location) == -1)
+            {
+                // Если кликнули на пустое место, сбрасываем выбор
+                ItemsListBox.ClearSelected();
+                ItemsListBox.SelectedIndex = -1;
+            }
         }
     }
 }

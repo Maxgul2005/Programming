@@ -35,6 +35,7 @@
             this.labelId = new System.Windows.Forms.Label();
             this.labelFullName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.addressControl1 = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.textBoxFullName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonRemoveCustomer = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.listBoxCustomer = new System.Windows.Forms.ListBox();
             this.Customers = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addressControl1 = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -95,7 +95,20 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(562, 458);
             this.panel2.TabIndex = 1;
-           
+            // 
+            // addressControl1
+            // 
+            address1.Apartment = "";
+            address1.Building = "";
+            address1.City = "";
+            address1.Country = "";
+            address1.Index = 100000;
+            address1.Street = "";
+            this.addressControl1.Address = address1;
+            this.addressControl1.Location = new System.Drawing.Point(7, 133);
+            this.addressControl1.Name = "addressControl1";
+            this.addressControl1.Size = new System.Drawing.Size(555, 265);
+            this.addressControl1.TabIndex = 8;
             // 
             // textBoxFullName
             // 
@@ -143,6 +156,7 @@
             this.listBoxCustomer.Name = "listBoxCustomer";
             this.listBoxCustomer.Size = new System.Drawing.Size(284, 381);
             this.listBoxCustomer.TabIndex = 1;
+            this.listBoxCustomer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxCustomer_MouseClick);
             this.listBoxCustomer.SelectedIndexChanged += new System.EventHandler(this.listBoxCustomer_SelectedIndexChanged);
             // 
             // Customers
@@ -159,20 +173,6 @@
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // addressControl1
-            // 
-            address1.Apartment = "";
-            address1.Building = "";
-            address1.City = "";
-            address1.Country = "";
-            address1.Index = 100000;
-            address1.Street = "";
-            this.addressControl1.Address = address1;
-            this.addressControl1.Location = new System.Drawing.Point(7, 133);
-            this.addressControl1.Name = "addressControl1";
-            this.addressControl1.Size = new System.Drawing.Size(555, 265);
-            this.addressControl1.TabIndex = 8;
             // 
             // contextMenuStrip2
             // 

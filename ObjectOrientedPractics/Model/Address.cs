@@ -88,6 +88,8 @@
             }
         }
 
+
+
         /// <summary>
         /// Получает или задает улицу.
         /// </summary>
@@ -151,7 +153,7 @@
         public Address()
         {
             Index = 100000;
-            Country = "jkljkjioi";
+            Country = "";
             City = "";
             Street = "";
             Building = "";

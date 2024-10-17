@@ -81,8 +81,17 @@ public class Item
         Category = category;
     }
 
-    public override string ToString()
+  
+    /// <summary>
+    /// Создает пустой/начальный экземпляр класса.Всем полям присваивается значение по умолчанию.
+    /// </summary>
+    public Item()
     {
-        return $"Id:{_id},{_name},{_info},Цена: {_cost} ";
+        _id = IdGenerator.GetNextId();
+        Name = "None";
+        Info = "None";
+        Cost = 0;
     }
+
+    
 }
