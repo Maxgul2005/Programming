@@ -25,7 +25,9 @@ namespace ObjectOrientedPractics.View.Controls
         /// <summary>
         /// Флаг для корректного обновления полей адреса.
         /// </summary>
-        public bool IsUpdatingFieldFlag = true;
+        public bool IsUpdatingFieldFlag = false;
+
+       
 
         /// <summary>
         /// Получает или устанавливает объект <see cref="Address"/>.
@@ -40,7 +42,6 @@ namespace ObjectOrientedPractics.View.Controls
             set
             {
                 _address = value;
-                UpdateData();
             }
         }
 
@@ -52,12 +53,13 @@ namespace ObjectOrientedPractics.View.Controls
             InitializeComponent();
             Address =  new Address();
             
+
         }
+
 
 
         
 
-       
 
         /// <summary>
         /// Создает подсказку с сообщением об ошибке для текстового поля.
@@ -87,7 +89,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 PostIndexTextBox.BackColor = Color.White;
-                _address.Index = index;
+                NewAddress.Address.Index = index;
             }
             catch (ArgumentException error)
             {
@@ -102,15 +104,18 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         private void CountryTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (IsUpdatingFieldFlag == true)
+            if (IsUpdatingFieldFlag == false)
             {
                 try
                 {
-                    Address.Country = CountryTextBox.Text;
+                    
                     CountryTextBox.BackColor = Color.White;
+                    
+                    NewAddress.Address.Country = CountryTextBox.Text;
                 }
-                catch (ArgumentException)
+                catch (ArgumentException error)
                 {
+                    CreateTooltip(CountryTextBox, error.Message);
                     CountryTextBox.BackColor = Color.Pink; 
                 }
             }
@@ -123,12 +128,12 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         private void CityTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (IsUpdatingFieldFlag == true)
+            if (IsUpdatingFieldFlag == false)
             {
                 try
                 {
                     CityTextBox.BackColor = Color.White;
-                    Address.City = CityTextBox.Text;
+                    NewAddress.Address.City = CityTextBox.Text;
                 }
                 catch (ArgumentException error)
                 {
@@ -144,12 +149,12 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         private void StreetTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (IsUpdatingFieldFlag == true)
+            if (IsUpdatingFieldFlag == false)
             { 
                 try
                 {
                     StreetTextBox.BackColor = Color.White;
-                    Address.Street = StreetTextBox.Text;
+                    NewAddress.Address.Street = StreetTextBox.Text;
                 }
                 catch (ArgumentException error)
                 {
@@ -165,12 +170,12 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         private void BuildingTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (IsUpdatingFieldFlag == true)
+            if (IsUpdatingFieldFlag == false)
             {
                 try
                 {
                     BuildingTextBox.BackColor = Color.White;
-                    Address.Building = BuildingTextBox.Text;
+                    NewAddress.Address.Building = BuildingTextBox.Text;
                 }
                 catch (ArgumentException error)
                 {
@@ -186,12 +191,12 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         private void ApartmentTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (IsUpdatingFieldFlag == true)
+            if (IsUpdatingFieldFlag == false)
             {
                 try
                 {
                     ApartmentTextBox.BackColor = Color.White;
-                    Address.Apartment = ApartmentTextBox.Text;
+                    NewAddress.Address.Apartment = ApartmentTextBox.Text;
                 }
                 catch (ArgumentException error)
                 {
@@ -214,20 +219,32 @@ namespace ObjectOrientedPractics.View.Controls
             ApartmentTextBox.Clear();
             PostIndexTextBox.BackColor = Color.White;
         }
-
+        public AddressControl NewAddress;
         /// <summary>
-        /// Обновляет данные в пользовательском элементе управления на основе текущих значений свойства <see cref="Address"/>.
+        /// При выборе обьекта в листбокс показывает текстбоксы <see cref="Address"/>.
         /// </summary>
-        public void UpdateData()
+        public void UpdateData(Address SomeAddress)
         {
 
-            PostIndexTextBox.Text = _address.Index.ToString();
-            CountryTextBox.Text = _address.Country;
-            CityTextBox.Text = _address.City;
-            StreetTextBox.Text =_address.Street;
-            BuildingTextBox.Text = _address.Building;
-            ApartmentTextBox.Text = _address.Apartment;
 
+            NewAddress.Address = SomeAddress;
+
+            PostIndexTextBox.Text = NewAddress.Address.Index.ToString();
+            CountryTextBox.Text = NewAddress.Address.Country.ToString();
+            CityTextBox.Text = NewAddress.Address.City.ToString();
+            StreetTextBox.Text = NewAddress.Address.Street.ToString();
+            BuildingTextBox.Text = NewAddress.Address.Building.ToString();
+            ApartmentTextBox.Text = NewAddress.Address.Apartment.ToString();
+
+        }
+
+        /// <summary>
+        /// Инициализируем обьект адресс на основе ткущих значениях текстбокс
+        /// </summary>
+        /// <returns></returns>
+        public Address GiveValues()
+        {
+            return new Address(Convert.ToInt32(PostIndexTextBox.Text), CountryTextBox.Text, CityTextBox.Text, StreetTextBox.Text, BuildingTextBox.Text, ApartmentTextBox.Text);
         }
        
 
@@ -251,6 +268,10 @@ namespace ObjectOrientedPractics.View.Controls
                 return false;
             }
         }
-      
+
+        private void AddressControl_Load(object sender, EventArgs e)
+        {
+            NewAddress = new AddressControl();
+        }
     }
 }

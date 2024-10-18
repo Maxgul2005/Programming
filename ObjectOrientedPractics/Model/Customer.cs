@@ -75,11 +75,6 @@ public class Customer
         Address = new Address();
     }
 
-    public override string ToString()
-    {
-       // return $"Id: {_id}, Fullname - {_fullname}, Address - {_address} ";
-       return $" {_id}) "; 
 
-    }
 
 }

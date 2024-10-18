@@ -184,6 +184,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddressControl";
             this.Size = new System.Drawing.Size(498, 186);
+            this.Load += new System.EventHandler(this.AddressControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
