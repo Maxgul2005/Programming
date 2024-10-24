@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 
 public class Customer
@@ -22,6 +23,10 @@ public class Customer
     /// корзина покупателя.
     /// </summary>
     Cart _cart;
+    /// <summary>
+    /// Список заказов пользователя
+    /// </summary>
+    private List<Order> _orders;
     /// <summary>
     /// Свойство на чтение для Id
     /// </summary>
@@ -58,6 +63,10 @@ public class Customer
     /// Получает или задает корзину товаров.
     /// </summary>
     public Cart Cart { get; set; }
+    /// <summary>
+    /// Получает или задает заказ.
+    /// </summary>
+    public List<Order> Orders { get; set; }
 
     //Конструктор
     /// <summary>
@@ -68,6 +77,7 @@ public class Customer
         Fullname = "None";
         Address = new Address();
         Cart = new Cart();
+        Orders = new List<Order>();
         _id = IdGenerator.GetNextId();
 
     }
@@ -82,6 +92,7 @@ public class Customer
         Fullname = fullname;
         Cart = new Cart();
         Address = new Address();
+        Orders = new List<Order>();
     }
 
 
