@@ -18,7 +18,10 @@ public class Customer
     /// Адрес клиента.
     /// </summary>
     Address _address;
-
+    /// <summary>
+    /// корзина покупателя.
+    /// </summary>
+    Cart _cart;
     /// <summary>
     /// Свойство на чтение для Id
     /// </summary>
@@ -51,6 +54,10 @@ public class Customer
             _address = value;
         }
     }
+    /// <summary>
+    /// Получает или задает корзину товаров.
+    /// </summary>
+    public Cart Cart { get; set; }
 
     //Конструктор
     /// <summary>
@@ -60,6 +67,7 @@ public class Customer
     {
         Fullname = "None";
         Address = new Address();
+        Cart = new Cart();
         _id = IdGenerator.GetNextId();
 
     }
@@ -71,7 +79,8 @@ public class Customer
     public Customer(string  fullname)
     {
         _id = IdGenerator.GetNextId();
-        Fullname = fullname; 
+        Fullname = fullname;
+        Cart = new Cart();
         Address = new Address();
     }
 
