@@ -1,6 +1,7 @@
 ﻿using ObjectOrientedPractics.View.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -25,6 +26,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// При установке значения добавляет клиентов в ListBox.
         /// </summary>
         /// <value>Список объектов <see cref="Customer"/>, представляющий клиентов.</value>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Customer> Customer
         {
             get { return _customers; }
@@ -137,6 +139,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 listBoxCustomer.ClearSelected();
                 ClearInfo();
             }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

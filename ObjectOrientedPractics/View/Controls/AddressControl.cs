@@ -27,12 +27,13 @@ namespace ObjectOrientedPractics.View.Controls
         /// </summary>
         public bool IsUpdatingFieldFlag = false;
 
-       
+
 
         /// <summary>
         /// Получает или устанавливает объект <see cref="Address"/>.
         /// При установке нового значения обновляются данные в пользовательском элементе управления.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Address Address
         {
             get

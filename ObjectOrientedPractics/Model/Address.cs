@@ -179,7 +179,12 @@
             Building = building;
             Apartment = apartment;
         }
-    
+
+        public string AddressToString()
+        {
+            return Index.ToString() + " " + Country + " " + City + " " + Street + " " + Building + " " + Apartment;
+        }
+
 }
 
 

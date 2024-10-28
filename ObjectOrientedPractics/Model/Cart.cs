@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 /// <summary>
 /// Хранит данные о корзине покупок:Список товаров,Суммарная стоимость всех товаров.
 /// </summary>
@@ -15,6 +16,7 @@ public class Cart
     /// <summary>
     /// Задает и возращает список товаров
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public List<Item> Items
     {
         get { return _items; }

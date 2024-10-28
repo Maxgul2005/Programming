@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 /// <summary>
 /// Представляет магазин, содержащий товары и покупателей.
 /// </summary>
@@ -16,11 +17,13 @@ class Store
     /// <summary>
     /// Свойство для получения или установки списка товаров.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public List<Item> Items
     {
         get { return _items; }
         set { _items = value; }
     }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     /// <summary>
     /// Свойство для получения или установки списка покупателей.
     /// </summary>

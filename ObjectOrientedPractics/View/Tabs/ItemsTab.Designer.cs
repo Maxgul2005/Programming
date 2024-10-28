@@ -63,6 +63,7 @@
             this.GroupBoxItems.TabIndex = 0;
             this.GroupBoxItems.TabStop = false;
             this.GroupBoxItems.Text = "Items";
+            this.GroupBoxItems.Enter += new System.EventHandler(this.GroupBoxItems_Enter);
             // 
             // RemoveItemsButton
             // 
@@ -119,6 +120,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(384, 456);
             this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // ComboBoxCategory
             // 

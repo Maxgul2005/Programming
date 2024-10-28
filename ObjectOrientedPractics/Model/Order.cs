@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 /// <summary>
 /// Класс который хранит в себе заказ покупателя.
 /// </summary>
@@ -24,7 +25,7 @@ public class Order
     public OrderStatus Status { get; set; }
     public string DateOfCreation { get; }
     public Address DeliveryAddress { get; set; }
-
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public List<Item> Items { get; set; }
     public double TotalCost
     {

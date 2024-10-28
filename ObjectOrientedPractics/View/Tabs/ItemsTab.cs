@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private Item _currentItem;
         private List<string> ItemsListBoxItems = new List<string>();
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         /// <summary>
         /// Свойство для получения или установки списка товаров вкладки.
         /// </summary>
@@ -184,6 +186,16 @@ namespace ObjectOrientedPractics.View.Tabs
                 ItemsListBox.ClearSelected();
                 ItemsListBox.SelectedIndex = -1;
             }
+        }
+
+        private void GroupBoxItems_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
