@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 /// <summary>
-/// Хранит данные о корзине покупок:Список товаров,Суммарная стоимость всех товаров.
+/// Хранит данные о корзине покупок:Список товаров,Суммарная стоимость всех товаров. Корзина агрегирует список товаров
 /// </summary>
 public class Cart
 {
     /// <summary>
-    /// Список товаров.
+    /// Список товаров.Корзина агрегирует список товаров
     /// </summary>
     private List<Item> _items;
     /// <summary>
@@ -21,27 +21,20 @@ public class Cart
     {
         get { return _items; }
         set { _items = value; }
-    }
+    } 
     /// <summary>
     /// Возвращает суммарную стоимость всех товаров.
     /// </summary>
     public double Amount
     {
-        get 
+        get
         {
             double summ = 0;
             foreach (Item cost in Items)
             {
                 summ += cost.Cost;
             }
-            if (summ > 0)
-            {
-                return _amount = summ;
-            }
-            else
-            {
-                return _amount = 0;
-            }
+            return _amount = summ;
         }
     }
 

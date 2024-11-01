@@ -32,18 +32,18 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.OrdersDataGridView = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.textBoxIdOrder = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.textBoxCreatOrder = new System.Windows.Forms.TextBox();
-            this.comboBoxStatusOrder = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.addressControl1 = new ObjectOrientedPractics.View.Controls.AddressControl();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxStatusOrder = new System.Windows.Forms.ComboBox();
+            this.textBoxCreatOrder = new System.Windows.Forms.TextBox();
+            this.textBoxIdOrder = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OrderItems = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.addressControl1 = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDataGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -71,6 +71,7 @@
             this.OrdersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.OrdersDataGridView.Size = new System.Drawing.Size(388, 742);
             this.OrdersDataGridView.TabIndex = 0;
+            this.OrdersDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrdersDataGridView_CellContentClick);
             // 
             // groupBox2
             // 
@@ -90,53 +91,6 @@
             this.groupBox2.Text = "Selected Order";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // textBoxIdOrder
-            // 
-            this.textBoxIdOrder.Location = new System.Drawing.Point(90, 38);
-            this.textBoxIdOrder.Name = "textBoxIdOrder";
-            this.textBoxIdOrder.Size = new System.Drawing.Size(109, 26);
-            this.textBoxIdOrder.TabIndex = 0;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // textBoxCreatOrder
-            // 
-            this.textBoxCreatOrder.Location = new System.Drawing.Point(90, 84);
-            this.textBoxCreatOrder.Name = "textBoxCreatOrder";
-            this.textBoxCreatOrder.Size = new System.Drawing.Size(109, 26);
-            this.textBoxCreatOrder.TabIndex = 2;
-            // 
-            // comboBoxStatusOrder
-            // 
-            this.comboBoxStatusOrder.FormattingEnabled = true;
-            this.comboBoxStatusOrder.Location = new System.Drawing.Point(90, 135);
-            this.comboBoxStatusOrder.Name = "comboBoxStatusOrder";
-            this.comboBoxStatusOrder.Size = new System.Drawing.Size(109, 28);
-            this.comboBoxStatusOrder.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(11, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(21, 16);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Id:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(11, 90);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 16);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Created:";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -148,13 +102,52 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Status:";
             // 
-            // addressControl1
+            // label2
             // 
-            this.addressControl1.Location = new System.Drawing.Point(24, 198);
-            this.addressControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.addressControl1.Name = "addressControl1";
-            this.addressControl1.Size = new System.Drawing.Size(818, 291);
-            this.addressControl1.TabIndex = 7;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(11, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 16);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Created:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(11, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(21, 16);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Id:";
+            // 
+            // comboBoxStatusOrder
+            // 
+            this.comboBoxStatusOrder.FormattingEnabled = true;
+            this.comboBoxStatusOrder.Location = new System.Drawing.Point(90, 135);
+            this.comboBoxStatusOrder.Name = "comboBoxStatusOrder";
+            this.comboBoxStatusOrder.Size = new System.Drawing.Size(109, 28);
+            this.comboBoxStatusOrder.TabIndex = 3;
+            // 
+            // textBoxCreatOrder
+            // 
+            this.textBoxCreatOrder.Location = new System.Drawing.Point(90, 84);
+            this.textBoxCreatOrder.Name = "textBoxCreatOrder";
+            this.textBoxCreatOrder.Size = new System.Drawing.Size(109, 26);
+            this.textBoxCreatOrder.TabIndex = 2;
+            // 
+            // textBoxIdOrder
+            // 
+            this.textBoxIdOrder.Location = new System.Drawing.Point(90, 38);
+            this.textBoxIdOrder.Name = "textBoxIdOrder";
+            this.textBoxIdOrder.Size = new System.Drawing.Size(109, 26);
+            this.textBoxIdOrder.TabIndex = 0;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // OrderItems
             // 
@@ -183,6 +176,14 @@
             this.label5.Size = new System.Drawing.Size(84, 20);
             this.label5.TabIndex = 5;
             this.label5.Text = "4 999, 90";
+            // 
+            // addressControl1
+            // 
+            this.addressControl1.Location = new System.Drawing.Point(24, 198);
+            this.addressControl1.Margin = new System.Windows.Forms.Padding(5);
+            this.addressControl1.Name = "addressControl1";
+            this.addressControl1.Size = new System.Drawing.Size(818, 291);
+            this.addressControl1.TabIndex = 7;
             // 
             // OrdersTab
             // 

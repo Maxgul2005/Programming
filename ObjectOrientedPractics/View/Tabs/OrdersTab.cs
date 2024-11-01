@@ -47,5 +47,10 @@ namespace ObjectOrientedPractics.View.Tabs
         {
 
         }
+
+        private void OrdersDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

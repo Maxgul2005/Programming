@@ -12,7 +12,6 @@ public class Order
 {
 
     private int _id;
-    private static int _allOrdersCount;
     private OrderStatus _status;
     private string _dateOfCreation;
     private Address _deliveryAddress;
@@ -49,12 +48,12 @@ public class Order
 
     public Order()
     {
+        _id = IdGenerator.GetNextId();
         Status = OrderStatus.New;
-        DateOfCreation = "01.01.2000";
+        DateOfCreation = "01.01.2024";
         DeliveryAddress = new Address();
         
-        _allOrdersCount += 1;
-        _id = _allOrdersCount;
+        
     }
     public Order(OrderStatus status, string dateOfCreation, List<Item> items)
     {

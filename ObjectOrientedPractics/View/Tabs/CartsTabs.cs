@@ -129,5 +129,10 @@ namespace ObjectOrientedPractics.View.Tabs
             ClearCart();
             UpdateAmount();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
