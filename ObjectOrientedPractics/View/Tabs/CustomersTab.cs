@@ -52,11 +52,13 @@ namespace ObjectOrientedPractics.View.Tabs
 
             Customer NewCustomer = new Customer();
             NewCustomer.Fullname = textBoxFullName.Text;
+            NewCustomer.IsPriority = IsPriorityCheckBox.Checked;
             NewCustomer.Address = addressControl1.GiveValues();
 
             Customer.Add(NewCustomer);
             CustomersListBoxItems.Add($"{NewCustomer.Id.ToString()})");
             listBoxCustomer.Items.Add(CustomersListBoxItems[CustomersListBoxItems.Count - 1]);
+            IsPriorityCheckBox.Checked = false;
             ClearInfo();
 
 
@@ -97,7 +99,8 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 addressControl1.IsUpdatingFieldFlag = true;
                 buttonAddCustomer.Enabled = true;
-                ClearInfo();    
+                ClearInfo();
+                IsPriorityCheckBox.Checked = false;
             }
             else
             {
@@ -108,7 +111,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentCustomer = Customer[selectedIndex];
                 textBoxId2.Text = _currentCustomer.Id.ToString();
                 textBoxFullName.Text = _currentCustomer.Fullname;
-
+                IsPriorityCheckBox.Checked = _currentCustomer.IsPriority;
                 addressControl1.UpdateData(_currentCustomer.Address);
 
             }
@@ -141,9 +144,14 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
+       
 
+        private void IsPriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((listBoxCustomer.SelectedIndex != -1))
+            {
+                _currentCustomer.IsPriority = IsPriorityCheckBox.Checked;
+            }
         }
     }
 }

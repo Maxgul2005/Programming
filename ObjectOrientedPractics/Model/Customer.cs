@@ -68,6 +68,11 @@ public class Customer
     /// </summary>
     public List<Order> Orders { get; set; }
 
+    /// <summary>
+    /// Возвращает или меняет приоритет клиента.
+    /// </summary>
+    public bool IsPriority { get; set; }
+
     //Конструктор
     /// <summary>
     /// Создает пустой/начальный экземпляр класса.Всем полям присваивается значение по умолчанию.
@@ -95,6 +100,10 @@ public class Customer
         Orders = new List<Order>();
     }
 
+    public override string ToString()
+    {
+        return Fullname;
+    }
 
 
 }

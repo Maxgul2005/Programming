@@ -82,6 +82,7 @@
             this.listBoxForItem.Name = "listBoxForItem";
             this.listBoxForItem.Size = new System.Drawing.Size(356, 404);
             this.listBoxForItem.TabIndex = 0;
+            this.listBoxForItem.SelectedIndexChanged += new System.EventHandler(this.listBoxForItem_SelectedIndexChanged);
             // 
             // groupBox2
             // 

@@ -104,7 +104,19 @@ namespace ObjectOrientedPractics.View.Tabs
                 string minute = DateTime.Now.Minute.ToString();
                 string Date = day + "." + month + "." + year + ". " + hour + ":" + minute;
                 List<Item> items = _currentCustomer.Cart.Items;
-                Order newOrder = new Order(OrderStatus.New, Date, items);
+                Order newOrder;
+                if (_currentCustomer.IsPriority == true)
+                {
+                    newOrder = new PriorityOrder(OrderStatus.New, Date, items, _currentCustomer.Address, DateTime.Now, DeliveryTimeRange.Range9To11);
+                }
+                else
+                {
+                    newOrder = new Order(OrderStatus.New, Date, items, _currentCustomer.Address);
+                }
+
+
+
+
                 _currentCustomer.Orders.Add(newOrder);
 
 
@@ -131,6 +143,11 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxForItem_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
