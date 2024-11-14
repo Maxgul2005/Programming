@@ -1,6 +1,8 @@
 ﻿using System;
+using ObjectOrientedPractics.Model;
 using System.Collections.Generic;
 using System.Net;
+using ObjectOrientedPractics.Model.Discounts;
 
 public class Customer
 {
@@ -27,6 +29,8 @@ public class Customer
     /// Список заказов пользователя
     /// </summary>
     private List<Order> _orders;
+
+    private List<IDiscount> _discounts;
     /// <summary>
     /// Свойство на чтение для Id
     /// </summary>
@@ -73,6 +77,8 @@ public class Customer
     /// </summary>
     public bool IsPriority { get; set; }
 
+    public List<IDiscount> Discounts { get; set; }
+
     //Конструктор
     /// <summary>
     /// Создает пустой/начальный экземпляр класса.Всем полям присваивается значение по умолчанию.
@@ -83,6 +89,8 @@ public class Customer
         Address = new Address();
         Cart = new Cart();
         Orders = new List<Order>();
+        Discounts = new List<IDiscount>();
+        Discounts.Add(new PointsDiscount());
         _id = IdGenerator.GetNextId();
 
     }

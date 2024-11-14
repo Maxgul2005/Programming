@@ -10,24 +10,45 @@ using System.ComponentModel;
 /// </summary>
 public class Order
 {
-
+    
     private int _id;
     private static int _allOrdersCount;
     private OrderStatus _status;
     private string _dateOfCreation;
     private Address _deliveryAddress;
     private List<Item> _items;
-    private double _totalCost;
-
+    private double _amount;
+    private double _discountAmount;
 
 
     public int Id { get; }
     public OrderStatus Status { get; set; }
     public string DateOfCreation { get; }
     public Address DeliveryAddress { get; set; }
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    /// <summary>
+    /// Размер примененной скидки
+    /// </summary>
+    public double DiscountAmount
+    {
+        get
+        {
+            return _discountAmount;
+        }
+        set
+        {
+          
+            _discountAmount = value;
+        }
+    }
+    public double Total
+    {
+        get
+        {
+            return Amount - DiscountAmount;
+        }
+    }
     public List<Item> Items { get; set; }
-    public double TotalCost
+    public double Amount
     {
         get
         {
@@ -38,33 +59,35 @@ public class Order
             }
             if (summ > 0)
             {
-                return _totalCost = summ;
+                return _amount = summ;
             }
             else
             {
-                return _totalCost = 0;
+                return _amount = 0;
             }
         }
     }
 
     public Order()
     {
-        _id = IdGenerator.GetNextId();
         Status = OrderStatus.New;
-        DateOfCreation = "01.01.2024";
+        DateOfCreation = "01.01.2000";
         DeliveryAddress = new Address();
         Items = new List<Item>();
-        
-        
+
+        _allOrdersCount += 1;
+        Id = _allOrdersCount;
     }
-    public Order(OrderStatus status, string dateOfCreation, List<Item> items, Address address)
+    public Order(OrderStatus status, string dateOfCreation, List<Item> items, Address address, double discountAmount)
     {
-       
         Status = status;
         DateOfCreation = dateOfCreation;
         Items = new List<Item>(items);
         DeliveryAddress = address;
+        DiscountAmount = discountAmount;
+
         _allOrdersCount += 1;
         Id = _allOrdersCount;
     }
+
 }
