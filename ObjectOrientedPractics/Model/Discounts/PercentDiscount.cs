@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model.Discounts
 {
-    public class PercentDiscount
+    public class PercentDiscount: IDiscount
     {
         /// <summary>
         /// Текущая скидка в процентах
@@ -81,12 +81,7 @@ namespace ObjectOrientedPractics.Model.Discounts
                 }
             }
             return Math.Round(sum, 2);
-            /*double sum = 0;
-            foreach (Item item in items)
-            {
-                sum += item.Cost;
-            }
-            return Math.Round(sum, 2);*/
+            
         }
 
         public double Calculate(List<Item> items)

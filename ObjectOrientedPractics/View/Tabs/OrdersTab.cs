@@ -36,7 +36,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 for (int j = 0; j < _currentCustomer.Orders.Count; j++)
                 {
                     _ordersCurrentCustomer.Add(_currentCustomer.Orders[j]);
-                    dataTable.Rows.Add(_currentCustomer.Orders[j].Id.ToString(), _currentCustomer.Orders[j].DateOfCreation, _currentCustomer.Orders[j].Status, _currentCustomer.Fullname, _currentCustomer.Address.AddressToString(), _currentCustomer.Orders[j].TotalCost.ToString());
+                    dataTable.Rows.Add(_currentCustomer.Orders[j].Id.ToString(), _currentCustomer.Orders[j].DateOfCreation, _currentCustomer.Orders[j].Status, _currentCustomer.Fullname, _currentCustomer.Address.AddressToString(), _currentCustomer.Orders[j].Amount.ToString(), _currentCustomer.Orders[j].Total.ToString());
                 }
 
             }
@@ -75,6 +75,7 @@ namespace ObjectOrientedPractics.View.Tabs
             dataTable.Columns.Add("Full Name", typeof(string));
             dataTable.Columns.Add("Address", typeof(string));
             dataTable.Columns.Add("Amount", typeof(string));
+            dataTable.Columns.Add("Total", typeof(string));
             OrderStatusComboBox.Enabled = false;
             DeliveryTimeRangeComboBox.DataSource = Enum.GetValues(typeof(DeliveryTimeRange)).Cast<DeliveryTimeRange>().Select(range => new { Value = range, Display = GetDisplayName(range) }).ToList();
             DeliveryTimeRangeComboBox.DisplayMember = "Display";
@@ -121,16 +122,17 @@ namespace ObjectOrientedPractics.View.Tabs
             if (OrdersDataGridView.CurrentCell != null && OrdersDataGridView.CurrentCell.RowIndex != -1 && dataTable.Rows.Count != 0)
             {
                 OrderItemsListBox.Items.Clear();
-
+                
                 _currentOrder = _ordersCurrentCustomer[OrdersDataGridView.CurrentCell.RowIndex];
+                
                 OrderIdTextBox.Text = _currentOrder.Id.ToString();
                 OrderCreatedTextBox.Text = _currentOrder.DateOfCreation.ToString();
                 OrderStatusComboBox.Text = _currentOrder.Status.ToString();
                 addressControl1.UpdateData(_currentOrder.DeliveryAddress);
 
                 OrderItemsListBox.Items.AddRange(_currentOrder.Items.ToArray());
-                AmountLabel.Text = _currentOrder.TotalCost.ToString();
-
+                AmountLabel.Text = _currentOrder.Amount.ToString();
+                TotalLabel.Text = _currentOrder.Total.ToString();
                 if (_currentOrder.GetType() == typeof(PriorityOrder))
                 {
                     PriorityOrdersPanel.Enabled = true;

@@ -48,6 +48,8 @@
             this.OrderItemsListBox = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.AmountLabel = new System.Windows.Forms.Label();
+            this.T = new System.Windows.Forms.Label();
+            this.TotalLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDataGridView)).BeginInit();
             this.SelectedPanel.SuspendLayout();
@@ -215,7 +217,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(1123, 688);
+            this.label4.Location = new System.Drawing.Point(396, 684);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 20);
             this.label4.TabIndex = 4;
@@ -225,16 +227,38 @@
             // 
             this.AmountLabel.AutoSize = true;
             this.AmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AmountLabel.Location = new System.Drawing.Point(1123, 708);
+            this.AmountLabel.Location = new System.Drawing.Point(399, 704);
             this.AmountLabel.Name = "AmountLabel";
-            this.AmountLabel.Size = new System.Drawing.Size(84, 20);
+            this.AmountLabel.Size = new System.Drawing.Size(34, 20);
             this.AmountLabel.TabIndex = 5;
-            this.AmountLabel.Text = "4 999, 90";
+            this.AmountLabel.Text = "0,0";
+            // 
+            // T
+            // 
+            this.T.AutoSize = true;
+            this.T.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.T.Location = new System.Drawing.Point(494, 684);
+            this.T.Name = "T";
+            this.T.Size = new System.Drawing.Size(54, 20);
+            this.T.TabIndex = 6;
+            this.T.Text = "Total:";
+            // 
+            // TotalLabel
+            // 
+            this.TotalLabel.AutoSize = true;
+            this.TotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TotalLabel.Location = new System.Drawing.Point(494, 704);
+            this.TotalLabel.Name = "TotalLabel";
+            this.TotalLabel.Size = new System.Drawing.Size(34, 20);
+            this.TotalLabel.TabIndex = 7;
+            this.TotalLabel.Text = "0,0";
             // 
             // OrdersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TotalLabel);
+            this.Controls.Add(this.T);
             this.Controls.Add(this.AmountLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.OrderItemsListBox);
@@ -274,5 +298,7 @@
         private System.Windows.Forms.ComboBox DeliveryTimeRangeComboBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label T;
+        private System.Windows.Forms.Label TotalLabel;
     }
 }

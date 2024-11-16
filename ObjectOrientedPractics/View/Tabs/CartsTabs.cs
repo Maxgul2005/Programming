@@ -70,14 +70,22 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 AddCartButton.Enabled = true;
                 listBoxForCart.Items.Clear();
+                DiscountCheckedListBox.Items.Clear();
                 _currentCustomer = Customers[comboBoxForCustomer.SelectedIndex];
                 listBoxForCart.Items.AddRange(_currentCustomer.Cart.Items.ToArray());
+                for (int i = 0; i < _currentCustomer.Discounts.Count; i++)
+                {
+                    DiscountCheckedListBox.Items.Add(_currentCustomer.Discounts[i].Info);
+                    DiscountCheckedListBox.SetItemChecked(i, true);
+                }
                 UpdateAmount();
+                UpdateDiscountAndTotalAmount();
             }
 
             else
             {
                 AddCartButton.Enabled = false;
+                DiscountCheckedListBox.Items.Clear();
             }
         }
 
@@ -90,6 +98,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 listBoxForCart.Items.Add(listBoxForItem.SelectedItem);
                 listBoxForItem.SelectedIndex = -1;
                 UpdateAmount();
+                UpdateDiscountAndTotalAmount();
             }
         }
 
@@ -107,17 +116,19 @@ namespace ObjectOrientedPractics.View.Tabs
                 Order newOrder;
                 if (_currentCustomer.IsPriority == true)
                 {
-                    newOrder = new PriorityOrder(OrderStatus.New, Date, items, _currentCustomer.Address, DateTime.Now, DeliveryTimeRange.Range9To11);
+                    newOrder = new PriorityOrder(OrderStatus.New, Date, items, _currentCustomer.Address,  DateTime.Now, Convert.ToDouble(DiscountAmountLabel.Text), DeliveryTimeRange.Range9To11);
                 }
                 else
                 {
-                    newOrder = new Order(OrderStatus.New, Date, items, _currentCustomer.Address);
+                   newOrder = new Order(OrderStatus.New, Date, items, _currentCustomer.Address, Convert.ToDouble(DiscountAmountLabel.Text));
                 }
 
 
 
 
-                _currentCustomer.Orders.Add(newOrder);
+               _currentCustomer.Orders.Add(newOrder);
+                CreateOrder();
+                ClearDiscountAndTotalLabels();
 
 
                 items.Clear();
@@ -133,6 +144,40 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentCustomer.Cart.Items.RemoveAt(listBoxForCart.SelectedIndex);
                 listBoxForCart.Items.RemoveAt(listBoxForCart.SelectedIndex);
                 UpdateAmount();
+                UpdateDiscountAndTotalAmount();
+            }
+        }
+        private void ClearDiscountAndTotalLabels()
+        {
+            DiscountAmountLabel.Text = "0";
+            TotalLabel.Text = "0";
+        }
+
+
+        /// <summary>
+        /// Обновляет сумму скидки и итоговую сумму заказа.
+        /// </summary>
+        private void UpdateDiscountAndTotalAmount()
+        {
+            int discountAmount = 0;
+            ClearDiscountAndTotalLabels();
+            if (_currentCustomer == null) return;
+            foreach (int indexOfDiscount in DiscountCheckedListBox.CheckedIndices)
+            {
+                discountAmount += (int)_currentCustomer.Discounts[indexOfDiscount].Calculate(_currentCustomer.Cart.Items);
+            }
+            DiscountAmountLabel.Text = discountAmount.ToString();
+            TotalLabel.Text = ((_currentCustomer.Cart.Amount - discountAmount).ToString());
+        }
+
+        /// <summary>
+        /// Устанавливает флажки для всех элементов в списке скидок.
+        /// </summary>
+        private void CheckAllItems()
+        {
+            for (int i = 0; i < DiscountCheckedListBox.Items.Count; i++)
+            {
+                DiscountCheckedListBox.SetItemChecked(i, true);
             }
         }
 
@@ -140,16 +185,44 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             ClearCart();
             UpdateAmount();
+            UpdateDiscountAndTotalAmount();
         }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
+        public int CreateOrder()
         {
+            int discountAmount = 0;
+            ClearDiscountAndTotalLabels();
+            if (_currentCustomer == null) return 0;
+            foreach (int indexOfDiscount in DiscountCheckedListBox.CheckedIndices)
+            {
+                discountAmount += (int)_currentCustomer.Discounts[indexOfDiscount].Apply(_currentCustomer.Cart.Items);
+            }
 
+            
+            for (int indexOfDiscount = 0; indexOfDiscount < DiscountCheckedListBox.Items.Count; indexOfDiscount++)
+            {
+                _currentCustomer.Discounts[indexOfDiscount].Update(_currentCustomer.Cart.Items);
+            }
+            UpdateDiscountsCheckedListBox();
+            return discountAmount;
         }
-
-        private void listBoxForItem_SelectedIndexChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Обновляет список доступных скидок в CheckedListBox.
+        /// Устанавливает флажки для всех скидок.
+        /// </summary>
+        private void UpdateDiscountsCheckedListBox()
         {
-
+            DiscountCheckedListBox.Items.Clear();
+            if (_currentCustomer == null) return;
+            for (int i = 0; i < _currentCustomer.Discounts.Count; i++)
+            {
+                DiscountCheckedListBox.Items.Add(_currentCustomer.Discounts[i].Info);
+            }
+            CheckAllItems();
+            UpdateDiscountAndTotalAmount();
+        }
+        private void DiscountCheckedListBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            UpdateDiscountAndTotalAmount();
         }
     }
 }

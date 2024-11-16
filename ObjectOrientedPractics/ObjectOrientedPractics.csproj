@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="View\AddDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddDiscountForm.Designer.cs">
+      <DependentUpon>AddDiscountForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Cart.cs" />
     <Compile Include="Model\Enums\Category.cs" />
@@ -99,6 +105,9 @@
     <Compile Include="View\Tabs\OrdersTab.Designer.cs">
       <DependentUpon>OrdersTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\AddDiscountForm.resx">
+      <DependentUpon>AddDiscountForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
