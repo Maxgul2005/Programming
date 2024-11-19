@@ -2,7 +2,7 @@
 using System.Runtime.Remoting.Messaging;
 
 
-public class Item
+public class Item: ICloneable, IComparable<Item>
 {
     // Поля класса
     private readonly int _id; //целочисленное readonly-поле, хранящее уникальный номер товара.
@@ -98,5 +98,50 @@ public class Item
         return Name;
     }
 
+    /// <summary>
+    /// Делает копию объекта по всем полям, кроме Id.
+    /// </summary>
+    /// <returns></returns>
+    public object Clone()
+    {
+        return new Item(this.Name, this.Info, this.Cost, this.Category);
+    }
+    /// <summary>
+    /// Объекты равны тогда, когда у них равны все поля кроме ID.
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    public override bool Equals(object other)
+    {
+        if (other == null)
+            return false;
+        if (!(other is Item))
+            return false;
+        if (object.ReferenceEquals(this, other))   // Если оба объекта ссылаются на одну и ту же область памяти, то они равны
+            return true;
+        Item item = (Item)other;
+        return (this.Name == item.Name && this.Info == item.Info && this.Cost == item.Cost && this.Category == item.Category);
+    }
+    /// <inheritdoc/>
+    public int CompareTo(Item item2)
+    {
+        if (item2 == null)
+            throw new ArgumentNullException(nameof(item2));
+
+        // Проверка на идентичность ссылок
+        if (ReferenceEquals(this, item2))
+            return 0;
+
+        // Сравнение стоимости
+        if (Cost > item2.Cost)
+        {
+            return 1;
+        }
+        if (Cost < item2.Cost)
+        {
+            return -1;
+        }
+        return 0; // Если стоимость равна
+    }
 
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model.Discounts
 {
-    public class PointsDiscount : IDiscount
+    public class PointsDiscount : IDiscount, IComparable<PointsDiscount>
     {
         private int _accumulatedPoints;
         public int AccumulatedPoints
@@ -79,6 +79,27 @@ namespace ObjectOrientedPractics.Model.Discounts
         {
             double amount = GetAmount(items);
             AccumulatedPoints += (int)Math.Ceiling(amount * 0.1);
+        }
+
+        /// <inheritdoc/>
+        public int CompareTo(PointsDiscount discount2)
+        {
+
+            if (object.ReferenceEquals(this, discount2))
+                return 0;
+            if (AccumulatedPoints > discount2.AccumulatedPoints)
+            {
+                return 1;
+            }
+            if (AccumulatedPoints < discount2.AccumulatedPoints)
+            {
+                return -1;
+            }
+            else if (AccumulatedPoints == discount2.AccumulatedPoints)
+            {
+                return 0;
+            }
+            return 1;
         }
 
     }

@@ -90,4 +90,21 @@ public class Order
         Id = _allOrdersCount;
     }
 
+    /// <summary>
+    /// Объекты равны тогда, когда у них равны все поля кроме ID.
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    public override bool Equals(object other)
+    {
+        if (other == null)
+            return false;
+        if (!(other is  Order))
+            return false;
+        if (object.ReferenceEquals(this, other))
+            return true;
+        Order order = (Order)other;
+        return (this.Status == order.Status && this.DateOfCreation == order.DateOfCreation && this.Items == order.Items && this.DeliveryAddress == order.DeliveryAddress && this.DiscountAmount == order.DiscountAmount);
+    }
+
 }

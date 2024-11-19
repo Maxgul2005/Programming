@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model.Discounts
 {
-    public class PercentDiscount: IDiscount
+    public class PercentDiscount: IDiscount,  IComparable<PercentDiscount>
     {
         /// <summary>
         /// Текущая скидка в процентах
@@ -125,15 +125,34 @@ namespace ObjectOrientedPractics.Model.Discounts
             {
                 CurrentDiscountPercent += 1;
             }
-            /*CurrentDiscountPercent += (int)Math.Floor(GetAmount(items) / 1000);*/
-            /*double amount = GetAmount(items);
-            AccumulatedPoints += (int)Math.Ceiling(amount * 0.1)*/
+            
 
         }
         public PercentDiscount()
         {
-            /*            DiscountCategory = category;*/
+          
             CurrentDiscountPercent = 1;
         }
+
+        /// <inheritdoc/>
+        public int CompareTo(PercentDiscount discount2)
+        {
+            if (object.ReferenceEquals(this, discount2))
+                return 0;
+            if (CurrentDiscountPercent > discount2.CurrentDiscountPercent)
+            {
+                return 1;
+            }
+            if (CurrentDiscountPercent < discount2.CurrentDiscountPercent)
+            {
+                return -1;
+            }
+            else if (CurrentDiscountPercent == discount2.CurrentDiscountPercent)
+            {
+                return 0;
+            }
+            return 1;
+        }
+
     }
 }
