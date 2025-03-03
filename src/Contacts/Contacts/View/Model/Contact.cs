@@ -8,34 +8,27 @@ namespace View.Model
 {
     public class Contact
     {
-        private string _name;
-        private string _phoneNumber;
-        private string _email;
+        /// <summary>
+        /// Задает и возращает имя контакта.
+        /// </summary>
+        public string Name { get; set; }
 
-        public string Name 
-        { get { return _name; } 
-          set 
-          {
-             _name = value; 
-          } 
-        }
-        public string PhoneNumber
-        {
-            get { return _phoneNumber; }
-            set
-            {
-                _phoneNumber = value;
-            }
-        }
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                _email = value ;
-            }
-        }
+        /// <summary>
+        /// Задает и возвращает номер телефона контакта.
+        /// </summary>
+        public string PhoneNumber { get; set; }
 
+        /// <summary>
+        /// Задает и возращает почту контакта.
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
+        /// Конструктор Contact с параметрами.
+        /// </summary>
+        /// <param name="name">Имя Контакта</param>
+        /// <param name="phoneNumber">Телефонный номер контакта</param>
+        /// <param name="email">Почта контакта</param>
         public Contact(string name, string phoneNumber, string email)
         {
             Name = name;
@@ -43,6 +36,15 @@ namespace View.Model
             Email = email;
         }
 
-
+        /// <summary>
+        /// Конструктор класса Contact, без параметров.
+        /// Инициализирует значениями по умолчанию.
+        /// </summary>
+        public Contact()
+        {
+            Name = "Гуляев Максим";
+            PhoneNumber = "Кто знает, тот знает";
+            Email = "Trulaladvanula00gmail.com";
+        }
     }
 }
