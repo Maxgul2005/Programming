@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace View.Model
 {
+    /// <summary>
+    /// Класс контакта пользователя, хранящий имя, номер телефона и почту.
+    /// </summary>
     public class Contact
     {
         /// <summary>
@@ -43,7 +46,7 @@ namespace View.Model
         public Contact()
         {
             Name = "Гуляев Максим";
-            PhoneNumber = "Кто знает, тот знает";
+            PhoneNumber = "8999000";
             Email = "Trulaladvanula00gmail.com";
         }
     }

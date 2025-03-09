@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace View.Model.Services
 {
+    /// <summary>
+    /// Класс, отвечающий за сериализацию и дисереализацию контакта в файл JSON.
+    /// </summary>
     public class ContactSerializer
     {
         /// <summary>

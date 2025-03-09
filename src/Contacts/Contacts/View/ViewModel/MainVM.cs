@@ -6,12 +6,29 @@ using View.Model.Services;
 
 namespace View.ViewModel
 {
+    /// <summary>
+    ///  Основная модель представления для управления контактами и их сохранением.
+    /// </summary>
     public class MainVM : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Текущий контакт, с которым работает модель представления.
+        /// </summary>
         private Contact _contact;
+
+        /// <summary>
+        /// Объект, выполняющий сериализацию и десериализацию контактов.
+        /// </summary>
         private readonly ContactSerializer _contactSerializer;
 
+        /// <summary>
+        /// Команда для сохранения контакта в файл.
+        /// </summary>
         public ICommand SaveCommand { get; }
+
+        /// <summary>
+        /// Команда для загрузки контакта из файла.
+        /// </summary>
         public ICommand LoadCommand { get; }
 
         /// <summary>
@@ -26,6 +43,9 @@ namespace View.ViewModel
             LoadCommand = new LoadCommand(_contactSerializer, SetContact);
         }
 
+        /// <summary>
+        ///  Возвращает и задает текущее имя контакта.
+        /// </summary>
         public string Name
         {
             get => _contact.Name;
@@ -39,6 +59,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        ///  Возвращает и задает номер контакта.
+        /// </summary>
         public string PhoneNumber
         {
             get => _contact.PhoneNumber;
@@ -52,6 +75,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        ///  Возвращает и задает почту контакта.
+        /// </summary>
         public string Email
         {
             get => _contact.Email;
@@ -65,13 +91,25 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Событие, уведомляющее об изменениях в свойствах.
+        /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        /// <summary>
+        /// Обработчик события, если мы меняем текстбокс
+        /// </summary>
+        /// <param name="propertyName"></param>
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
+        /// <summary>
+        /// Обновление свойства Name, PhoneNumber, и Emai. 
+        /// </summary>
+        /// <param name="contact"></param>
         private void SetContact(Contact contact)
         {
             _contact = contact;
