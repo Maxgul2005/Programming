@@ -39,8 +39,7 @@ namespace View.ViewModel
             _contactSerializer = new ContactSerializer();
             _contact = new Contact();
 
-            SaveCommand = new SaveCommand(_contactSerializer, () => _contact);
-            LoadCommand = new LoadCommand(_contactSerializer, SetContact);
+            
         }
 
         /// <summary>
