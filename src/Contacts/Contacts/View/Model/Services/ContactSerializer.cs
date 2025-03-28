@@ -5,68 +5,63 @@ using Newtonsoft.Json;
 namespace View.Model.Services
 {
     /// <summary>
-    /// Класс, отвечающий за сериализацию и дисереализацию контакта в файл JSON.
+    /// Предоставляет методы для сериализации и десериализации списка контактов в формате JSON.
     /// </summary>
-    public class ContactSerializer
+    public static class ContactSerializer
     {
         /// <summary>
-        /// Полный путь к файлу хранения контакта.
+        /// Путь к файлу, в который сохраняются контакты.
         /// </summary>
-        private readonly string _filePath;
+        private static string _filePath;
 
         /// <summary>
-        /// Создает экземпляр <see cref="ContactSerializer"/> с путем к файлу по умолчанию.
+        /// Устанавливает путь к файлу по умолчанию и создаёт каталог, если он отсутствует.
         /// </summary>
-        public ContactSerializer()
+        public static void CreateDirectory()
         {
-            string directoryName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Contacts");
-
-            if (!Directory.Exists(directoryName))
+            _filePath = Path.Combine(Environment.GetFolderPath
+                                    (Environment.SpecialFolder.MyDocuments),
+                                    "Contacts",
+                                    "contacts.json");
+            var directory = Path.GetDirectoryName(_filePath);
+            if (!Directory.Exists(directory))
             {
-                Directory.CreateDirectory(directoryName);
-            }
-
-            _filePath = Path.Combine(directoryName, "contacts.json");
-        }
-
-        /// <summary>
-        /// Сохраняет контакт в файл.
-        /// </summary>
-        /// <param name="contact">Контакт для сохранения.</param>
-        public void SaveToFile(Contact contact)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(contact, Formatting.Indented);
-                File.WriteAllText(_filePath, json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка при сохранении файла: {ex.Message}");
+                Directory.CreateDirectory(directory);
             }
         }
 
         /// <summary>
-        /// Загружает контакт из файла.
+        /// Сохраняет список контактов в файл в формате JSON.
         /// </summary>
-        /// <returns>Загруженный контакт или новый объект, если файл отсутствует.</returns>
-        public Contact LoadFromFile()
+        /// <param name="contacts">Список контактов для сохранения.</param>
+        public static void SaveContacts(IEnumerable<Contact> contacts)
         {
-            try
+            if (contacts == null)
             {
-                if (!File.Exists(_filePath))
-                {
-                    return new Contact();
-                }
+                throw new ArgumentNullException(nameof(contacts), "Контакт не может быть null.");
+            }
 
-                string json = File.ReadAllText(_filePath);
-                return JsonConvert.DeserializeObject<Contact>(json) ?? new Contact();
-            }
-            catch (Exception ex)
+            CreateDirectory();
+            var json = JsonConvert.SerializeObject(contacts, Formatting.Indented);
+            File.WriteAllText(_filePath, json);
+        }
+
+        /// <summary>
+        /// Загружает список контактов из файла JSON.
+        /// </summary>
+        /// <returns>
+        /// Возвращает список контактов, если файл существует и успешно десериализован.
+        /// В противном случае возвращает пустой список.
+        /// </returns>
+        public static List<Contact> LoadContacts()
+        {
+            if (!File.Exists(_filePath))
             {
-                Console.WriteLine($"Ошибка при загрузке файла: {ex.Message}");
-                return new Contact();
+                return new List<Contact>();
             }
+
+            var json = File.ReadAllText(_filePath);
+            return JsonConvert.DeserializeObject<List<Contact>>(json);
         }
     }
 }
