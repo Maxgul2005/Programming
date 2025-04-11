@@ -156,12 +156,6 @@ namespace View.ViewModel
         /// <param name="parameter">Параметр команды.</param>
         public void ApplyContact(object parameter)
         {
-            if (parameter is not BindingGroup bindingGroup)
-            {
-                return;
-            }
-
-            bindingGroup.CommitEdit();
             if (SelectedContact == null)
             {
                 return;

@@ -18,7 +18,7 @@
             <ColumnDefinition Width="2*" MinWidth="300"/>
         </Grid.ColumnDefinitions>
 
-        <!--  Левая колонка  -->
+        
         <Grid Grid.Column="0" Background="#f8f8f8">
             <Border Padding="8" Background="{x:Null}">
                 <Grid>
@@ -28,7 +28,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!--  Поле поиска  -->
+                   
                     <Grid Grid.Row="0" Margin="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -47,7 +47,7 @@
                             IsReadOnly="True"/>
                     </Grid>
 
-                    <!--  Таблица контактов  -->
+                   
                     <ListBox
                         x:Name="ContactsList"
                         Grid.Row="1"
@@ -55,7 +55,7 @@
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Contacts}"
                         SelectedItem="{Binding SelectedContact, Mode=TwoWay}"/>
-                    <!--  Кнопки управления  -->
+                   
                     <Grid Grid.Row="2" Margin="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -85,7 +85,7 @@
             </Border>
         </Grid>
 
-        <!--  Разделитель колонок  -->
+        
         <GridSplitter
             Grid.Column="1"
             Width="3"
@@ -95,13 +95,10 @@
             ResizeBehavior="PreviousAndNext"
             ResizeDirection="Columns"/>
 
-        <!--  Правая колонка  -->
+       
         <Grid Grid.Column="2" Background="White">
             <Border Margin="8" Background="{x:Null}">
                 <Grid>
-                    <Grid.BindingGroup>
-                        <BindingGroup x:Name="ContactBindingGroup"/>
-                    </Grid.BindingGroup>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -126,7 +123,7 @@
                         <TextBox
                             Margin="0 3 0 0"
                             IsReadOnly="{Binding IsReadOnlyMode}"
-                            Text="{Binding SelectedContact.Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                            Text="{Binding SelectedContact.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel
@@ -138,7 +135,7 @@
                         <TextBox
                             Margin="0 3 0 0"
                             IsReadOnly="{Binding IsReadOnlyMode}"
-                            Text="{Binding SelectedContact.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                            Text="{Binding SelectedContact.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel
@@ -150,10 +147,10 @@
                         <TextBox
                             Margin="0 3 0 0"
                             IsReadOnly="{Binding IsReadOnlyMode}"
-                            Text="{Binding SelectedContact.Email, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                            Text="{Binding SelectedContact.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
-                    <!--  Кнопка "Apply"  -->
+                  
                     <Button
                         Grid.Row="4"
                         Grid.Column="1"
@@ -163,7 +160,6 @@
                         HorizontalAlignment="Left"
                         Visibility="{Binding IsAddOrEditMode, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Command="{Binding ApplyCommand}"
-                        CommandParameter="{Binding ElementName=ContactBindingGroup}"
                         Content="Apply"/>
                 </Grid>
             </Border>
