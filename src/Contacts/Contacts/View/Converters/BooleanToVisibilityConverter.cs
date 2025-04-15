@@ -29,7 +29,11 @@ namespace View.Converters
         /// если значение <paramref name="value"/> равно <c>true</c>,
         /// и <see cref="Visibility.Collapsed"/> в противном случае.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(
+            object value,
+            Type targetType, 
+            object parameter, 
+            CultureInfo culture)
         {
             if (value is bool boolValue)
             {
@@ -51,7 +55,11 @@ namespace View.Converters
         /// <see cref="NotImplementedException"/>.
         /// </returns>
         /// <exception cref="NotImplementedException">Метод не реализован.</exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value, 
+            Type targetType, 
+            object parameter, 
+            CultureInfo culture)
         {
             if (value is Visibility visibility)
             {
