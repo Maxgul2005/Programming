@@ -129,7 +129,7 @@
             Height="25"
             Margin="0 50 0 0"
             HorizontalAlignment="Left"
-            Command="{Binding DataContext.ApplyCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+            Command="{Binding DataContext.ApplyContactCommand, RelativeSource={RelativeSource AncestorType=Window}}"
             CommandParameter="{Binding ElementName=ContactBindingGroup}"
             Content="Apply"
             Visibility="{Binding DataContext.IsAddOrEditMode, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
